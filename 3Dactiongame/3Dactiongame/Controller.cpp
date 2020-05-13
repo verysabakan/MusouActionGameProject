@@ -31,7 +31,7 @@ Controller::~Controller()
 //------------------------------------------------------
 // @brief	更新
 //------------------------------------------------------
-void Controller::Update()
+void Controller::Update(void)
 {
 	// 前ﾌﾚｰﾑの入力状態
 	key[KEY_SIGNAL_OLD] = key[KEY_SIGNAL_NOW];
@@ -53,7 +53,7 @@ void Controller::Update()
 //------------------------------------------------------
 // @brief	描画:ﾁｪｯｸ用
 //------------------------------------------------------
-void Controller::Draw()
+void Controller::Draw(void)
 {
 	// どのｷｰが押されているか
 	for (int i = 0; i < 256; i++) 

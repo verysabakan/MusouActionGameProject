@@ -31,8 +31,8 @@ public:
 	// ﾊﾟｯﾄﾞの状態を取得する関数
 	//const KEY_FLAG GetInputKey() const;
 
-	void Update();	// 更新
-	void Draw();	// 描画:ﾁｪｯｸ用
+	void Update(void);	// 更新
+	void Draw(void);	// 描画:ﾁｪｯｸ用
 
 private:
 	// ｷｰ情報保存用

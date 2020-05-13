@@ -4,24 +4,29 @@
 //------------------------------------------------------
 
 #include <DxLib.h>
-#include "SceneManager.h"
+#include "GameTask.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
-	ChangeWindowMode(TRUE), DxLib_Init(), SetDrawScreen(DX_SCREEN_BACK); //ウィンドウモード変更と初期化と裏画面設定
+	// ｹﾞｰﾑｸﾗｽの生成
+	GameTask* gameTask = new GameTask();
 
-	SceneManager SceneManager;
-	SceneManager.Initialize();
-
-	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0) {//画面更新 & メッセージ処理 & 画面消去
-
-		SceneManager.Update();  //更新
-		SceneManager.Draw();    //描画
-
+	// 初期化が失敗していれば終了
+	if (gameTask->Initialize() == -1) 
+	{
+		delete(gameTask);	// ﾒﾓﾘ開放
+		return -1;			// ｴﾗｰ終了
 	}
 
-	SceneManager.Finalize();
+	// エスケープキーが押されるかウインドウが閉じられるまでループ
+	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
+	{
+		gameTask->Update();
+		gameTask->Draw();
+	}
 
-	DxLib_End(); // DXライブラリ終了処理
-	return 0;
+	gameTask->Finalize();
+	delete(gameTask);
+
+	return 0;	// 正常終了
 }

@@ -31,7 +31,7 @@ SceneManager::~SceneManager()
 //------------------------------------------------------
 // @brief	初期化
 //------------------------------------------------------
-void SceneManager::Initialize()
+void SceneManager::Initialize(void)
 {
 	// ｸﾗｽ別の初期化
 	scene->Initialize();
@@ -40,7 +40,7 @@ void SceneManager::Initialize()
 //------------------------------------------------------
 // @brief	終了処理
 //------------------------------------------------------
-void SceneManager::Finalize()
+void SceneManager::Finalize(void)
 {
 	// ｸﾗｽ別の終了処理
 	scene->Finalize();
@@ -49,7 +49,7 @@ void SceneManager::Finalize()
 //------------------------------------------------------
 // @brief	更新
 //------------------------------------------------------
-void SceneManager::Update()
+void SceneManager::Update(void)
 {
 	// 次のｼｰﾝがnextSceneにｾｯﾄされていたら
 	if (nextScene != eScene_None) 
@@ -91,7 +91,7 @@ void SceneManager::Update()
 //------------------------------------------------------
 // @brief	描画
 //------------------------------------------------------
-void SceneManager::Draw()
+void SceneManager::Draw(void)
 {
 	scene->Draw();
 }

@@ -126,6 +126,7 @@
     <ClCompile Include="CharSelScene.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="GameTask.cpp" />
     <ClCompile Include="ISceneSwitcher.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModeSelScene.cpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="CharSelScene.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="GameTask.h" />
     <ClInclude Include="ISceneSwitcher.h" />
     <ClInclude Include="ModeSelScene.h" />
     <ClInclude Include="SceneManager.h" />

@@ -26,7 +26,7 @@ CharSelScene::~CharSelScene()
 //------------------------------------------------------
 // @brief	更新
 //------------------------------------------------------
-void CharSelScene::Update()
+void CharSelScene::Update(void)
 {
 
 	// ﾃﾞﾊﾞｯｸﾞ用ｼｰﾝ切り替えｷｰ:Q
@@ -39,7 +39,7 @@ void CharSelScene::Update()
 //------------------------------------------------------
 // @brief	描画
 //------------------------------------------------------
-void CharSelScene::Draw()
+void CharSelScene::Draw(void)
 {
 	DrawString(0, 0, "ｷｬﾗｸﾀｰ選択画面", 0xffffff);
 }

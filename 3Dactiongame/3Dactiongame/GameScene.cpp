@@ -25,7 +25,7 @@ GameScene::~GameScene()
 //------------------------------------------------------
 // @brief	çXêV
 //------------------------------------------------------
-void GameScene::Update()
+void GameScene::Update(void)
 {
 
 	// √ﬁ ﬁØ∏ﬁópº∞›êÿÇËë÷Ç¶∑∞:Q
@@ -38,7 +38,7 @@ void GameScene::Update()
 //------------------------------------------------------
 // @brief	ï`âÊ
 //------------------------------------------------------
-void GameScene::Draw()
+void GameScene::Draw(void)
 {
 	DrawString(0, 0, "πﬁ∞—âÊñ ", 0xffffff);
 }

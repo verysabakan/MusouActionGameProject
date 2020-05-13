@@ -19,6 +19,12 @@
     <Filter Include="ヘッダー ファイル\Scene">
       <UniqueIdentifier>{b2684a35-6136-4b60-be35-9f076862b40c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main">
+      <UniqueIdentifier>{45000157-5504-4187-9bc4-3a41ffb8fb14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Main">
+      <UniqueIdentifier>{fcae8726-bbb2-43bf-9e1d-98a362a5f226}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ISceneSwitcher.cpp">
@@ -45,11 +51,14 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Controller.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>ソース ファイル\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTask.cpp">
+      <Filter>ソース ファイル\Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="BaseProcessing.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTask.h">
+      <Filter>ヘッダー ファイル\Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -26,7 +26,7 @@ StageSelScene::~StageSelScene()
 //------------------------------------------------------
 // @brief	更新
 //------------------------------------------------------
-void StageSelScene::Update()
+void StageSelScene::Update(void)
 {
 
 	// ﾃﾞﾊﾞｯｸﾞ用ｼｰﾝ切り替えｷｰ:Q
@@ -39,7 +39,7 @@ void StageSelScene::Update()
 //------------------------------------------------------
 // @brief	描画
 //------------------------------------------------------
-void StageSelScene::Draw()
+void StageSelScene::Draw(void)
 {
 	DrawString(0,0,"ｽﾃｰｼﾞ選択画面",0xffffff);
 }

@@ -26,7 +26,7 @@ TitleScene::~TitleScene()
 //------------------------------------------------------
 // @brief	çXêV
 //------------------------------------------------------
-void TitleScene::Update()
+void TitleScene::Update(void)
 {
 
 	// √ﬁ ﬁØ∏ﬁópº∞›êÿÇËë÷Ç¶∑∞:Q
@@ -39,7 +39,7 @@ void TitleScene::Update()
 //------------------------------------------------------
 // @brief	ï`âÊ
 //------------------------------------------------------
-void TitleScene::Draw()
+void TitleScene::Draw(void)
 {
 	DrawString(0, 0, "¿≤ƒŸâÊñ ", 0xffffff);
 }

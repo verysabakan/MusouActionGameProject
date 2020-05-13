@@ -26,7 +26,7 @@ ModeSelScene::~ModeSelScene()
 //------------------------------------------------------
 // @brief	更新
 //------------------------------------------------------
-void ModeSelScene::Update()
+void ModeSelScene::Update(void)
 {
 
 	// ﾃﾞﾊﾞｯｸﾞ用ｼｰﾝ切り替えｷｰ:Q
@@ -39,7 +39,7 @@ void ModeSelScene::Update()
 //------------------------------------------------------
 // @brief	描画
 //------------------------------------------------------
-void ModeSelScene::Draw()
+void ModeSelScene::Draw(void)
 {
 	DrawString(0, 0, "ﾓｰﾄﾞ選択画面", 0xffffff);
 }
