@@ -11,8 +11,8 @@ class TitleScene
 	: public BaseScene
 {
 public:
-	TitleScene(ISceneSwitcher* switcher);
-	~TitleScene();
+	TitleScene(ISceneSwitcher* switcher);	// ºİ½Ä×¸À
+	~TitleScene();							// ÃŞ½Ä×¸À
 
 	// µ°ÊŞ°×²ÄŞ
 	//virtual void Initialize() override;	//‰Šú‰»

@@ -11,8 +11,8 @@ class ModeSelScene
 	: public BaseScene
 {
 public:
-	ModeSelScene(ISceneSwitcher* switcher);
-	~ModeSelScene();
+	ModeSelScene(ISceneSwitcher* switcher);	// ºİ½Ä×¸À
+	~ModeSelScene();						// ÃŞ½Ä×¸À
 
 	// µ°ÊŞ°×²ÄŞ
 	//virtual void Initialize() override;	//‰Šú‰»

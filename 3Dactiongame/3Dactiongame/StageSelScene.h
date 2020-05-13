@@ -11,8 +11,8 @@ class StageSelScene
 	: public BaseScene
 {
 public:
-	StageSelScene(ISceneSwitcher* switcher);
-	~StageSelScene();
+	StageSelScene(ISceneSwitcher* switcher);	// ºİ½Ä×¸À
+	~StageSelScene();							// ÃŞ½Ä×¸À
 
 	// µ°ÊŞ°×²ÄŞ
 	//virtual void Initialize() override;	//‰Šú‰»

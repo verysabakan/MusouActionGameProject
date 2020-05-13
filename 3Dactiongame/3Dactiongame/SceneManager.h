@@ -11,8 +11,8 @@ class SceneManager
 	: public ISceneSwitcher, BaseProcessing
 {
 public:
-	SceneManager();
-	~SceneManager();
+	SceneManager();		// ºİ½Ä×¸À
+	~SceneManager();	// ÃŞ½Ä×¸À
 
 	// µ°ÊŞ°×²ÄŞ
 	virtual void Initialize() override;	//‰Šú‰»

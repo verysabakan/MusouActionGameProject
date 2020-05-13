@@ -11,8 +11,8 @@ class GameScene
 	: public BaseScene
 {
 public:
-	GameScene(ISceneSwitcher* switcher);
-	~GameScene();
+	GameScene(ISceneSwitcher* switcher);	// ºİ½Ä×¸À
+	~GameScene();							// ÃŞ½Ä×¸À
 
 	// µ°ÊŞ°×²ÄŞ
 	//virtual void Initialize() override;	//‰Šú‰»

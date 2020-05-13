@@ -11,8 +11,8 @@ class CharSelScene
 	: public BaseScene
 {
 public:
-	CharSelScene(ISceneSwitcher* switcher);
-	~CharSelScene();
+	CharSelScene(ISceneSwitcher* switcher);	// ºİ½Ä×¸À
+	~CharSelScene();						// ÃŞ½Ä×¸À
 
 	// µ°ÊŞ°×²ÄŞ
 	//virtual void Initialize() override;	//‰Šú‰»

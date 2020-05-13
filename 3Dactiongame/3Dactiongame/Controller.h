@@ -23,8 +23,8 @@ using PAD_FLAG = std::array<bool, 28>;
 class Controller
 {
 public:
-	Controller();
-	~Controller();
+	Controller();	// ºİ½Ä×¸À
+	~Controller();	// ÃŞ½Ä×¸À
 
 	// ·°‚Ìó‘Ô‚ğæ“¾‚·‚éŠÖ”
 	//const KEY_FLAG GetInputKey() const;
