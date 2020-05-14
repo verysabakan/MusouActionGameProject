@@ -39,15 +39,13 @@ void Controller::Update(void)
 
 	// Œ»İ‚ÌÌÚ°Ñ‚Ì“ü—Íó‘Ô
 	GetHitKeyStateAll(key[KEY_SIGNAL_NOW].data());
-	//pad[KEY_SIGNAL_NOW].data = GetJoypadInputState(DX_INPUT_PAD1);
-
-	// ‘S‚Ä‚ÌÊß¯ÄŞ‚Ì“ü—Íó‘Ô
 	auto pad1 = GetJoypadInputState(DX_INPUT_PAD1);	// 1P
+	//auto pad2 = GetJoypadInputState(DX_INPUT_PAD1);	// 2P
+	//auto pad3 = GetJoypadInputState(DX_INPUT_PAD1);	// 3P
 
 	for (int i = 0; i < 28; i++) {
 		pad[KEY_SIGNAL_NOW][i] = pad1;
 	}
-	
 
 	/*
 	// ‰Ÿ‚³‚ê‚½uŠÔA—£‚³‚ê‚½uŠÔ

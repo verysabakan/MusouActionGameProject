@@ -144,8 +144,10 @@
     <ClInclude Include="ISceneSwitcher.h" />
     <ClInclude Include="ModeSelScene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="StageSelScene.h" />
     <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="VECTOR3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -17,7 +17,9 @@
 SceneManager::SceneManager()
 	: nextScene(eScene_None)
 {
+	// Å‰‚Ì¼°Ý‚Ì¶¬A‰Šú‰»
 	scene = (BaseScene*) new TitleScene(this);
+	scene->Initialize();
 }
 
 //------------------------------------------------------

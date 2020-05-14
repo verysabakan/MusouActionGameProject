@@ -1,6 +1,6 @@
 //------------------------------------------------------
 // @brief	ｹﾞｰﾑ自体の初期化、ﾌﾛｰ、終了
-// 2020 5/7 Ryosuke Iida
+// 2020 5/14 Ryosuke Iida
 //------------------------------------------------------
 
 #include <assert.h>
@@ -40,8 +40,17 @@ int GameTask::Initialize()
 	}
 
 	// 画面ﾓｰﾄﾞのｾｯﾄ
-	SetGraphMode(640, 480, 16);		// (仮)
-	ChangeWindowMode(TRUE);			// TRUE:ｳｨﾝﾄﾞｳ、FALSE:ﾌﾙｽｸﾘｰﾝ
+	SetGraphMode(1200, 720, 32);		// (仮)
+	ChangeWindowMode(TRUE);				// TRUE:ｳｨﾝﾄﾞｳ、FALSE:ﾌﾙｽｸﾘｰﾝ
+	SetDrawScreen(DX_SCREEN_BACK);		// 背面に描画
+
+	
+	//SetBackgroundColor(255, 255, 0);
+	//zバッファを有効にする
+	//SetUseZBuffer3D(true);
+	//ｚバッファへの書き込みを有効にする
+	//SetWriteZBuffer3D(true);
+	
 
 	// SceneManagerを生成
 	sceneManager = new SceneManager();

@@ -15,9 +15,25 @@ public:
 	~TitleScene();							// ﾃﾞｽﾄﾗｸﾀ
 
 	// ｵｰﾊﾞｰﾗｲﾄﾞ
-	//virtual void Initialize(void) override;	//初期化
-	//virtual void Finalize(void) override;	//終了処理
-	virtual void Update(void) override;		//更新
-	virtual void Draw(void) override;		//描画
+	virtual void Initialize(void) override;	// 初期化
+	virtual void Finalize(void) override;	// 終了処理
+	virtual void Update(void) override;		// 更新
+	virtual void Draw(void) override;		// 描画
+
+private:
+	// ﾀｲﾄﾙの部品
+	enum TITLE_PARTS
+	{
+		TITLE_PARTS_EW,
+		TITLE_PARTS_EXTREME,
+		TITLE_PARTS_WARRIORS,
+		TITLE_PARTS_MARK,
+		TITLE_PARTS_MAX
+	};
+
+	// 変数の定義
+	int titleImage[TITLE_PARTS_MAX];	// ﾀｲﾄﾙ画像:ﾊﾟｰﾂごと
+	int bgImage;						// BACKGROUND:背景画像
+	int pabImage;						// PRESS ANY BUTTON:ｽﾀｰﾄﾎﾞﾀﾝ画像
 };
 

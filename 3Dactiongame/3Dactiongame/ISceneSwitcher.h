@@ -7,13 +7,13 @@
 
 // ｼｰﾝ切り替えのための定数
 typedef enum {
-	eScene_Title,		//ﾀｲﾄﾙ画面
-	eScene_ModeSel,		//ﾓｰﾄﾞ選択画面
-	eScene_CharSel,		//ｷｬﾗｸﾀｰ選択画面
-	eScene_StageSel,	//ｽﾃｰｼﾞ選択画面
-	eScene_Game,		//ｹﾞｰﾑ画面
+	eScene_Title,		// ﾀｲﾄﾙ画面
+	eScene_ModeSel,		// ﾓｰﾄﾞ選択画面
+	eScene_CharSel,		// ｷｬﾗｸﾀｰ選択画面
+	eScene_StageSel,	// ｽﾃｰｼﾞ選択画面
+	eScene_Game,		// ｹﾞｰﾑ画面
 
-	eScene_None,		//無し
+	eScene_None,		// 無し
 } eScene;
 
 class ISceneSwitcher
