@@ -7,12 +7,14 @@
 #include <DxLib.h>
 #include "GameTask.h"
 #include "SceneManager.h"
+#include "Controller.h"
 
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
 //------------------------------------------------------
 GameTask::GameTask()
 	: sceneManager(NULL)
+	, controller(NULL)
 {
 	// 処理なし
 }
@@ -24,6 +26,7 @@ GameTask::~GameTask()
 {
 	// 異常終了のﾁｪｯｸ
 	assert(sceneManager == NULL);
+	assert(controller == NULL);
 }
 
 //------------------------------------------------------
@@ -43,6 +46,9 @@ int GameTask::Initialize()
 	// SceneManagerを生成
 	sceneManager = new SceneManager();
 
+	// Controllerを生成
+	controller = new Controller();
+
 	return 0;
 }
 
@@ -51,9 +57,13 @@ int GameTask::Initialize()
 //------------------------------------------------------
 void GameTask::Finalize()
 {
-	// ↓他に削除するものがあれば書く
+	// SceneManagerを削除
 	delete(sceneManager);
 	sceneManager = NULL;
+
+	// controllerを削除
+	delete(controller);
+	controller = NULL;
 
 	// DxLibの後始末
 	DxLib_End();
@@ -64,6 +74,9 @@ void GameTask::Finalize()
 //------------------------------------------------------
 void GameTask::Update()
 {
+	// ｺﾝﾄﾛｰﾗｰの更新
+	controller->Update();
+
 	// ｼｰﾝ別の更新
 	sceneManager->Update();
 }
@@ -75,6 +88,9 @@ void GameTask::Draw()
 {
 	// 画面を初期化
 	ClearDrawScreen();
+
+	// ｺﾝﾄﾛｰﾗｰの描画:入力ﾁｪｯｸ
+	controller->Draw();
 
 	// ｼｰﾝ別の描画
 	sceneManager->Draw();

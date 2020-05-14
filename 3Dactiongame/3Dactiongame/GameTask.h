@@ -7,6 +7,7 @@
 
 // ÌßÛÄÀ²ÌßéŒ¾
 class SceneManager;
+class Controller;
 
 class GameTask
 {
@@ -21,5 +22,6 @@ public:
 
 private:
 	SceneManager* sceneManager;
+	Controller* controller;
 };
 

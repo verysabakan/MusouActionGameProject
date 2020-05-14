@@ -3,8 +3,8 @@
 // 2020 5/7 Ryosuke Iida
 //------------------------------------------------------
 
-#include "Controller.h"
 #include <DxLib.h>
+#include "Controller.h"
 
 //------------------------------------------------------
 // @brief	ºİ½Ä×¸À
@@ -41,6 +41,14 @@ void Controller::Update(void)
 	GetHitKeyStateAll(key[KEY_SIGNAL_NOW].data());
 	//pad[KEY_SIGNAL_NOW].data = GetJoypadInputState(DX_INPUT_PAD1);
 
+	// ‘S‚Ä‚ÌÊß¯ÄŞ‚Ì“ü—Íó‘Ô
+	auto pad1 = GetJoypadInputState(DX_INPUT_PAD1);	// 1P
+
+	for (int i = 0; i < 28; i++) {
+		pad[KEY_SIGNAL_NOW][i] = pad1;
+	}
+	
+
 	/*
 	// ‰Ÿ‚³‚ê‚½uŠÔA—£‚³‚ê‚½uŠÔ
 	for (int i = 0; i < key->max_size; i++) {
@@ -58,11 +66,25 @@ void Controller::Draw(void)
 	// ‚Ç‚Ì·°‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
 	for (int i = 0; i < 256; i++) 
 	{
-		if (key[KEY_SIGNAL_NOW][i] == true)
+		if (key[KEY_SIGNAL_NOW][i] == 1)
 		{
-			DrawFormatString(0, 16, 0xffffff, "Œ»İ‰Ÿ‚³‚ê‚Ä‚¢‚é·°:%d", i);
+			DrawFormatString(0, 16, 0xffffff, "Œ»İ‰Ÿ‚µ‚Ä‚¢‚é·°:%d", i);
+			
+			if (key[KEY_SIGNAL_NOW][KEY_INPUT_G] == 1) 
+			{
+				DrawString(0, 32, "w’è‚µ‚½·°‚ğ‰Ÿ‚µ‚½", 0xffffff);
+			}
 		}
 	}
+
+	// ‚Ç‚ÌÎŞÀİ‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
+	for (int i = 0; i < 28; i++) {
+		if (pad[KEY_SIGNAL_NOW][i]) {
+			DrawFormatString(0, 48, 0xffffff, "Œ»İ‰Ÿ‚µ‚Ä‚¢‚éÎŞÀİ:%d", i);
+		}
+	}
+
+	DrawFormatString(0, 48, 0xffffff, "Œ»İ‰Ÿ‚µ‚Ä‚¢‚éÎŞÀİ:%d", KEY_INPUT_K);
 }
 
 //------------------------------------------------------
