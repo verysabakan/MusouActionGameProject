@@ -7,6 +7,16 @@
 
 #include "BaseScene.h"
 
+// ю╡ды┌л∙■∙i
+enum TITLE_PARTS
+{
+	TITLE_PARTS_EW,
+	TITLE_PARTS_EXTREME,
+	TITLE_PARTS_WARRIORS,
+	TITLE_PARTS_MARK,
+	TITLE_PARTS_MAX
+};
+
 class TitleScene
 	: public BaseScene
 {
@@ -21,15 +31,6 @@ public:
 	virtual void Draw(void) override;		// ∙`┴Ф
 
 private:
-	// ю╡ды┌л∙■∙i
-	enum TITLE_PARTS
-	{
-		TITLE_PARTS_EW,
-		TITLE_PARTS_EXTREME,
-		TITLE_PARTS_WARRIORS,
-		TITLE_PARTS_MARK,
-		TITLE_PARTS_MAX
-	};
 
 	// ∙о░■┌л▓Х▀`
 	int titleImage[TITLE_PARTS_MAX];	// ю╡ды┴Ф▒°:йъ╟б┌╡┌ф

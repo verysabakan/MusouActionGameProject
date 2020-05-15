@@ -44,8 +44,7 @@ int GameTask::Initialize()
 	ChangeWindowMode(TRUE);				// TRUE:ｳｨﾝﾄﾞｳ、FALSE:ﾌﾙｽｸﾘｰﾝ
 	SetDrawScreen(DX_SCREEN_BACK);		// 背面に描画
 
-	
-	//SetBackgroundColor(255, 255, 0);
+	SetBackgroundColor(128, 128, 128);
 	//zバッファを有効にする
 	//SetUseZBuffer3D(true);
 	//ｚバッファへの書き込みを有効にする

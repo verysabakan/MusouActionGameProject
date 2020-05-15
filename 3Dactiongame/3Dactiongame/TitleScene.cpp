@@ -34,7 +34,7 @@ void TitleScene::Initialize(void)
 	titleImage[TITLE_PARTS_WARRIORS] = LoadGraph("Image/Title/WARRIORS.png");
 	titleImage[TITLE_PARTS_MARK] = LoadGraph("Image/Title/MARK.png");
 	bgImage = LoadGraph("Image/Title/BACKGROUND.png");
-	pabImage = LoadGraph("Image/Title/STRAT.png");
+	pabImage = LoadGraph("Image/Title/START.png");
 }
 
 //------------------------------------------------------
