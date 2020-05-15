@@ -3,8 +3,11 @@
 // 2020 5/7 Ryosuke Iida
 //------------------------------------------------------
 
-#include "TitleScene.h"
 #include <DxLib.h>
+#include "TitleScene.h"
+#include "TitleConstant.h"
+#include "Controller.h"
+
 
 //------------------------------------------------------
 // @brief	ºÝ½Ä×¸À
@@ -70,11 +73,11 @@ void TitleScene::Draw(void)
 {
 	// ‰æ‘œ‚Ì•`‰æ
 	DrawGraph(0, 0, bgImage, true);
-	DrawGraph(0, 0, titleImage[TITLE_PARTS_MARK], true);
-	DrawGraph(0, 0, titleImage[TITLE_PARTS_EW], true);
-	DrawGraph(0, 0, titleImage[TITLE_PARTS_EXTREME], true);
-	DrawGraph(0, 0, titleImage[TITLE_PARTS_WARRIORS], true);
-	DrawGraph(0, 0, pabImage, true);
+	DrawGraph(MARK_POS_X, MARK_POS_Y, titleImage[TITLE_PARTS_MARK], true);
+	DrawGraph(EW_POS_X, EW_POS_Y, titleImage[TITLE_PARTS_EW], true);
+	DrawGraph(EXTREME_POS_X, EXTREME_POS_Y, titleImage[TITLE_PARTS_EXTREME], true);
+	DrawGraph(WARRIORS_POS_X, WARRIORS_POS_Y, titleImage[TITLE_PARTS_WARRIORS], true);
+	DrawGraph(START_POS_X, START_POS_Y, pabImage, true);
 
 	DrawString(0, 0, "À²ÄÙ‰æ–Ê", 0xffffff);
 }

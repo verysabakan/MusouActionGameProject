@@ -101,5 +101,8 @@
     <ClInclude Include="VECTOR3.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="TitleConstant.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
