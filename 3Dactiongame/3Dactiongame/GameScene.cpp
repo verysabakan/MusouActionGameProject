@@ -25,7 +25,7 @@ GameScene::~GameScene()
 //------------------------------------------------------
 // @brief	çXêV
 //------------------------------------------------------
-void GameScene::Update(void)
+void GameScene::Update(const Controller& controll)
 {
 
 	// √ﬁ ﬁØ∏ﬁópº∞›êÿÇËë÷Ç¶∑∞:Q

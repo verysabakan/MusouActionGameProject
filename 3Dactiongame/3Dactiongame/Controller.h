@@ -11,18 +11,15 @@
 #define KEY_STATE_BUFFER 256	// ｷｰの状態を保存する場所の最大格納数
 #define PAD_STATE_BUFFER 28		// ﾊﾟｯﾄﾞの状態を保存する場所の最大格納数
 
-// 入力状態
-enum INPUT_SIGNAL
+// 入力信号
+enum INPUT_STATE
 {
-	INPUT_SIGNAL_NOW,	// 現在
-	INPUT_SIGNAL_OLD,	// 前ﾌﾚｰﾑ
-	INPUT_SIGNAL_TRG,	// 押した瞬間
-	INPUT_SIGNAL_UP,	// 離した瞬間
-	INPUT_SIGNAL_MAX
+	INPUT_STATE_NOW,	// 現在
+	INPUT_STATE_OLD,	// 前ﾌﾚｰﾑ
+	INPUT_STATE_TRG,	// 押した瞬間
+	INPUT_STATE_UP,		// 離した瞬間
+	INPUT_STATE_MAX
 };
-
-//using KEY_FLAG = std::array<char, KEY_STATE_BUFFER>;
-//using PAD_FLAG = std::array<bool, PAD_STATE_BUFFER>;
 
 class Controller
 {
@@ -33,12 +30,10 @@ public:
 	void Update(void);	// 更新
 	void Draw(void);	// 描画:ﾁｪｯｸ用
 
-	// ｷｰ、ﾊﾟｯﾄﾞが受け取った状態であるか確認する
-	//const KEY_FLAG& GetInputKey(INPUT_SIGNAL requiredSignal) const;
-	//const PAD_FLAG& GetInputButton(INPUT_SIGNAL requiredSignal) const;
+	const bool& GetInputState(int const input,INPUT_STATE const inputState) const;	// 入力が受け取った状態にあるかを判断し返す
 
 private:
-	// ｷｰ、ﾊﾟｯﾄﾞ情報保存用
-	bool key[INPUT_SIGNAL_MAX][KEY_STATE_BUFFER];
-	bool pad[INPUT_SIGNAL_MAX][KEY_STATE_BUFFER];
+	// ｷｰ、ﾊﾟｯﾄﾞ情報格納用
+	bool key[INPUT_STATE_MAX][KEY_STATE_BUFFER];
+	bool pad[INPUT_STATE_MAX][KEY_STATE_BUFFER];
 };

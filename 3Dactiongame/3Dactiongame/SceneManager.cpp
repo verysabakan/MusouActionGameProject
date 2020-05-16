@@ -3,6 +3,7 @@
 // 2020 5/7 Ryosuke Iida
 //------------------------------------------------------
 
+#include <memory>
 #include <DxLib.h>
 #include "TitleScene.h"
 #include "ModeSelScene.h"
@@ -10,6 +11,7 @@
 #include "StageSelScene.h"
 #include "GameScene.h"
 #include "SceneManager.h"
+#include "Controller.h"
 
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
@@ -18,7 +20,7 @@ SceneManager::SceneManager()
 	: nextScene(eScene_None)
 {
 	// 最初のｼｰﾝの生成、初期化
-	scene = (BaseScene*) new TitleScene(this);
+	scene = std::make_shared<TitleScene>(this);
 	scene->Initialize();
 }
 
@@ -51,35 +53,34 @@ void SceneManager::Finalize(void)
 //------------------------------------------------------
 // @brief	更新
 //------------------------------------------------------
-void SceneManager::Update(void)
+void SceneManager::Update(const Controller& controll)
 {
 	// 次のｼｰﾝがnextSceneにｾｯﾄされていたら
 	if (nextScene != eScene_None) 
 	{
 		// 現在のｼｰﾝの終了処理を行う
-		scene->Finalize();	
-		delete scene;
+		scene->Finalize();
 
 		// ｼｰﾝごとの処理
 		if (nextScene == eScene_Title) 
 		{
-			scene = (BaseScene*) new TitleScene(this);
+			scene = std::make_shared<TitleScene>(this);
 		}
 		else if (nextScene == eScene_ModeSel)
 		{
-			scene = (BaseScene*) new ModeSelScene(this);
+			scene = std::make_shared<ModeSelScene>(this);
 		}
 		else if (nextScene == eScene_CharSel)
 		{
-			scene = (BaseScene*) new CharSelScene(this);
+			scene = std::make_shared<CharSelScene>(this);
 		}
 		else if (nextScene == eScene_StageSel)
 		{
-			scene = (BaseScene*) new StageSelScene(this);
+			scene = std::make_shared<StageSelScene>(this);
 		}
 		else if (nextScene == eScene_Game)
 		{
-			scene = (BaseScene*) new GameScene(this);
+			scene = std::make_shared<GameScene>(this);
 		}
 
 		// ｼｰﾝの初期化
@@ -87,7 +88,9 @@ void SceneManager::Update(void)
 	}
 
 	// ｼｰﾝの更新
-	scene->Update();
+	scene->Update(controll);
+
+	//std::shared_ptr<TitleScene>;
 }
 
 //------------------------------------------------------

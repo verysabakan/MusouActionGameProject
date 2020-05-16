@@ -26,7 +26,7 @@ ModeSelScene::~ModeSelScene()
 //------------------------------------------------------
 // @brief	çXêV
 //------------------------------------------------------
-void ModeSelScene::Update(void)
+void ModeSelScene::Update(const Controller& controll)
 {
 
 	// √ﬁ ﬁØ∏ﬁópº∞›êÿÇËë÷Ç¶∑∞:Q

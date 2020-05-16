@@ -26,7 +26,7 @@ CharSelScene::~CharSelScene()
 //------------------------------------------------------
 // @brief	çXêV
 //------------------------------------------------------
-void CharSelScene::Update(void)
+void CharSelScene::Update(const Controller& controll)
 {
 
 	// √ﬁ ﬁØ∏ﬁópº∞›êÿÇËë÷Ç¶∑∞:Q

@@ -13,8 +13,6 @@
 // @brief	ｺﾝｽﾄﾗｸﾀ
 //------------------------------------------------------
 GameTask::GameTask()
-	: sceneManager(NULL)
-	, controller(NULL)
 {
 	// 処理なし
 }
@@ -25,8 +23,8 @@ GameTask::GameTask()
 GameTask::~GameTask()
 {
 	// 異常終了のﾁｪｯｸ
-	assert(sceneManager == NULL);
-	assert(controller == NULL);
+	assert(sceneManager == nullptr);
+	assert(controll == nullptr);
 }
 
 //------------------------------------------------------
@@ -52,10 +50,10 @@ int GameTask::Initialize()
 	
 
 	// SceneManagerを生成
-	sceneManager = new SceneManager();
+	sceneManager = std::make_unique<SceneManager>();
 
 	// Controllerを生成
-	controller = new Controller();
+	controll = std::make_unique<Controller>();
 
 	return 0;
 }
@@ -65,13 +63,11 @@ int GameTask::Initialize()
 //------------------------------------------------------
 void GameTask::Finalize()
 {
-	// SceneManagerを削除
-	delete(sceneManager);
-	sceneManager = NULL;
+	// SceneManagerを開放
+	sceneManager.release();
 
-	// controllerを削除
-	delete(controller);
-	controller = NULL;
+	// controllerを開放
+	controll.release();
 
 	// DxLibの後始末
 	DxLib_End();
@@ -82,11 +78,11 @@ void GameTask::Finalize()
 //------------------------------------------------------
 void GameTask::Update()
 {
-	// ｺﾝﾄﾛｰﾗｰの更新
-	controller->Update();
-
 	// ｼｰﾝ別の更新
-	sceneManager->Update();
+	sceneManager->Update((*controll));
+
+	// ｺﾝﾄﾛｰﾗｰの更新
+	controll->Update();
 }
 
 //------------------------------------------------------
@@ -98,7 +94,7 @@ void GameTask::Draw()
 	ClearDrawScreen();
 
 	// ｺﾝﾄﾛｰﾗｰの描画:入力ﾁｪｯｸ
-	controller->Draw();
+	controll->Draw();
 
 	// ｼｰﾝ別の描画
 	sceneManager->Draw();

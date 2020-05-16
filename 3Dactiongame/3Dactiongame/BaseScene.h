@@ -5,20 +5,21 @@
 
 #pragma once
 
-#include "BaseProcessing.h"
+#include <memory>
+#include "SceneProcess.h"
 #include "ISceneSwitcher.h"
 
 class BaseScene
-	: public BaseProcessing
+	: public SceneProcess
 {
 public:
 	BaseScene(ISceneSwitcher* switcher);	// ｺﾝｽﾄﾗｸﾀ
 	virtual ~BaseScene();					// ﾃﾞｽﾄﾗｸﾀ
 
-	// ｵｰﾊﾞｰﾗｲﾄﾞ
+	// -----ｵｰﾊﾞｰﾗｲﾄﾞ----- //
 	virtual void Initialize(void) override {}		// 初期化
 	virtual void Finalize(void) override {}			// 終了処理
-	virtual void Update(void) override {}			// 更新
+	virtual void Update(const Controller& controll) override {}			// 更新
 	virtual void Draw(void) override {}				// 描画
 
 protected:

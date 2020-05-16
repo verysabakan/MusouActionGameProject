@@ -26,7 +26,7 @@ StageSelScene::~StageSelScene()
 //------------------------------------------------------
 // @brief	çXêV
 //------------------------------------------------------
-void StageSelScene::Update(void)
+void StageSelScene::Update(const Controller& controll)
 {
 
 	// √ﬁ ﬁØ∏ﬁópº∞›êÿÇËë÷Ç¶∑∞:Q

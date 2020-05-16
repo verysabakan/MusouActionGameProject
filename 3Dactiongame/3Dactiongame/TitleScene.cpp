@@ -57,7 +57,7 @@ void TitleScene::Finalize(void)
 //------------------------------------------------------
 // @brief	çXêV
 //------------------------------------------------------
-void TitleScene::Update(void)
+void TitleScene::Update(const Controller& controll)
 {
 	// √ﬁ ﬁØ∏ﬁópº∞›êÿÇËë÷Ç¶∑∞:Q
 	if (CheckHitKey(KEY_INPUT_Q) != 0) {

@@ -5,6 +5,11 @@
 
 #pragma once
 
+#include <memory>
+#include "Controller.h"
+
+//#include <mutex>
+
 // ÌßÛÄÀ²ÌßéŒ¾
 class SceneManager;
 class Controller;
@@ -21,7 +26,7 @@ public:
 	void Draw(void);		// XV
 
 private:
-	SceneManager* sceneManager;
-	Controller* controller;
+	std::unique_ptr<SceneManager> sceneManager;
+	std::unique_ptr<Controller> controll;
 };
 

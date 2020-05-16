@@ -25,6 +25,9 @@
     <Filter Include="ヘッダー ファイル\Main">
       <UniqueIdentifier>{fcae8726-bbb2-43bf-9e1d-98a362a5f226}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Constant">
+      <UniqueIdentifier>{c30caccf-8c3c-423e-a949-7df6dfd325b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ISceneSwitcher.cpp">
@@ -89,9 +92,6 @@
     <ClInclude Include="Controller.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="BaseProcessing.h">
-      <Filter>ヘッダー ファイル\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="GameTask.h">
       <Filter>ヘッダー ファイル\Main</Filter>
     </ClInclude>
@@ -102,6 +102,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="TitleConstant.h">
+      <Filter>ヘッダー ファイル\Constant</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneProcess.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
