@@ -3,8 +3,8 @@
 // 2020 5/7 Ryosuke Iida
 //------------------------------------------------------
 
-#include "StageSelScene.h"
 #include <DxLib.h>
+#include "StageSelScene.h"
 
 //------------------------------------------------------
 // @brief	ºÝ½Ä×¸À
@@ -30,7 +30,7 @@ void StageSelScene::Update(const Controller& controll)
 {
 
 	// ÃÞÊÞ¯¸Þ—p¼°ÝØ‚è‘Ö‚¦·°:Q
-	if (CheckHitKey(KEY_INPUT_Q) != 0) {
+	if (CheckHitKey(KEY_INPUT_U) == 1) {
 		// ¹Þ°Ñ‰æ–Ê‚ÉØ‚è‘Ö‚¦
 		sceneSwitcher->SwitchScene(eScene_Game);
 	}
@@ -39,7 +39,7 @@ void StageSelScene::Update(const Controller& controll)
 //------------------------------------------------------
 // @brief	•`‰æ
 //------------------------------------------------------
-void StageSelScene::Draw(void)
+void StageSelScene::Render()
 {
 	DrawString(0,0,"½Ã°¼Þ‘I‘ð‰æ–Ê",0xffffff);
 }

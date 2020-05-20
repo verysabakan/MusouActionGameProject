@@ -25,4 +25,3 @@
 // START‰æ‘œ‚Ì»²½Þ
 #define START_POS_X 470
 #define START_POS_Y 600
-

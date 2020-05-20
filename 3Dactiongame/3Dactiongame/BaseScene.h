@@ -17,10 +17,10 @@ public:
 	virtual ~BaseScene();					// ÃŞ½Ä×¸À
 
 	// -----µ°ÊŞ°×²ÄŞ----- //
-	virtual void Initialize(void) override {}		// ‰Šú‰»
-	virtual void Finalize(void) override {}			// I—¹ˆ—
+	virtual void Initialize() override {}		// ‰Šú‰»
+	virtual void Finalize() override {}			// I—¹ˆ—
 	virtual void Update(const Controller& controll) override {}			// XV
-	virtual void Draw(void) override {}				// •`‰æ
+	virtual void Render() override {}				// •`‰æ
 
 protected:
 	ISceneSwitcher* sceneSwitcher;	// ¼°İ‚ÌØ‚è‘Ö‚¦‚ğ“`‚¦‚é

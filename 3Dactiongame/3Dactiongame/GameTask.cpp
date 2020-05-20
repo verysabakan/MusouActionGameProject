@@ -41,14 +41,10 @@ int GameTask::Initialize()
 	SetGraphMode(1200, 720, 32);		// (仮)
 	ChangeWindowMode(TRUE);				// TRUE:ｳｨﾝﾄﾞｳ、FALSE:ﾌﾙｽｸﾘｰﾝ
 	SetDrawScreen(DX_SCREEN_BACK);		// 背面に描画
-
-	SetBackgroundColor(128, 128, 128);
-	//zバッファを有効にする
-	//SetUseZBuffer3D(true);
-	//ｚバッファへの書き込みを有効にする
-	//SetWriteZBuffer3D(true);
+	SetBackgroundColor(128, 128, 128);	// 背景色
+	SetUseZBuffer3D(true);				// zバッファを有効にする
+	SetWriteZBuffer3D(true);			//ｚバッファへの書き込みを有効にする
 	
-
 	// SceneManagerを生成
 	sceneManager = std::make_unique<SceneManager>();
 
@@ -79,7 +75,7 @@ void GameTask::Finalize()
 void GameTask::Update()
 {
 	// ｼｰﾝ別の更新
-	sceneManager->Update((*controll));
+	sceneManager->Update(*controll);
 
 	// ｺﾝﾄﾛｰﾗｰの更新
 	controll->Update();
@@ -88,16 +84,16 @@ void GameTask::Update()
 //------------------------------------------------------
 // @brief	描画
 //------------------------------------------------------
-void GameTask::Draw()
+void GameTask::Render()
 {
 	// 画面を初期化
 	ClearDrawScreen();
 
-	// ｺﾝﾄﾛｰﾗｰの描画:入力ﾁｪｯｸ
-	controll->Draw();
-
 	// ｼｰﾝ別の描画
-	sceneManager->Draw();
+	sceneManager->Render();
+
+	// ｺﾝﾄﾛｰﾗｰの描画:入力ﾁｪｯｸ
+	controll->Render();
 
 	// 裏画面の内容を表面に反映させる
 	ScreenFlip();

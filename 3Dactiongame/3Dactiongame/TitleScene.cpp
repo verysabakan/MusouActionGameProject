@@ -3,11 +3,10 @@
 // 2020 5/7 Ryosuke Iida
 //------------------------------------------------------
 
+#include <assert.h>
 #include <DxLib.h>
 #include "TitleScene.h"
 #include "TitleConstant.h"
-#include "Controller.h"
-
 
 //------------------------------------------------------
 // @brief	ºİ½Ä×¸À
@@ -23,13 +22,18 @@ TitleScene::TitleScene(ISceneSwitcher* switcher)
 //------------------------------------------------------
 TitleScene::~TitleScene()
 {
-	// ˆ—‚È‚µ
+	for (auto i = 0; i < TITLE_PARTS_MAX; i++)
+	{
+		assert(titleImage[i] == NULL);
+		assert(bgImage == NULL);
+		assert(pabImage == NULL);
+	}
 }
 
 //------------------------------------------------------
 // @brief	‰Šú‰»
 //------------------------------------------------------
-void TitleScene::Initialize(void)
+void TitleScene::Initialize()
 {
 	// ¸Ş×¯Ì¨¸‚Ì“o˜^
 	titleImage[TITLE_PARTS_EW] = LoadGraph("Image/Title/EW.png");
@@ -43,15 +47,18 @@ void TitleScene::Initialize(void)
 //------------------------------------------------------
 // @brief	I—¹ˆ—
 //------------------------------------------------------
-void TitleScene::Finalize(void)
+void TitleScene::Finalize()
 {
 	// “Ç‚İ‚ñ‚¾‰æ‘œ‚Ìíœ
 	for (auto i = 0; i < TITLE_PARTS_MAX; i++)
 	{
 		DeleteGraph(titleImage[i]);
+		titleImage[i] = NULL;
 	}
 	DeleteGraph(bgImage);
+	bgImage = NULL;
 	DeleteGraph(pabImage);
+	pabImage = NULL;
 }
 
 //------------------------------------------------------
@@ -60,7 +67,8 @@ void TitleScene::Finalize(void)
 void TitleScene::Update(const Controller& controll)
 {
 	// ÃŞÊŞ¯¸Ş—p¼°İØ‚è‘Ö‚¦·°:Q
-	if (CheckHitKey(KEY_INPUT_Q) != 0) {
+	if (CheckHitKey(KEY_INPUT_P) == 1)
+	{
 		// Ó°ÄŞ‘I‘ğ‰æ–Ê‚ÉØ‚è‘Ö‚¦
 		sceneSwitcher->SwitchScene(eScene_ModeSel);
 	}
@@ -69,7 +77,7 @@ void TitleScene::Update(const Controller& controll)
 //------------------------------------------------------
 // @brief	•`‰æ
 //------------------------------------------------------
-void TitleScene::Draw(void)
+void TitleScene::Render()
 {
 	// ‰æ‘œ‚Ì•`‰æ
 	DrawGraph(0, 0, bgImage, true);

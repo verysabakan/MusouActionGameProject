@@ -17,13 +17,13 @@ class Controller;
 class GameTask
 {
 public:
-	GameTask();
-	~GameTask();
+	GameTask();			// ｺﾝｽﾄﾗｸﾀ
+	~GameTask();		// ﾃﾞｽﾄﾗｸﾀ
 	
-	int Initialize(void);	// 初期化
-	void Finalize(void);	// 終了処理
-	void Update(void);		// 更新
-	void Draw(void);		// 更新
+	int Initialize();	// 初期化
+	void Finalize();	// 終了処理
+	void Update();		// 更新
+	void Render();		// 更新
 
 private:
 	std::unique_ptr<SceneManager> sceneManager;

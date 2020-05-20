@@ -11,7 +11,6 @@
 #include "StageSelScene.h"
 #include "GameScene.h"
 #include "SceneManager.h"
-#include "Controller.h"
 
 //------------------------------------------------------
 // @brief	ºİ½Ä×¸À
@@ -35,7 +34,7 @@ SceneManager::~SceneManager()
 //------------------------------------------------------
 // @brief	‰Šú‰»
 //------------------------------------------------------
-void SceneManager::Initialize(void)
+void SceneManager::Initialize()
 {
 	// ¸×½•Ê‚Ì‰Šú‰»
 	scene->Initialize();
@@ -44,7 +43,7 @@ void SceneManager::Initialize(void)
 //------------------------------------------------------
 // @brief	I—¹ˆ—
 //------------------------------------------------------
-void SceneManager::Finalize(void)
+void SceneManager::Finalize()
 {
 	// ¸×½•Ê‚ÌI—¹ˆ—
 	scene->Finalize();
@@ -96,9 +95,9 @@ void SceneManager::Update(const Controller& controll)
 //------------------------------------------------------
 // @brief	•`‰æ
 //------------------------------------------------------
-void SceneManager::Draw(void)
+void SceneManager::Render()
 {
-	scene->Draw();
+	scene->Render();
 }
 
 //------------------------------------------------------

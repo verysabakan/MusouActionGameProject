@@ -1,30 +1,26 @@
 //------------------------------------------------------
 // @brief	ｷｰﾎﾞｰﾄﾞやｺﾝﾄﾛｰﾗｰからの操作、入力
-// 2020 5/7 Ryosuke Iida
+// 2020 5/16 Ryosuke Iida
 //------------------------------------------------------
 
 #include <DxLib.h>
 #include "Controller.h"
+
+bool up = false;
+bool trg = false;
 
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
 //------------------------------------------------------
 Controller::Controller()
 {
-	// -----ｷｰ、ﾊﾟｯﾄﾞ入力状態の初期化----- //
-	for (int i = 0; i < INPUT_STATE_MAX; i++) {
-		// ｷｰﾎﾞｰﾄﾞ
-		for (int j = 0; j < KEY_STATE_BUFFER; j++) 
-		{
-			key[i][j] = false;
-		}
+	// ﾊﾟｯﾄﾞ対応ﾎﾞﾀﾝの初期化
+	SetPadInput(PAD_INPUT_UP, PAD_INPUT_DOWN, PAD_INPUT_LEFT, PAD_INPUT_RIGHT,
+		PAD_INPUT_B, PAD_INPUT_A, PAD_INPUT_C, PAD_INPUT_X);
 
-		// ﾊﾟｯﾄﾞ
-		for (int j = 0; j < PAD_STATE_BUFFER; j++) 
-		{
-			pad[i][j] = false;
-		}
-	}
+	// 変数初期化
+	input = 0;
+	inputOld = 0;
 }
 
 //------------------------------------------------------
@@ -38,101 +34,276 @@ Controller::~Controller()
 //------------------------------------------------------
 // @brief	更新
 //------------------------------------------------------
-void Controller::Update(void)
+void Controller::Update()
 {
-	// -----入力状態初期化----- //
-	for (int i = 0; i < KEY_STATE_BUFFER; i++)
-	{
-		// 全部押していない事にする
-		key[INPUT_STATE_NOW][i] = false;
-		key[INPUT_STATE_UP][i] = false;
-		key[INPUT_STATE_TRG][i] = false;
-	}
+	// 前回入力
+	inputOld = input;
 
-	for (int i = 0; i < KEY_STATE_BUFFER; i++)
-	{
-		// 全部押していない事にする
-		pad[INPUT_STATE_NOW][i] = false;
-		pad[INPUT_STATE_UP][i] = false;
-		pad[INPUT_STATE_TRG][i] = false;
-	}
+	// 今回の入力
+	input = GetJoypadInputState(DX_INPUT_PAD1);
 
-	// -----現在のﾌﾚｰﾑの全ての入力状態の取得----- //
-	char keyBuffer[KEY_STATE_BUFFER];
-	GetHitKeyStateAll(keyBuffer);
-	auto pad1 = GetJoypadInputState(DX_INPUT_PAD1);		// 1P
-	//auto pad2 = GetJoypadInputState(DX_INPUT_PAD1);		// 2P
-	//auto pad3 = GetJoypadInputState(DX_INPUT_PAD1);		// 3P
-	//auto pad3 = GetJoypadInputState(DX_INPUT_PAD1);		// 4P
-
-	// -----ｷｰのの入力状態の格納----- //
-	for (int i = 0; i < KEY_STATE_BUFFER; i++)
-	{
-		if (keyBuffer[i] == 1)
-		{
-			key[INPUT_STATE_NOW][i] = true;
-		}
-	}
-
-	// ﾊﾟｯﾄﾞの入力状態の格納
-	for (int i = 0; i < PAD_STATE_BUFFER; i++) {
-		if (pad1 & (1 << i)) {
-			pad[INPUT_STATE_NOW][i] = true;
-		}
-	}
-
-	// -----押された瞬間、離された瞬間、現ﾌﾚｰﾑの入力保存----- //
-	for (int i = 0; i < KEY_STATE_BUFFER; i++)
-	{
-		key[INPUT_STATE_UP][i] = ~key[INPUT_STATE_NOW][i] & key[INPUT_STATE_OLD][i]; 
-		key[INPUT_STATE_TRG][i] = key[INPUT_STATE_NOW][i] & ~key[INPUT_STATE_OLD][i];
-		key[INPUT_STATE_OLD][i] = key[INPUT_STATE_NOW][i];
-	}
-
-	for (int i = 0; i < PAD_STATE_BUFFER; i++)
-	{
-		pad[INPUT_STATE_UP][i] = pad[INPUT_STATE_NOW][i] & ~pad[INPUT_STATE_OLD][i];
-		pad[INPUT_STATE_TRG][i] = ~pad[INPUT_STATE_NOW][i] & pad[INPUT_STATE_OLD][i];
-		pad[INPUT_STATE_OLD][i] = pad[INPUT_STATE_NOW][i];
-	}
+	// ｷｰﾎﾞｰﾄﾞの割り当て
+	char keyInput[keyBuffer];
+	GetHitKeyStateAll(keyInput);
+	if (keyInput[KEY_INPUT_UP]) input |= padInput[PAD_UP];
+	if (keyInput[KEY_INPUT_DOWN]) input |= padInput[PAD_DOWN];
+	if (keyInput[KEY_INPUT_LEFT]) input |= padInput[PAD_LEFT];
+	if (keyInput[KEY_INPUT_RIGHT]) input |= padInput[PAD_RIGHT];
+	if (keyInput[KEY_INPUT_A]) input |= padInput[PAD_1];
+	if (keyInput[KEY_INPUT_S]) input |= padInput[PAD_2];
+	if (keyInput[KEY_INPUT_D]) input |= padInput[PAD_3];
+	if (keyInput[KEY_INPUT_F]) input |= padInput[PAD_4];
 }
 
 //------------------------------------------------------
 // @brief	描画:ﾁｪｯｸ用
 //------------------------------------------------------
-void Controller::Draw(void)
+void Controller::Render()
 {
-	// どのｷｰが押されているか
-	for (int i = 0; i < KEY_STATE_BUFFER; i++)
+	// 長押し
+	if (IsPushUP(INPUT_HOLD))
 	{
-		if (key[INPUT_STATE_NOW][i] == 1)
-		{
-			DrawFormatString(0, 16, 0xffffff, "現在押しているｷｰ:%d", i);
-		}
+		DrawString(0, 16, "ﾎｰﾙﾄﾞです", 0xffffff);
+		DrawFormatString(0, 32, 0xffffff, "%d", padInput[PAD_UP]);
 	}
 
-	// どのﾎﾞﾀﾝが押されているか
-	for (int i = 0; i < PAD_STATE_BUFFER; i++)
+	// 押した瞬間
+	if (IsPushUP(INPUT_TRG))
 	{
-		if (pad[INPUT_STATE_NOW][i]) {
-			DrawFormatString(0, 32, 0xffffff, "現在押しているﾎﾞﾀﾝ:%d", i);
+		trg = !trg;
+	}
+	if (trg) 
+	{
+		DrawString(0, 48, "ﾄﾘｶﾞｰです", 0xffffff);
+		DrawFormatString(0, 64, 0xffffff, "%d", padInput[PAD_UP]);
+	}
+
+	// 離した瞬間
+	if (IsPushUP(INPUT_UP))
+	{
+		up = !up;
+	}
+	if (up)
+	{
+		DrawString(0, 80, "ｱｯﾌﾟです", 0xffffff);
+		DrawFormatString(0, 96, 0xffffff, "%d", padInput[PAD_UP]);
+	}
+
+	// どれを押しているか
+	for (auto i = 0; i < PAD_BUTTON_NUM; i++)
+	{
+		if (input & padInput[i])
+		{
+			DrawFormatString(0, 112 + 16 * i, 0xffffff, "%d:ﾎｰﾙﾄﾞです", i);
 		}
 	}
+	
 }
 
 //------------------------------------------------------
-// @brief	入力が受け取った状態にあるかを判断し返す
+// @brief	ﾊﾟｯﾄﾞ対応ﾎﾞﾀﾝの登録
 //------------------------------------------------------
-const bool& Controller::GetInputState(int const input, INPUT_STATE const inputState) const
+void Controller::SetPadInput(int up, int down, int left, int right, int a, int b, int c, int d)
 {
-	bool ret = false;
+	// 対応するﾎﾞﾀﾝを割り振り
+	padInput[PAD_UP] = up;
+	padInput[PAD_DOWN] = down;
+	padInput[PAD_LEFT] = left;
+	padInput[PAD_RIGHT] = right;
+	padInput[PAD_1] = a;
+	padInput[PAD_2] = b;
+	padInput[PAD_3] = c;
+	padInput[PAD_4] = d;
+}
 
-	// ｷｰ、ﾊﾟｯﾄﾞの入力が受け取った状態か
-	if ((key[inputState][input] == true)
-	||	(pad[inputState][input] == true))
+//------------------------------------------------------
+// @brief	上ﾎﾞﾀﾝの状態を返す
+// 引数		現在の入力
+// 戻り値	押されていればtrue
+//------------------------------------------------------
+const bool Controller::IsPushUP(const INPUT_STATE inputState) const
+{
+	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
+	if (inputState == INPUT_HOLD && input & padInput[PAD_UP])
 	{
-		ret = true;
+		return true;
+	}
+	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_UP])
+	{
+		return true;
+	}
+	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_UP])
+	{
+		return true;
+	}
+	
+	return false;
+}
+
+//------------------------------------------------------
+// @brief	下ﾎﾞﾀﾝの状態を返す
+// 引数		現在の入力
+// 戻り値	押されていればtrue
+//------------------------------------------------------
+bool Controller::IsPushDOWN(const INPUT_STATE inputState)
+{
+	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
+	if (inputState == INPUT_HOLD && input & padInput[PAD_UP])
+	{
+		return true;
+	}
+	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_UP])
+	{
+		return true;
+	}
+	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_UP])
+	{
+		return true;
 	}
 
-	return ret;
+	return false;
+}
+
+//------------------------------------------------------
+// @brief	左ﾎﾞﾀﾝの状態を返す
+// 引数		現在の入力
+// 戻り値	押されていればtrue
+//------------------------------------------------------
+bool Controller::IsPushLEFT(const INPUT_STATE inputState)
+{
+	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
+	if (inputState == INPUT_HOLD && input & padInput[PAD_UP])
+	{
+		return true;
+	}
+	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_UP])
+	{
+		return true;
+	}
+	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_UP])
+	{
+		return true;
+	}
+
+	return false;
+}
+
+//------------------------------------------------------
+// @brief	右ﾎﾞﾀﾝの状態を返す
+// 引数		現在の入力
+// 戻り値	押されていればtrue
+//------------------------------------------------------
+bool Controller::IsPushRIGHT(const INPUT_STATE inputState)
+{
+	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
+	if (inputState == INPUT_HOLD && input & padInput[PAD_UP])
+	{
+		return true;
+	}
+	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_UP])
+	{
+		return true;
+	}
+	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_UP])
+	{
+		return true;
+	}
+
+	return false;
+}
+
+//------------------------------------------------------
+// @brief	1ﾎﾞﾀﾝの状態を返す
+// 引数		現在の入力
+// 戻り値	押されていればtrue
+//------------------------------------------------------
+bool Controller::IsPushA(const INPUT_STATE inputState)
+{
+	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
+	if (inputState == INPUT_HOLD && input & padInput[PAD_UP])
+	{
+		return true;
+	}
+	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_UP])
+	{
+		return true;
+	}
+	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_UP])
+	{
+		return true;
+	}
+
+	return false;
+}
+
+//------------------------------------------------------
+// @brief	2ﾎﾞﾀﾝの状態を返す
+// 引数		現在の入力
+// 戻り値	押されていればtrue
+//------------------------------------------------------
+bool Controller::IsPushB(const INPUT_STATE inputState)
+{
+	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
+	if (inputState == INPUT_HOLD && input & padInput[PAD_UP])
+	{
+		return true;
+	}
+	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_UP])
+	{
+		return true;
+	}
+	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_UP])
+	{
+		return true;
+	}
+
+	return false;
+}
+
+//------------------------------------------------------
+// @brief	3ﾎﾞﾀﾝの状態を返す
+// 引数		現在の入力
+// 戻り値	押されていればtrue
+//------------------------------------------------------
+bool Controller::IsPushC(const INPUT_STATE inputState)
+{
+	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
+	if (inputState == INPUT_HOLD && input & padInput[PAD_UP])
+	{
+		return true;
+	}
+	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_UP])
+	{
+		return true;
+	}
+	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_UP])
+	{
+		return true;
+	}
+
+	return false;
+}
+
+//------------------------------------------------------
+// @brief	4ﾎﾞﾀﾝの状態を返す
+// 引数		現在の入力
+// 戻り値	押されていればtrue
+//------------------------------------------------------
+bool Controller::IsPushD(const INPUT_STATE inputState)
+{
+	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
+	if (inputState == INPUT_HOLD && input & padInput[PAD_UP])
+	{
+		return true;
+	}
+	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_UP])
+	{
+		return true;
+	}
+	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_UP])
+	{
+		return true;
+	}
+
+	return false;
 }

@@ -3,8 +3,9 @@
 // 2020 5/7 Ryosuke Iida
 //------------------------------------------------------
 
-#include "CharSelScene.h"
 #include <DxLib.h>
+#include "CharSelScene.h"
+//#include "Controller.h"
 
 //------------------------------------------------------
 // @brief	ºÝ½Ä×¸À
@@ -28,9 +29,8 @@ CharSelScene::~CharSelScene()
 //------------------------------------------------------
 void CharSelScene::Update(const Controller& controll)
 {
-
 	// ÃÞÊÞ¯¸Þ—p¼°ÝØ‚è‘Ö‚¦·°:Q
-	if (CheckHitKey(KEY_INPUT_Q) != 0) {
+	if (CheckHitKey(KEY_INPUT_I) == 1) {
 		// ½Ã°¼Þ‘I‘ð‰æ–Ê‚ÉØ‚è‘Ö‚¦
 		sceneSwitcher->SwitchScene(eScene_StageSel);
 	}
@@ -39,7 +39,7 @@ void CharSelScene::Update(const Controller& controll)
 //------------------------------------------------------
 // @brief	•`‰æ
 //------------------------------------------------------
-void CharSelScene::Draw(void)
+void CharSelScene::Render()
 {
 	DrawString(0, 0, "·¬×¸À°‘I‘ð‰æ–Ê", 0xffffff);
 }

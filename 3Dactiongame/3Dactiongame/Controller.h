@@ -1,39 +1,58 @@
 //------------------------------------------------------
 // @brief	ｷｰﾎﾞｰﾄﾞやｺﾝﾄﾛｰﾗｰからの操作、入力
 //				ｷｰﾎﾞｰﾄﾞは一人用、ｺﾝﾄﾛｰﾗｰで複数人
-// 2020 5/7 Ryosuke Iida
+// 2020 5/16 Ryosuke Iida
 //------------------------------------------------------
 
 #pragma once
 
-#include <array>
+//#include <array>
 
-#define KEY_STATE_BUFFER 256	// ｷｰの状態を保存する場所の最大格納数
-#define PAD_STATE_BUFFER 28		// ﾊﾟｯﾄﾞの状態を保存する場所の最大格納数
-
-// 入力信号
+// 入力状態
 enum INPUT_STATE
 {
-	INPUT_STATE_NOW,	// 現在
-	INPUT_STATE_OLD,	// 前ﾌﾚｰﾑ
-	INPUT_STATE_TRG,	// 押した瞬間
-	INPUT_STATE_UP,		// 離した瞬間
-	INPUT_STATE_MAX
+	INPUT_HOLD,
+	INPUT_TRG,
+	INPUT_UP
 };
 
 class Controller
 {
+private:
+	// ﾊﾟｯﾄﾞ対応ﾎﾞﾀﾝ
+	enum
+	{
+		PAD_UP,
+		PAD_DOWN,
+		PAD_LEFT,
+		PAD_RIGHT,
+		PAD_1,
+		PAD_2,
+		PAD_3,
+		PAD_4,
+		PAD_BUTTON_NUM,
+	};
+
+	static const int keyBuffer = 256;
+
+	int padInput[PAD_BUTTON_NUM];	// ﾊﾟｯﾄﾞ情報格納用
+	int input;						// 入力情報
+	int inputOld;					// 前回の入力情報
+
 public:
 	Controller();	// ｺﾝｽﾄﾗｸﾀ
 	~Controller();	// ﾃﾞｽﾄﾗｸﾀ
 
-	void Update(void);	// 更新
-	void Draw(void);	// 描画:ﾁｪｯｸ用
+	void Update();	// 更新
+	void Render();	// 描画:ﾁｪｯｸ用
 
-	const bool& GetInputState(int const input,INPUT_STATE const inputState) const;	// 入力が受け取った状態にあるかを判断し返す
-
-private:
-	// ｷｰ、ﾊﾟｯﾄﾞ情報格納用
-	bool key[INPUT_STATE_MAX][KEY_STATE_BUFFER];
-	bool pad[INPUT_STATE_MAX][KEY_STATE_BUFFER];
+	void SetPadInput(int up, int down, int left, int right, int a, int b, int c, int d);	// ﾊﾟｯﾄﾞ対応ﾎﾞﾀﾝの登録
+	const bool IsPushUP(const INPUT_STATE inputState) const;
+	bool IsPushDOWN(const INPUT_STATE inputState);
+	bool IsPushLEFT(const INPUT_STATE inputState);
+	bool IsPushRIGHT(const INPUT_STATE inputState);
+	bool IsPushA(const INPUT_STATE inputState);
+	bool IsPushB(const INPUT_STATE inputState);
+	bool IsPushC(const INPUT_STATE inputState);
+	bool IsPushD(const INPUT_STATE inputState);
 };

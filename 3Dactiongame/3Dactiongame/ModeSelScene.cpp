@@ -3,8 +3,8 @@
 // 2020 5/7 Ryosuke Iida
 //------------------------------------------------------
 
-#include "ModeSelScene.h"
 #include <DxLib.h>
+#include "ModeSelScene.h"
 
 //------------------------------------------------------
 // @brief	ºÝ½Ä×¸À
@@ -24,13 +24,33 @@ ModeSelScene::~ModeSelScene()
 }
 
 //------------------------------------------------------
+// @brief	‰Šú‰»
+//------------------------------------------------------
+void ModeSelScene::Initialize()
+{
+	modelHandle = MV1LoadModel("Model/Fukuoka_Prop.fbx");
+}
+
+//------------------------------------------------------
+// @brief	I—¹ˆ—
+//------------------------------------------------------
+void ModeSelScene::Finalize()
+{
+	MV1DeleteModel(modelHandle);
+	modelHandle = NULL;
+}
+
+//------------------------------------------------------
 // @brief	XV
 //------------------------------------------------------
 void ModeSelScene::Update(const Controller& controll)
 {
+	// ‰æ–Ê‚É‰f‚éˆÊ’u‚É‚R‚cƒ‚ƒfƒ‹‚ðˆÚ“®
+	MV1SetPosition(modelHandle, VGet(320.0f, -300.0f, 600.0f));
+	MV1DrawModel(modelHandle);
 
 	// ÃÞÊÞ¯¸Þ—p¼°ÝØ‚è‘Ö‚¦·°:Q
-	if (CheckHitKey(KEY_INPUT_Q) != 0) {
+	if (CheckHitKey(KEY_INPUT_O) == 1) {
 		// ·¬×¸À°‘I‘ð‰æ–Ê‚ÉØ‚è‘Ö‚¦
 		sceneSwitcher->SwitchScene(eScene_CharSel);
 	}
@@ -39,7 +59,7 @@ void ModeSelScene::Update(const Controller& controll)
 //------------------------------------------------------
 // @brief	•`‰æ
 //------------------------------------------------------
-void ModeSelScene::Draw(void)
+void ModeSelScene::Render()
 {
 	DrawString(0, 0, "Ó°ÄÞ‘I‘ð‰æ–Ê", 0xffffff);
 }

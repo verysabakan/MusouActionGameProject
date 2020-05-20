@@ -3,8 +3,9 @@
 // 2020 5/7 Ryosuke Iida
 //------------------------------------------------------
 
-#include "GameScene.h"
 #include <DxLib.h>
+#include "GameScene.h"
+#include "Camera.h"
 
 //------------------------------------------------------
 // @brief	ºÝ½Ä×¸À
@@ -29,7 +30,7 @@ void GameScene::Update(const Controller& controll)
 {
 
 	// ÃÞÊÞ¯¸Þ—p¼°ÝØ‚è‘Ö‚¦·°:Q
-	if (CheckHitKey(KEY_INPUT_Q) != 0) {
+	if (CheckHitKey(KEY_INPUT_Y) == 1) {
 		// À²ÄÙ‰æ–Ê‚ÉØ‚è‘Ö‚¦
 		sceneSwitcher->SwitchScene(eScene_Title);
 	}
@@ -38,7 +39,7 @@ void GameScene::Update(const Controller& controll)
 //------------------------------------------------------
 // @brief	•`‰æ
 //------------------------------------------------------
-void GameScene::Draw(void)
+void GameScene::Render()
 {
 	DrawString(0, 0, "¹Þ°Ñ‰æ–Ê", 0xffffff);
 }

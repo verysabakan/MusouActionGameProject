@@ -88,7 +88,8 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>%DXLIB_DIR%;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\ゲーム制作用\夏のゲームショウ用無双系ゲーム\fbx\2019.2\lib\vs2017\x64\release;D:\ゲーム制作用\夏のゲームショウ用無双系ゲーム\fbx\2019.2\lib\vs2017\x64\debug;%DXLIB_DIR%;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libfbxsdk-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -118,11 +119,13 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>%DXLIB_DIR%;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\ゲーム制作用\夏のゲームショウ用無双系ゲーム\fbx\2019.2\lib\vs2017\x64\release;D:\ゲーム制作用\夏のゲームショウ用無双系ゲーム\fbx\2019.2\lib\vs2017\x64\debug;%DXLIB_DIR%;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libfbxsdk-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseScene.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CharSelScene.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="GameScene.cpp" />
@@ -130,11 +133,16 @@
     <ClCompile Include="ISceneSwitcher.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModeSelScene.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="StageSelScene.cpp" />
     <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="ModelBase.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="SceneProcess.h" />
     <ClInclude Include="BaseScene.h" />
     <ClInclude Include="CharSelScene.h" />
@@ -148,7 +156,7 @@
     <ClInclude Include="StageSelScene.h" />
     <ClInclude Include="TitleConstant.h" />
     <ClInclude Include="TitleScene.h" />
-    <ClInclude Include="VECTOR3.h" />
+    <ClInclude Include="Vector3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
