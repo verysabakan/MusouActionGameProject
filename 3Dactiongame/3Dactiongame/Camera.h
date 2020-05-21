@@ -12,7 +12,7 @@ class Camera
 private:
 	const float standardEye = 100.0f;
 
-	ModelBase * model;//カメラオブジェクトのポインタの保存用
+	ModelBase* model;//カメラオブジェクトのポインタの保存用
 	Vector3 cameraPos;//カメラ位置
 	Vector3 targetPos;//注視点
 	Vector3 cameraUpVec;//カメラの上方向
@@ -29,12 +29,10 @@ private:
 	int camcnt;
 
 public:
-	Camera(ModelBase*);		// ｺﾝｽﾄﾗｸﾀ
+	Camera(ModelBase* m);		// ｺﾝｽﾄﾗｸﾀ
 	~Camera();		// ﾃﾞｽﾄﾗｸﾀ
 
 	void Initialize();		// 初期化
 	void Finalize();		// 終了処理
 	void Update();			// 更新
-	void Render();			// 描画
-
 };

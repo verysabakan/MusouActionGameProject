@@ -2,9 +2,9 @@
 
 #pragma once
 
-class Player :public ModelBase
+class Player 
+	:public ModelBase
 {
-
 private:
 	int newKey;
 	int oldKey;

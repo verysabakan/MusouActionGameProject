@@ -59,6 +59,8 @@ void SceneManager::Update(const Controller& controll)
 	{
 		// 現在のｼｰﾝの終了処理を行う
 		scene->Finalize();
+		// ﾘｿｰｽの開放
+		scene.reset();
 
 		// ｼｰﾝごとの処理
 		if (nextScene == eScene_Title) 
@@ -81,6 +83,9 @@ void SceneManager::Update(const Controller& controll)
 		{
 			scene = std::make_shared<GameScene>(this);
 		}
+
+		// 次のｼｰﾝに行かない
+		nextScene = eScene_None;
 
 		// ｼｰﾝの初期化
 		scene->Initialize();

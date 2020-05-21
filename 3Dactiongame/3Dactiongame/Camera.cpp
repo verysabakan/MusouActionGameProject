@@ -12,10 +12,9 @@
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
 //------------------------------------------------------
-Camera::Camera(ModelBase* model)
+Camera::Camera(ModelBase* m)
 {
-	this->model = model;
-	Initialize();
+	model = m;
 }
 
 //------------------------------------------------------
@@ -33,7 +32,7 @@ void Camera::Initialize()
 {
 	cameraPos = Vector3(0.0f, 50.0f, -500.0f);
 	targetPos = Vector3(0.0f, 0.0f, 0.0f);
-	cameraUpVec = Vector3(0.0f, 0.0f, 0.0f);
+	cameraUpVec = Vector3(0.0f, 1.0f, 0.0f);
 	yaw = DX_PI_F / 60;
 	camLength = 500.0f;		//中心からの距離
 	camDir = 90.0f;
@@ -86,12 +85,9 @@ void Camera::Update()
 	cameraPos.x = modelPos.x - camVec.x*camLength;
 	cameraPos.y = modelPos.y + (camVec.y*camLength + standardEye);	//100.0fは標準目線
 	cameraPos.z = modelPos.z - camVec.z*camLength;
-}
 
-//------------------------------------------------------
-// @brief	描画
-//------------------------------------------------------
-void Camera::Render()
-{
-
+	//カメラポジション
+	SetCameraPositionAndTargetAndUpVec(cameraPos.ConvertVec(),
+											targetPos.ConvertVec(),
+												cameraUpVec.ConvertVec());
 }

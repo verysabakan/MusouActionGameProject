@@ -25,8 +25,6 @@ struct Vector3
 	Vector3 operator-();
 };
 
-
-
 Vector3 ConvertVec3(const VECTOR& v);	// VECTORŒ^‚ðVector3Œ^‚É‚µ‚Ä•Ô‚·
 
 Vector3 operator+(const Vector3& va, const Vector3 vb);

@@ -14,7 +14,8 @@
 TitleScene::TitleScene(ISceneSwitcher* switcher)
 	: BaseScene(switcher)
 {
-	// ˆ—‚È‚µ
+	// ¶¬‚Ì‰Šú‰»
+	Initialize();
 }
 
 //------------------------------------------------------
@@ -22,12 +23,13 @@ TitleScene::TitleScene(ISceneSwitcher* switcher)
 //------------------------------------------------------
 TitleScene::~TitleScene()
 {
+	// ˆÙíI—¹‚ÌÁª¯¸
 	for (auto i = 0; i < TITLE_PARTS_MAX; i++)
 	{
 		assert(titleImage[i] == NULL);
-		assert(bgImage == NULL);
-		assert(pabImage == NULL);
 	}
+	assert(bgImage == NULL);
+	assert(pabImage == NULL);
 }
 
 //------------------------------------------------------

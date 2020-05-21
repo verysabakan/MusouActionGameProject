@@ -15,7 +15,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	// 初期化が失敗していれば終了
 	if (gameTask->Initialize() == -1) 
 	{
-		gameTask.release();	// ﾒﾓﾘ開放
+		gameTask.reset();	// ﾒﾓﾘ開放
 		return -1;			// ｴﾗｰ終了
 	}
 
@@ -27,7 +27,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	}
 
 	gameTask->Finalize();
-	gameTask.release();
+	gameTask.reset();
 
 	return 0;	// 正常終了
 }

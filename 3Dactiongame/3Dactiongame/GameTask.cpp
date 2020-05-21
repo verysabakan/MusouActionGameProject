@@ -14,7 +14,9 @@
 //------------------------------------------------------
 GameTask::GameTask()
 {
-	// 処理なし
+	// ｵﾌﾞｼﾞｪｸﾄ生成
+	sceneManager = std::make_unique<SceneManager>();
+	controll = std::make_unique<Controller>();
 }
 
 //------------------------------------------------------
@@ -22,9 +24,7 @@ GameTask::GameTask()
 //------------------------------------------------------
 GameTask::~GameTask()
 {
-	// 異常終了のﾁｪｯｸ
-	assert(sceneManager == nullptr);
-	assert(controll == nullptr);
+	// 処理なし
 }
 
 //------------------------------------------------------
@@ -45,11 +45,8 @@ int GameTask::Initialize()
 	SetUseZBuffer3D(true);				// zバッファを有効にする
 	SetWriteZBuffer3D(true);			//ｚバッファへの書き込みを有効にする
 	
-	// SceneManagerを生成
-	sceneManager = std::make_unique<SceneManager>();
-
-	// Controllerを生成
-	controll = std::make_unique<Controller>();
+	// 初期化
+	sceneManager->Initialize();
 
 	return 0;
 }
@@ -59,11 +56,12 @@ int GameTask::Initialize()
 //------------------------------------------------------
 void GameTask::Finalize()
 {
-	// SceneManagerを開放
-	sceneManager.release();
+	// 各終了処理
+	sceneManager->Finalize();
 
-	// controllerを開放
-	controll.release();
+	// ﾘｿｰｽの開放
+	sceneManager.reset();
+	controll.reset();
 
 	// DxLibの後始末
 	DxLib_End();
