@@ -29,8 +29,6 @@ private:
 	std::unique_ptr<Player> player;
 	std::unique_ptr<Camera> camera;
 
-	int playerModel;
-
 	int stage;
 };
 

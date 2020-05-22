@@ -8,7 +8,7 @@
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
-	// ｹﾞｰﾑｸﾗｽの生
+	// ｹﾞｰﾑﾀｽｸの生成
 	std::unique_ptr<GameTask> gameTask;
 	gameTask = std::make_unique<GameTask>();
 
@@ -19,7 +19,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		return -1;			// ｴﾗｰ終了
 	}
 
-	// エスケープキーが押されるかウインドウが閉じられるまでループ
+	// ｴｽｹｰﾌﾟｷｰが押されるかｳｨﾝﾄﾞｳが閉じられるまでﾙｰﾌﾟ
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
 	{
 		gameTask->Update();

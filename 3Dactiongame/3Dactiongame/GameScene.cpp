@@ -18,10 +18,48 @@ GameScene::GameScene(ISceneSwitcher* switcher)
 	: BaseScene(switcher)
 {
 	// ｵﾌﾞｼﾞｪｸﾄ生成
-	playerModel = MV1LoadModel("Model/Otameshi/chanko/chanko.mv1");
-	stage = MV1LoadModel("Model/Otameshi/chanko/Fukuoka_Ground.mv1");
+	auto playerModel = MV1LoadModel("Model/Otameshi/Heracules/Model_Heracules_Green.mv1");
 
-	player = std::make_unique<Player>(playerModel);
+	// -----------------------------------------
+	std::vector<int> playerAnim;
+	auto i = 0;
+
+	std::string dir_name = "Model/Otameshi/heracules/Animation";
+	std::string extension = "mv1";
+
+	HANDLE hFind;
+	WIN32_FIND_DATA win32fd;
+	std::string search_name = dir_name + "\\*." + extension;
+
+	hFind = FindFirstFile(search_name.c_str(), &win32fd);
+
+	if (hFind == INVALID_HANDLE_VALUE)
+	{
+		throw std::runtime_error("file not found");
+	}
+
+	//次のファイルがある限り読み込み続ける
+	do
+	{
+		//ディレクトリなら無視
+		if (win32fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {}
+		else
+		{
+			std::string fileName = win32fd.cFileName;
+			fileName.insert(0, "Model/Otameshi/Heracules/Animation/");
+
+			playerAnim.push_back(MV1LoadModel(fileName.c_str()));
+			i++;
+		}
+	} while (FindNextFile(hFind, &win32fd));
+
+	//閉じる
+	FindClose(hFind);
+	// -----------------------------------------
+
+	stage = MV1LoadModel("Model/Otameshi/room/droidroom.x");
+
+	player = std::make_unique<Player>(playerModel ,playerAnim);
 
 	// playerがnullptrでない場合
 	if (player != nullptr)
@@ -100,7 +138,7 @@ void GameScene::Render()
 
 	// モデルの座標をセット
 	auto Spos = VGet(0.0f, 200.0f, 0.0f);
-	auto Sscale = VGet(100.0f, 100.0f, 100.0f);
+	auto Sscale = VGet(0.5f, 0.5f, 0.5f);
 	auto Srol = VGet(0.0f, 0.0f, 0.0f);
 	MV1SetPosition(stage, Spos);
 	MV1SetRotationXYZ(stage, Srol);

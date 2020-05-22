@@ -1,6 +1,7 @@
 #pragma once
 
 #include <DxLib.h>
+#include <vector>
 #include "Vector3.h"
 
 class ModelBase
@@ -8,6 +9,7 @@ class ModelBase
 protected:
 	int model;			// ﾓﾃﾞﾙﾃﾞｰﾀ用
 	int modelID;
+	std::vector<int> animID;		// ｱﾆﾒｰｼｮﾝﾃﾞｰﾀ用
 	Vector3 target;		// 向いている方向
 	Vector3 pos;		// XYZ軸方向
 	Vector3 rol;		// 回転
@@ -23,7 +25,7 @@ protected:
 public:
 
 	ModelBase() {}			// ｺﾝｽﾄﾗｸﾀ
-	~ModelBase() {}		// ﾃﾞｽﾄﾗｸﾀ
+	~ModelBase() {}			// ﾃﾞｽﾄﾗｸﾀ
 
 	virtual void Update(void) = 0;	// 更新:必ず実装
 	virtual void Render(void) = 0;	// 描画:必ず実装
@@ -43,10 +45,10 @@ public:
 	}	
 	void SetAnimID(int modelID, int no)					// ｱﾆﾒｰｼｮﾝIDのｾｯﾄ
 	{
-		//歩く(７番)モーションをセット
-		MV1DetachAnim(modelID, attachiIndex);//アニメーションのリセット
-		attachiIndex = MV1AttachAnim(modelID, no, -1, false);
-		//アニメーションのトータル時間を計測
+		// 歩く(7番)をｾｯﾄ
+		MV1DetachAnim(modelID, attachiIndex);		// ｱﾆﾒｰｼｮﾝのﾘｾｯﾄ
+		attachiIndex = MV1AttachAnim(modelID, 0, animID[no], false);
+		// ｱﾆﾒｰｼｮﾝのﾄｰﾀﾙ時間を計測
 		totalTime = MV1GetAttachAnimTotalTime(modelID, attachiIndex);
 		playTime = 0.0f;
 	}

@@ -8,6 +8,7 @@
 #include "GameTask.h"
 #include "SceneManager.h"
 #include "Controller.h"
+#include "MainConstant.h"
 
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
@@ -38,12 +39,12 @@ int GameTask::Initialize()
 	}
 
 	// 画面ﾓｰﾄﾞのｾｯﾄ
-	SetGraphMode(1200, 720, 32);		// (仮)
+	SetGraphMode(SCREEN_SIZE_X, SCREEN_SIZE_Y, 32);		// (仮)
 	ChangeWindowMode(TRUE);				// TRUE:ｳｨﾝﾄﾞｳ、FALSE:ﾌﾙｽｸﾘｰﾝ
 	SetDrawScreen(DX_SCREEN_BACK);		// 背面に描画
-	SetBackgroundColor(128, 128, 128);	// 背景色
-	SetUseZBuffer3D(true);				// zバッファを有効にする
-	SetWriteZBuffer3D(true);			//ｚバッファへの書き込みを有効にする
+	SetBackgroundColor(BACKGROUND_COLOR, BACKGROUND_COLOR, BACKGROUND_COLOR);	// 背景色
+	SetUseZBuffer3D(TRUE);				// zバッファを有効にする
+	SetWriteZBuffer3D(TRUE);			//ｚバッファへの書き込みを有効にする
 	
 	// 初期化
 	sceneManager->Initialize();

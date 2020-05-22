@@ -131,5 +131,8 @@
     <ClInclude Include="Vector3.h">
       <Filter>ヘッダー ファイル\Object</Filter>
     </ClInclude>
+    <ClInclude Include="MainConstant.h">
+      <Filter>ヘッダー ファイル\Constant</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

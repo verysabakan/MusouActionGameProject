@@ -88,8 +88,8 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>D:\ゲーム制作用\夏のゲームショウ用無双系ゲーム\fbx\2019.2\lib\vs2017\x86\release;D:\ゲーム制作用\夏のゲームショウ用無双系ゲーム\fbx\2019.2\lib\vs2017\x86\debug;%DXLIB_DIR%;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libfbxsdk-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%DXLIB_DIR%;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -119,8 +119,8 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>D:\ゲーム制作用\夏のゲームショウ用無双系ゲーム\fbx\2019.2\lib\vs2017\x86\release;D:\ゲーム制作用\夏のゲームショウ用無双系ゲーム\fbx\2019.2\lib\vs2017\x86\debug;%DXLIB_DIR%;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libfbxsdk-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%DXLIB_DIR%;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -141,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="MainConstant.h" />
     <ClInclude Include="ModelBase.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SceneProcess.h" />
