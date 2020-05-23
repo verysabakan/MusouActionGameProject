@@ -128,6 +128,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CharSelScene.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="FrameRate.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GameTask.cpp" />
     <ClCompile Include="ISceneSwitcher.cpp" />
@@ -141,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="FrameRate.h" />
     <ClInclude Include="MainConstant.h" />
     <ClInclude Include="ModelBase.h" />
     <ClInclude Include="Player.h" />

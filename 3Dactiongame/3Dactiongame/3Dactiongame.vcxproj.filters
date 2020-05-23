@@ -34,6 +34,9 @@
     <Filter Include="ヘッダー ファイル\Object">
       <UniqueIdentifier>{075f061b-f8c7-4127-b10b-cb03352cd401}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Variable">
+      <UniqueIdentifier>{671c7aeb-8f3c-44a2-b215-9e599c776f97}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ISceneSwitcher.cpp">
@@ -78,6 +81,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>ソース ファイル\Object</Filter>
     </ClCompile>
+    <ClCompile Include="FrameRate.cpp">
+      <Filter>ソース ファイル\Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ISceneSwitcher.h">
@@ -107,9 +113,6 @@
     <ClInclude Include="GameTask.h">
       <Filter>ヘッダー ファイル\Main</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="TitleConstant.h">
       <Filter>ヘッダー ファイル\Constant</Filter>
     </ClInclude>
@@ -128,11 +131,17 @@
     <ClInclude Include="Player.h">
       <Filter>ヘッダー ファイル\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Vector3.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
-    </ClInclude>
     <ClInclude Include="MainConstant.h">
       <Filter>ヘッダー ファイル\Constant</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>ヘッダー ファイル\Variable</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>ヘッダー ファイル\Variable</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameRate.h">
+      <Filter>ヘッダー ファイル\Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

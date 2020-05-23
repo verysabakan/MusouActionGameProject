@@ -36,17 +36,11 @@ void Player::Initialize()
 	scl = Vector3(0.5f, 0.5f, 0.5f);
 	dir = 0.0f;
 	// ±ÆÒ°¼®Ý¾¯Ä±¯Ìß
-	attachiIndex = -1;
-	//for (int i = 0; i < animID.size(); i++) {
-		attachiIndex = MV1AttachAnim(modelID, 0, animID[7], true);
-	//}
-	// ±ÆÒ°¼®Ý‚ÌÄ°ÀÙŽžŠÔ‚ðŒv‘ª
-	totalTime = MV1GetAttachAnimTotalTime(modelID, attachiIndex);
+	SetAnimID(modelID, 3);
 	playTime = 0;
 	newKey = 0;
 	oldKey = 0;
 	trgKey = 0;
-	SetAnimID(modelID, 0);
 	// À°¹Þ¯Ä‚ÌŒvŽZ
 	target = ConvertVec3(VTransform(VGet(300.0f, pos.y, pos.z), MGetRotY(rol.y)));
 	//uŠg‘åk¬vu‰ñ“]vuˆÚ“®v‚ÌÝ’è
@@ -120,7 +114,7 @@ void Player::Update()
 	{
 		// ’âŽ~(0”Ô)Ó°¼®Ý‚ð¾¯Ä
 		// •à‚­(7”Ô)Ó°¼®Ý‚ð¾¯Ä
-		SetAnimID(modelID, 0);
+		SetAnimID(modelID, 3);
 	}
 	oldKey = newKey;// ŽŸ‚ÌÙ°Ìß‚Ìˆ×‚Ì€”õ
 	playTime += 0.5f;

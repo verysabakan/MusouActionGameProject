@@ -83,10 +83,10 @@ void Camera::Update()
 
 	// ﾍﾞｸﾄﾙ方向へｵﾌｾｯﾄする
 	cameraPos.x = modelPos.x - camVec.x*camLength;
-	cameraPos.y = modelPos.y + (camVec.y*camLength + standardEye);	//100.0fは標準目線
+	cameraPos.y = modelPos.y + (camVec.y*camLength + standardEye);	// 100.0fは標準目線
 	cameraPos.z = modelPos.z - camVec.z*camLength;
 
-	//カメラポジション
+	// ｶﾒﾗのﾎﾟｼﾞｼｮﾝ
 	SetCameraPositionAndTargetAndUpVec(cameraPos.ConvertVec(),
 											targetPos.ConvertVec(),
 												cameraUpVec.ConvertVec());

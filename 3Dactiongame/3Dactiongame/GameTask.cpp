@@ -9,6 +9,7 @@
 #include "SceneManager.h"
 #include "Controller.h"
 #include "MainConstant.h"
+#include "FrameRate.h"
 
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
@@ -18,6 +19,7 @@ GameTask::GameTask()
 	// ｵﾌﾞｼﾞｪｸﾄ生成
 	sceneManager = std::make_unique<SceneManager>();
 	controll = std::make_unique<Controller>();
+	frameRate = std::make_unique<FrameRate>();
 }
 
 //------------------------------------------------------
@@ -63,6 +65,7 @@ void GameTask::Finalize()
 	// ﾘｿｰｽの開放
 	sceneManager.reset();
 	controll.reset();
+	frameRate.reset();
 
 	// DxLibの後始末
 	DxLib_End();
@@ -73,6 +76,9 @@ void GameTask::Finalize()
 //------------------------------------------------------
 void GameTask::Update()
 {
+	// ﾌﾚｰﾑ計測固定
+	frameRate->Update();
+
 	// ｼｰﾝ別の更新
 	sceneManager->Update(*controll);
 
@@ -94,6 +100,11 @@ void GameTask::Render()
 	// ｺﾝﾄﾛｰﾗｰの描画:入力ﾁｪｯｸ
 	controll->Render();
 
+	// 現在のﾌﾚｰﾑﾚｰﾄの描画
+	frameRate->Render();
+
 	// 裏画面の内容を表面に反映させる
 	ScreenFlip();
+
+	
 }
