@@ -49,10 +49,10 @@ void Controller::Update()
 	if (keyInput[KEY_INPUT_DOWN]) input |= padInput[PAD_DOWN];
 	if (keyInput[KEY_INPUT_LEFT]) input |= padInput[PAD_LEFT];
 	if (keyInput[KEY_INPUT_RIGHT]) input |= padInput[PAD_RIGHT];
-	if (keyInput[KEY_INPUT_A]) input |= padInput[PAD_1];
-	if (keyInput[KEY_INPUT_S]) input |= padInput[PAD_2];
-	if (keyInput[KEY_INPUT_D]) input |= padInput[PAD_3];
-	if (keyInput[KEY_INPUT_F]) input |= padInput[PAD_4];
+	if (keyInput[KEY_INPUT_Z]) input |= padInput[PAD_1];
+	if (keyInput[KEY_INPUT_X]) input |= padInput[PAD_2];
+	if (keyInput[KEY_INPUT_C]) input |= padInput[PAD_3];
+	if (keyInput[KEY_INPUT_V]) input |= padInput[PAD_4];
 }
 
 //------------------------------------------------------
@@ -102,6 +102,7 @@ void Controller::Render()
 
 //------------------------------------------------------
 // @brief	ﾊﾟｯﾄﾞ対応ﾎﾞﾀﾝの登録
+// @param	対応するﾎﾞﾀﾝの値
 //------------------------------------------------------
 void Controller::SetPadInput(int up, int down, int left, int right, int a, int b, int c, int d)
 {
@@ -118,8 +119,8 @@ void Controller::SetPadInput(int up, int down, int left, int right, int a, int b
 
 //------------------------------------------------------
 // @brief	上ﾎﾞﾀﾝの状態を返す
-// 引数		現在の入力
-// 戻り値	押されていればtrue
+// @param	inputState	現在の入力
+// @return	押されていればtrue
 //------------------------------------------------------
 const bool Controller::IsPushUP(const INPUT_STATE inputState) const
 {
@@ -142,8 +143,8 @@ const bool Controller::IsPushUP(const INPUT_STATE inputState) const
 
 //------------------------------------------------------
 // @brief	下ﾎﾞﾀﾝの状態を返す
-// 引数		現在の入力
-// 戻り値	押されていればtrue
+// @param	inputState	現在の入力
+// @return	押されていればtrue
 //------------------------------------------------------
 bool Controller::IsPushDOWN(const INPUT_STATE inputState)
 {
@@ -166,8 +167,8 @@ bool Controller::IsPushDOWN(const INPUT_STATE inputState)
 
 //------------------------------------------------------
 // @brief	左ﾎﾞﾀﾝの状態を返す
-// 引数		現在の入力
-// 戻り値	押されていればtrue
+// @param	inputState	現在の入力
+// @return	押されていればtrue
 //------------------------------------------------------
 bool Controller::IsPushLEFT(const INPUT_STATE inputState)
 {
@@ -190,8 +191,8 @@ bool Controller::IsPushLEFT(const INPUT_STATE inputState)
 
 //------------------------------------------------------
 // @brief	右ﾎﾞﾀﾝの状態を返す
-// 引数		現在の入力
-// 戻り値	押されていればtrue
+// @param	inputState	現在の入力
+// @return	押されていればtrue
 //------------------------------------------------------
 bool Controller::IsPushRIGHT(const INPUT_STATE inputState)
 {
@@ -214,8 +215,8 @@ bool Controller::IsPushRIGHT(const INPUT_STATE inputState)
 
 //------------------------------------------------------
 // @brief	1ﾎﾞﾀﾝの状態を返す
-// 引数		現在の入力
-// 戻り値	押されていればtrue
+// @param	inputState	現在の入力
+// @return	押されていればtrue
 //------------------------------------------------------
 bool Controller::IsPushA(const INPUT_STATE inputState)
 {
@@ -238,8 +239,8 @@ bool Controller::IsPushA(const INPUT_STATE inputState)
 
 //------------------------------------------------------
 // @brief	2ﾎﾞﾀﾝの状態を返す
-// 引数		現在の入力
-// 戻り値	押されていればtrue
+// @param	inputState	現在の入力
+// @return	押されていればtrue
 //------------------------------------------------------
 bool Controller::IsPushB(const INPUT_STATE inputState)
 {
@@ -262,8 +263,8 @@ bool Controller::IsPushB(const INPUT_STATE inputState)
 
 //------------------------------------------------------
 // @brief	3ﾎﾞﾀﾝの状態を返す
-// 引数		現在の入力
-// 戻り値	押されていればtrue
+// @param	inputState	現在の入力
+// @return	押されていればtrue
 //------------------------------------------------------
 bool Controller::IsPushC(const INPUT_STATE inputState)
 {
@@ -286,8 +287,8 @@ bool Controller::IsPushC(const INPUT_STATE inputState)
 
 //------------------------------------------------------
 // @brief	4ﾎﾞﾀﾝの状態を返す
-// 引数		現在の入力
-// 戻り値	押されていればtrue
+// @param	inputState	現在の入力
+// @return	押されていればtrue
 //------------------------------------------------------
 bool Controller::IsPushD(const INPUT_STATE inputState)
 {

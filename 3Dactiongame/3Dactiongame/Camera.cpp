@@ -30,17 +30,18 @@ Camera::~Camera()
 //------------------------------------------------------
 void Camera::Initialize()
 {
-	cameraPos = Vector3(0.0f, 50.0f, -500.0f);
-	targetPos = Vector3(0.0f, 0.0f, 0.0f);
-	cameraUpVec = Vector3(0.0f, 1.0f, 0.0f);
-	yaw = DX_PI_F / 60;
 	camLength = 500.0f;		//中心からの距離
-	camDir = 90.0f;
+	cameraPos = { 0, 0, camLength };	// ｶﾒﾗの初期位置
+	targetPos = {};
+	cameraDir = {};
+	cameraUpVec = { 0, 1.0f, 0.0f };	// ｶﾒﾗの上方向
+	cameraRol = {};
+	rotateSpeed = deg1Rad;
 	camcnt = 0;
-	//camDir = 5;
 	deg = 90;
-	camRol = Vector3(0.0f, 0.0f, 0.0f);
-	camRol.y = (DX_PI_F / 180)*camDir;
+	//camRol = model->GetRotation();
+	//camRol.y = (DX_PI_F / 180) * camDir;
+	SetCameraNearFar(clipNear, clipFar);	// ｶﾒﾗの描画範囲
 }
 
 //------------------------------------------------------
@@ -56,38 +57,69 @@ void Camera::Finalize()
 //------------------------------------------------------
 void Camera::Update()
 {
-	if (CheckHitKey(KEY_INPUT_F))
-	{
-		camLength += 5;
-	}
-	if (CheckHitKey(KEY_INPUT_G))
-	{
-		camLength -= 5;
-	}
+	Vector3 rotate;	// 回転速度
+	cameraDir = (targetPos - cameraPos).Normalized();	// ｶﾒﾗの向き
 
-	//計算用の座標ﾓﾃﾞﾙを用意する
-	auto modelPos = model->GetPosition();
-
-	camRol = model->GetRotation();
-	targetPos.x = modelPos.x + cosf(camRol.y) * 300.0f;
-	targetPos.z = modelPos.z - sinf(camRol.y) * 300.0f;
-	targetPos.y = 50.0f;
-
-	// ﾀｰｹﾞｯﾄへのﾍﾞｸﾄﾙ変換
-	auto camVec = ConvertVec3(VGet(targetPos.x - modelPos.x,
-										targetPos.y,
-											targetPos.z - modelPos.z));
+	if (CheckHitKey(KEY_INPUT_F)) { camLength += 5; }
+	if (CheckHitKey(KEY_INPUT_G)) { camLength -= 5; }
 	
-	// ﾍﾞｸﾄﾙの正規化
-	camVec = camVec.Normalized();	//単位ﾍﾞｸﾄﾙ
+	if (CheckHitKey(KEY_INPUT_W))
+	{
+		if (cameraDir.y >= deg1Rad * -70)
+		{
+			rotate.x = -rotateSpeed;
+		}
+	}
 
-	// ﾍﾞｸﾄﾙ方向へｵﾌｾｯﾄする
-	cameraPos.x = modelPos.x - camVec.x*camLength;
-	cameraPos.y = modelPos.y + (camVec.y*camLength + standardEye);	// 100.0fは標準目線
-	cameraPos.z = modelPos.z - camVec.z*camLength;
+	if (CheckHitKey(KEY_INPUT_S)) 
+	{ 
+		if (cameraDir.y <= deg1Rad * 70)
+		{
+			rotate.x = rotateSpeed;
+		}
+	}
 
+	if (CheckHitKey(KEY_INPUT_A)) { rotate.y = rotateSpeed; }
+	if (CheckHitKey(KEY_INPUT_D)) { rotate.y = -rotateSpeed; }
+	
+	// ---------------------------------
+	/*MATRIX viewMatrix;
+	viewMatrix = MGetIdent();
+	memcpy(viewMatrix.m[0], &Vector3(1, 0, 0), sizeof(Vector3));
+	memcpy(viewMatrix.m[1], &Vector3(0, 1, 0), sizeof(Vector3));
+	memcpy(viewMatrix.m[2], &Vector3(0, 0, 1), sizeof(Vector3));
+
+	Vector3 camPos = { 0, 0, -100 };
+
+	auto z = MGetRotZ(angle.z);
+
+	auto xyz = MMult(z, y);
+	xyz = MMult(xyz, x);
+
+	CreateLookAtMatrix(&viewMatrix, &cameraPos.ConvertVec(),
+			&targetPos.ConvertVec(), &cameraUpVec.ConvertVec());
+
+	Vector3 D = { 1, 1, 0 };
+	
+	auto vecView = D * viewMatrix;
+
+	auto camZAxis = Vector3(viewMatrix.m[2][0], viewMatrix.m[2][1], viewMatrix.m[2][2]);
+
+	auto TransQ =*/ 
+
+	// ---------------------------------
+	
 	// ｶﾒﾗのﾎﾟｼﾞｼｮﾝ
 	SetCameraPositionAndTargetAndUpVec(cameraPos.ConvertVec(),
 											targetPos.ConvertVec(),
 												cameraUpVec.ConvertVec());
+												
+}
+
+//------------------------------------------------------
+// @brief	ｶﾒﾗが向いている方向を返す
+//------------------------------------------------------
+Vector3 Camera::GetCameraDir()
+{
+	return cameraDir;
 }

@@ -1,3 +1,8 @@
+//------------------------------------------------------
+// @brief	ÌßÚ²Ô°‚ð‘€‚é
+// 2020 5/19 Ryosuke Iida
+//------------------------------------------------------
+
 #include <assert.h>
 #include <vector>
 #include <cmath>
@@ -31,21 +36,21 @@ Player::~Player()
 //------------------------------------------------------
 void Player::Initialize()
 {
-	pos = Vector3();
-	rol = Vector3();
-	scl = Vector3(0.5f, 0.5f, 0.5f);
-	dir = 0.0f;
+	pos = {};
+	rol = {};	// ³–Ê
+	angle = 0.0f;
 	// ±ÆÒ°¼®Ý¾¯Ä±¯Ìß
-	SetAnimID(modelID, 3);
+	animState = ANIM_IDLE;
+	SetAnimID(modelID, ANIM_IDLE);
+	oldAnimState = animState;
 	playTime = 0;
-	newKey = 0;
-	oldKey = 0;
-	trgKey = 0;
+
 	// À°¹Þ¯Ä‚ÌŒvŽZ
-	target = ConvertVec3(VTransform(VGet(300.0f, pos.y, pos.z), MGetRotY(rol.y)));
+	// target = ConvertVec3(VTransform(VGet(300.0f, pos.y, pos.z), MGetRotY(rol.y)));
 	//uŠg‘åk¬vu‰ñ“]vuˆÚ“®v‚ÌÝ’è
+	scl = Vector3(0.5f, 0.5f, 0.5f);
 	MV1SetScale(modelID, scl.ConvertVec());//‡AŠg‘åk¬
-	MV1SetRotationXYZ(modelID, VGet(rol.x, rol.y - (DX_PI_F / 180) * 90, rol.z));//‰ñ“]
+	MV1SetRotationXYZ(modelID, rol.ConvertVec());//‰ñ“]
 	// MV1SetRotationXYZ(model, rol);//‰ñ“]
 	MV1SetPosition(modelID, pos.ConvertVec());//ˆÚ“®
 }
@@ -63,68 +68,12 @@ void Player::Finalize()
 //------------------------------------------------------
 // @brief	XV
 //------------------------------------------------------
-void Player::Update()
+void Player::Update(const Vector3& cameraDir)
 {
-	newKey = 0;
-	//¶‰Eù‰ñ
-	if (CheckHitKey(KEY_INPUT_RIGHT))
-	{
-		dir += 0.8f;
-		newKey = 1;
-		//ModelAnimTime(ACT_RUN);
-	}
-
-
-	if (CheckHitKey(KEY_INPUT_LEFT))
-	{
-		dir -= 0.8f;
-		newKey = 1;
-	}
-	rol.y = (DX_PI_F / 180)*dir;// ×¼Þ±Ý‚É•ÏŠ·
-	//----Œü‚¢‚Ä‚¢‚é•ûŒü‚É‘OŒãˆÚ“®
-	if (CheckHitKey(KEY_INPUT_UP))
-	{
-		pos.x += cosf(rol.y)*3.0f;
-		pos.z -= sinf(rol.y)*3.0f;
-		newKey = 1;
-	}
-
-	if (CheckHitKey(KEY_INPUT_DOWN))
-	{
-		pos.x -= cosf(rol.y)*3.0f;
-		newKey = 1;
-		pos.z += sinf(rol.y)*3.0f;
-	}
-
-	// À°¹Þ¯Ä‚ÌŒvŽZ
-	target = ConvertVec3(VTransform(VGet(300.0f, 0.0f, 0.0f), MGetRotY(rol.y)));
-	//uŠg‘åk¬vu‰ñ“]vuˆÚ“®v‚ÌÝ’è
-	MV1SetScale(modelID, scl.ConvertVec());// ‡AŠg‘åk¬2
-	MV1SetRotationXYZ(modelID, VGet(rol.x, rol.y - (DX_PI_F / 180) * 90, rol.z)); //‰ñ“]
-	// MV1SetRotationXYZ(model, rol);// ‰ñ“]
-	MV1SetPosition(modelID, pos.ConvertVec());// ˆÚ“®
-
-	// ±ÆÒ°¼®Ý‚ÌØ‚è‘Ö‚¦
-	if ((newKey == 1) && oldKey == 0)
-	{
-		SetAnimID(modelID, 7);
-
-	}
-	if ((newKey == 0) && oldKey == 1)
-	{
-		// ’âŽ~(0”Ô)Ó°¼®Ý‚ð¾¯Ä
-		// •à‚­(7”Ô)Ó°¼®Ý‚ð¾¯Ä
-		SetAnimID(modelID, 3);
-	}
-	oldKey = newKey;// ŽŸ‚ÌÙ°Ìß‚Ìˆ×‚Ì€”õ
-	playTime += 0.5f;
-	if (playTime >= totalTime)
-	{
-		playTime = 0.0f;
-	}
-
-	// model‚É±ÆÒ°¼®Ý‚ð¾¯Ä
-	MV1SetAttachAnimTime(modelID, attachiIndex, playTime);
+	// ˆÚ“®‚ÌXV
+	Behavior(cameraDir);
+	// ±ÆÒ°¼®Ý‚ÌXV
+	Animation();
 }
 
 //------------------------------------------------------
@@ -134,4 +83,85 @@ void Player::Render()
 {
 	// •`‰æ
 	MV1DrawModel(modelID);
+}
+
+//------------------------------------------------------
+// @brief	“®ì
+//------------------------------------------------------
+void Player::Behavior(const Vector3& cameraDir)
+{
+	// “ü—Í–³‚µ:‘Ò‹@ó‘Ô
+	animState = ANIM_IDLE;
+
+	// ˆÚ“®‘¬“x
+	auto moveSpeed = cameraDir * 5.0f;
+
+	// ‰EˆÚ“®
+	if (CheckHitKey(KEY_INPUT_RIGHT))
+	{
+		// i‚Þ•ûŒü‚Ì‘¬“x‚É•ÏŠ·
+		moveSpeed = Vector3(moveSpeed.z, moveSpeed.y, -moveSpeed.x);
+		animState = ANIM_FORWARD;
+	}
+
+	// ¶ˆÚ“®
+	if (CheckHitKey(KEY_INPUT_LEFT))
+	{
+		// i‚Þ•ûŒü‚Ì‘¬“x‚É•ÏŠ·
+		moveSpeed = Vector3(-moveSpeed.z, moveSpeed.y, moveSpeed.x);
+		animState = ANIM_FORWARD;
+	}
+
+	// ¶Ò×³–Ê•ûŒü‚ÉˆÚ“®
+	if (CheckHitKey(KEY_INPUT_UP))
+	{
+		// i‚Þ•ûŒü‚Ì‘¬“x‚É•ÏŠ·
+		moveSpeed = Vector3(moveSpeed.x, moveSpeed.y, moveSpeed.z);
+		animState = ANIM_FORWARD;
+	}
+
+	// ¶Ò×‚Ì•ûŒü‚ÉˆÚ“®
+	if (CheckHitKey(KEY_INPUT_DOWN))
+	{
+		// i‚Þ•ûŒü‚Ì‘¬“x‚É•ÏŠ·
+		moveSpeed = Vector3(-moveSpeed.x, moveSpeed.y, -moveSpeed.z);
+		animState = ANIM_FORWARD;
+	}
+
+	// ˆÚ“®‚µ‚Ä‚¢‚é‚Æ‚«‚ÌXV
+	if (animState == ANIM_FORWARD)
+	{
+		rol.y = atan2(-moveSpeed.x, -moveSpeed.z);
+		pos.x += moveSpeed.x;
+		pos.z += moveSpeed.z;
+		animState = ANIM_FORWARD;
+	}
+
+	// ˆÚ“®A‰ñ“]‚ÌÝ’è
+	MV1SetPosition(modelID, pos.ConvertVec());
+	MV1SetRotationXYZ(modelID, rol.ConvertVec());
+}
+
+//------------------------------------------------------
+// @brief	±ÆÒ°¼®Ý
+//------------------------------------------------------
+void Player::Animation()
+{
+	// ‘O‚Æˆá‚Á‚Ä‚¢‚½‚çXV‚·‚é
+	if (animState != oldAnimState)
+	{
+		// ±ÆÒ°¼®Ý‚ÌØ‚è‘Ö‚¦
+		SetAnimID(modelID, animState);
+		// ‚Ð‚Æ‚Â‘O‚Ì±ÆÒ°¼®Ý‚ð•Û‘¶
+		oldAnimState = animState;
+	}
+
+	playTime += 0.5f;
+	if (playTime >= totalTime)
+	{
+		playTime = 0.0f;
+	}
+
+	// model‚É±ÆÒ°¼®Ý‚ð¾¯Ä
+	MV1SetAttachAnimTime(modelID, attachiIndex, playTime);
 }

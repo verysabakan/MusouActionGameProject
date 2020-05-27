@@ -7,32 +7,36 @@
 
 class ModelBase;
 
+namespace {
+	const float standardEye = 100.0f;	// 見ている位置を上げる
+	const float clipNear = 0.1f;		// 手前ｸﾘｯﾌﾟ
+	const float clipFar = 5000.0f;		// 奥ｸﾘｯﾌﾟ
+	const float deg1Rad = (DX_PI_F / 180.0f);	// 1度
+}
+
 class Camera
 {
 private:
-	const float standardEye = 100.0f;
-
-	ModelBase* model;//カメラオブジェクトのポインタの保存用
-	Vector3 cameraPos;//カメラ位置
-	Vector3 targetPos;//注視点
-	Vector3 cameraUpVec;//カメラの上方向
-	float yaw;
-	float fov;//視野角
-	float clipNear;//手前クリップ
-	float clipFar;//奥クリップ
-	Vector3 camRol;//カメラの回転
+	ModelBase* model;		// ｶﾒﾗｵﾌﾞｼﾞｪｸﾄのﾎﾟｲﾝﾀの保存用
+	Vector3 cameraPos;		// ｶﾒﾗ位置
+	Vector3 targetPos;		// 注視点
+	Vector3 cameraUpVec;	// ｶﾒﾗの上方向
+	Vector3 cameraRol;		// ｶﾒﾗの回転
+	Vector3 cameraDir;
+	float fov;				// 視野角
 	float camLength;
 	int deg;
-	float camDir;
 	float size;
-	int speed;
+	float rotateSpeed;		// 回転速度
 	int camcnt;
 
 public:
-	Camera(ModelBase* m);		// ｺﾝｽﾄﾗｸﾀ
-	~Camera();		// ﾃﾞｽﾄﾗｸﾀ
+	Camera(ModelBase* m);	// ｺﾝｽﾄﾗｸﾀ
+	~Camera();				// ﾃﾞｽﾄﾗｸﾀ
 
 	void Initialize();		// 初期化
 	void Finalize();		// 終了処理
 	void Update();			// 更新
+
+	Vector3 GetCameraDir();	// ｶﾒﾗが向いている方向を返す
 };
