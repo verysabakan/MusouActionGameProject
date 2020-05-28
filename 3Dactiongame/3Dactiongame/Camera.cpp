@@ -5,7 +5,6 @@
 
 #include <DxLib.h>
 #include <cmath>
-#include "Vector3.h"
 #include "Camera.h"
 #include "ModelBase.h"
 
@@ -36,7 +35,8 @@ void Camera::Initialize()
 	cameraDir = {};
 	cameraUpVec = { 0, 1.0f, 0.0f };	// ¶Ò×‚Ìã•ûŒü
 	cameraRol = {};
-	rotateSpeed = deg1Rad;
+	quaternion.x = quaternion.y = quaternion.z = 0.0f;
+	quaternion.t = 1.0f;
 	camcnt = 0;
 	deg = 90;
 	//camRol = model->GetRotation();
@@ -59,61 +59,93 @@ void Camera::Update()
 {
 	Vector3 rotate;	// ‰ñ“]‘¬“x
 	cameraDir = (targetPos - cameraPos).Normalized();	// ¶Ò×‚ÌŒü‚«
+	auto modelPos = model->GetPosition();
+	cameraPos += modelPos - targetPos;
+	targetPos = modelPos;
 
-	if (CheckHitKey(KEY_INPUT_F)) { camLength += 5; }
-	if (CheckHitKey(KEY_INPUT_G)) { camLength -= 5; }
+	if (CheckHitKey(KEY_INPUT_F)) 
+	{ 
+		camLength += 5; 
+	}
+
+	if (CheckHitKey(KEY_INPUT_G)) 
+	{ 
+		camLength -= 5;
+	}
 	
+	float roll = 0;		// roll‰ñ“]
+	float pitch = 0;	// pitch‰ñ“]
+	float yaw = 0;		// yaw‰ñ“]
+
 	if (CheckHitKey(KEY_INPUT_W))
 	{
-		if (cameraDir.y >= deg1Rad * -70)
-		{
-			rotate.x = -rotateSpeed;
-		}
+		roll = deg1Rad;
 	}
 
 	if (CheckHitKey(KEY_INPUT_S)) 
-	{ 
-		if (cameraDir.y <= deg1Rad * 70)
-		{
-			rotate.x = rotateSpeed;
-		}
+	{
+		roll = -deg1Rad;
 	}
 
-	if (CheckHitKey(KEY_INPUT_A)) { rotate.y = rotateSpeed; }
-	if (CheckHitKey(KEY_INPUT_D)) { rotate.y = -rotateSpeed; }
-	
-	// ---------------------------------
-	/*MATRIX viewMatrix;
-	viewMatrix = MGetIdent();
-	memcpy(viewMatrix.m[0], &Vector3(1, 0, 0), sizeof(Vector3));
-	memcpy(viewMatrix.m[1], &Vector3(0, 1, 0), sizeof(Vector3));
-	memcpy(viewMatrix.m[2], &Vector3(0, 0, 1), sizeof(Vector3));
+	if (CheckHitKey(KEY_INPUT_A)) 
+	{ 
+		yaw = deg1Rad;
+	}
 
-	Vector3 camPos = { 0, 0, -100 };
+	if (CheckHitKey(KEY_INPUT_D)) 
+	{ 
+		yaw = -deg1Rad;
+	}
 
-	auto z = MGetRotZ(angle.z);
+	/////////////////////////////////////
+	MATRIX mat;
+	MATRIX matRot;
+	MATRIX matTrans;
+	CreateIdentityMatrix(&mat);
+	CreateIdentityMatrix(&matRot);
 
-	auto xyz = MMult(z, y);
-	xyz = MMult(xyz, x);
+	quaternion.x = quaternion.y = quaternion.z = 0.0f;
+	quaternion.t = 1.0f;
 
-	CreateLookAtMatrix(&viewMatrix, &cameraPos.ConvertVec(),
-			&targetPos.ConvertVec(), &cameraUpVec.ConvertVec());
+	// Û°Ù
+	auto zAxis = Vector3(mat.m[2][0], mat.m[2][1], mat.m[2][2]);
+	quaternion = quaternion * CreateRotationQuaternion(roll, zAxis);
 
-	Vector3 D = { 1, 1, 0 };
-	
-	auto vecView = D * viewMatrix;
+	// Ëß¯Á
+	auto xAxis = Vector3(mat.m[0][0], mat.m[0][1], mat.m[0][2]);
+	quaternion = quaternion * CreateRotationQuaternion(pitch, xAxis);
 
-	auto camZAxis = Vector3(viewMatrix.m[2][0], viewMatrix.m[2][1], viewMatrix.m[2][2]);
+	// Ö°
+	auto yAxis = Vector3(mat.m[1][0], mat.m[1][1], mat.m[1][2]);
+	quaternion = quaternion * CreateRotationQuaternion(yaw, yAxis);
 
-	auto TransQ =*/ 
+	Vector3 camPos = { 0, 0, camLength };	// Å‰‚Ì¶Ò×ˆÊ’u
 
-	// ---------------------------------
-	
-	// ¶Ò×‚ÌÎß¼Þ¼®Ý
-	SetCameraPositionAndTargetAndUpVec(cameraPos.ConvertVec(),
-											targetPos.ConvertVec(),
-												cameraUpVec.ConvertVec());
-												
+	matRot = MMult(matRot, QuaternionToMatrix(quaternion));
+
+	auto DL = camPos * matRot;
+
+	auto camZAxis = Vector3(matRot.m[2][0], matRot.m[2][1], matRot.m[2][2]);
+
+	auto rotAxis = Cross(camPos, camZAxis);
+
+	auto transQ = CreateRotationQuaternion(roll, rotAxis);
+
+	auto TransRotMat = QuaternionToMatrix(transQ);
+
+	camPos = camPos * TransRotMat;
+
+	//matRot = QuaternionToMatrix(quaternion);
+	//mat = MMult(mat, matRot);         //‰ñ“]~½¹°Ù
+
+	//matTrans = MGetTranslate(VGet(0, 0, 0));
+	//mat = MMult(mat, matTrans);       //ˆÚ“®~‰ñ“]~½¹°Ù
+
+	//cameraPos = cameraPos * mat;
+	///////////////////////////////////////////
+
+	// ¶Ò×Ý’è
+	SetCameraPositionAndTargetAndUpVec(cameraPos.ConvertVec(), targetPos.ConvertVec(), cameraUpVec.ConvertVec());
 }
 
 //------------------------------------------------------

@@ -47,7 +47,7 @@ Quaternion Quaternion::operator*(const Quaternion& q)const
 // @param	Axis	Ž²
 // @return	‰ñ“]Œã‚Ì¸«°ÀÆµÝ
 //------------------------------------------------------
-Quaternion Quaternion::CreateRotationQuaternion(const double& radian, Vector3 axis)
+Quaternion CreateRotationQuaternion(const double& radian, Vector3 axis)
 {
 	Quaternion ret;
 	double norm, ccc, sss;
@@ -56,9 +56,9 @@ Quaternion Quaternion::CreateRotationQuaternion(const double& radian, Vector3 ax
 	if (norm <= 0) return ret;
 
 	norm = 1.0 / sqrt(norm);
-	axis.x *= norm;
-	axis.y *= norm;
-	axis.z *= norm;
+	axis.x *= (float)norm;
+	axis.y *= (float)norm;
+	axis.z *= (float)norm;
 
 	ccc = cos(0.5 * radian);
 	sss = sin(0.5 * radian);
@@ -76,7 +76,7 @@ Quaternion Quaternion::CreateRotationQuaternion(const double& radian, Vector3 ax
 // @param	pos	Œ»ÝˆÊ’u
 // @return	ì¬‚µ‚½¸«°ÀÆµÝ
 //------------------------------------------------------
-Quaternion Quaternion::CreateXYZToQuaternion(const Vector3& pos)
+Quaternion CreateXYZToQuaternion(const Vector3& pos)
 {
 	Quaternion ret;
 
@@ -89,27 +89,28 @@ Quaternion Quaternion::CreateXYZToQuaternion(const Vector3& pos)
 }
 
 //------------------------------------------------------
-// @brief	¸«°ÀÆµÝ‚ð‰ñ“]s—ñ‚Ö•Ï‚¦‚é
+// @brief	¸«°ÀÆµÝ‚©‚ç‰ñ“]s—ñ‚Ö
 // @param	pos	Œ»ÝˆÊ’u
 // @return	•ÏŠ·Œã‚Ì¸«°ÀÆµÝ
 //------------------------------------------------------
-MATRIX Quaternion::QuaternionToMatrix(const Quaternion& q)
+MATRIX QuaternionToMatrix(const Quaternion& q)
 {
 	MATRIX ret = MGetIdent();	// ’PˆÊs—ñ
+
 	//XŽ²
-	ret.m[0][0] = 1.0f - 2.0f * q.y * q.y - 2.0f * q.z * q.z;
-	ret.m[0][1] = 2.0f * q.x * q.y + 2.0f * q.t * q.z;
-	ret.m[0][2] = 2.0f * q.x * q.z - 2.0f * q.t * q.y;
+	ret.m[0][0] = (float)(1.0f - 2.0f * q.y * q.y - 2.0f * q.z * q.z);
+	ret.m[0][1] = (float)(2.0f * q.x * q.y + 2.0f * q.t * q.z);
+	ret.m[0][2] = (float)(2.0f * q.x * q.z - 2.0f * q.t * q.y);
 
 	//YŽ²
-	ret.m[1][0] = 2.0f * q.x * q.y - 2.0f * q.t * q.z;
-	ret.m[1][1] = 1.0f - 2.0f * q.x * q.x - 2.0f * q.z * q.z;
-	ret.m[1][2] = 2.0f * q.y * q.z + 2.0f * q.t * q.x;
+	ret.m[1][0] = (float)(2.0f * q.x * q.y - 2.0f * q.t * q.z);
+	ret.m[1][1] = (float)(1.0f - 2.0f * q.x * q.x - 2.0f * q.z * q.z);
+	ret.m[1][2] = (float)(2.0f * q.y * q.z + 2.0f * q.t * q.x);
 
 	//ZŽ²
-	ret.m[2][0] = 2.0f * q.x * q.z + 2.0f * q.t * q.y;
-	ret.m[2][1] = 2.0f * q.y * q.z - 2.0f * q.t * q.x;
-	ret.m[2][2] = 1.0f - 2.0f * q.x * q.x - 2.0f * q.y * q.y;
+	ret.m[2][0] = (float)(2.0f * q.x * q.z + 2.0f * q.t * q.y);
+	ret.m[2][1] = (float)(2.0f * q.y * q.z - 2.0f * q.t * q.x);
+	ret.m[2][2] = (float)(1.0f - 2.0f * q.x * q.x - 2.0f * q.y * q.y);
 
 	return ret;
 }

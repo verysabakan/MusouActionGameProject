@@ -4,6 +4,7 @@
 //------------------------------------------------------
 
 #pragma once
+#include "Quaternion.h"
 
 class ModelBase;
 
@@ -23,11 +24,11 @@ private:
 	Vector3 cameraUpVec;	// ¶Ò×‚Ìã•ûŒü
 	Vector3 cameraRol;		// ¶Ò×‚Ì‰ñ“]
 	Vector3 cameraDir;
+	Quaternion quaternion;	// ¸«°ÀÆµİ
 	float fov;				// ‹–ìŠp
 	float camLength;
 	int deg;
 	float size;
-	float rotateSpeed;		// ‰ñ“]‘¬“x
 	int camcnt;
 
 public:

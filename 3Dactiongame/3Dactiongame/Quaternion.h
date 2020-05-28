@@ -12,11 +12,12 @@
 struct Quaternion
 {
 	Quaternion() :t(0), x(0), y(0), z(0) {}
-	Quaternion(double t, double inx, double iny, double inz) :x(inx), y(iny), z(inz) {}
+	Quaternion(double in_t, double in_x, double in_y, double in_z) :t(in_t), x(in_x), y(in_y), z(in_z) {}
 	double t, x, y, z;
 
-	Quaternion operator*(const Quaternion& q)const;
-	Quaternion CreateRotationQuaternion(const double& rad, Vector3 axis);
-	Quaternion CreateXYZToQuaternion(const Vector3& pos);
-	MATRIX QuaternionToMatrix(const Quaternion& q);
+	Quaternion operator*(const Quaternion& q) const;
 };
+
+Quaternion CreateRotationQuaternion(const double& rad, Vector3 axis);	// ‰ñ“]‚Ì¸«°ÀÆµİ
+Quaternion CreateXYZToQuaternion(const Vector3& pos);					// ˆÊ’u‚©‚ç¸«°ÀÆµİ‚ğì¬
+MATRIX QuaternionToMatrix(const Quaternion& q);							// ¸«°ÀÆµİ‚©‚ç‰ñ“]s—ñ‚Ö
