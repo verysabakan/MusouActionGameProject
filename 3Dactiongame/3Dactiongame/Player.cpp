@@ -17,7 +17,8 @@ Player::Player(int mID , std::vector<int>& aID)
 	: ModelBase()
 {
 	modelID = MV1DuplicateModel(mID);
-	for (int i = 0; i < aID.size(); i++) {
+	for (int i = 0; i < aID.size(); i++) 
+	{
 		animID.push_back(aID[i]);
 	}
 }
@@ -42,7 +43,7 @@ void Player::Initialize()
 	// ±ÆÒ°¼®Ý¾¯Ä±¯Ìß
 	animState = ANIM_IDLE;
 	SetAnimID(modelID, ANIM_IDLE);
-	oldAnimState = animState;
+	oldAnimState = animState;	// ‘O‚Ì±ÆÒ°¼®Ý
 	playTime = 0;
 
 	// À°¹Þ¯Ä‚ÌŒvŽZ
@@ -156,6 +157,7 @@ void Player::Animation()
 		oldAnimState = animState;
 	}
 
+	// ±ÆÒ°¼®Ý‚ÌÄ¶
 	playTime += 0.5f;
 	if (playTime >= totalTime)
 	{

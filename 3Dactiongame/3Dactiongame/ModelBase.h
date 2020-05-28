@@ -48,7 +48,7 @@ public:
 	void SetAnimID(int modelID, int no)					// ±ÆÒ°¼®ÝID‚Ì¾¯Ä
 	{
 		MV1DetachAnim(modelID, attachiIndex);
-		attachiIndex = MV1AttachAnim(modelID, 0, animID[no], false);
+		attachiIndex = MV1AttachAnim(modelID, 0, animID[no], TRUE);
 		// ±ÆÒ°¼®Ý‚ÌÄ°ÀÙŽžŠÔ‚ðŒv‘ª
 		totalTime = MV1GetAttachAnimTotalTime(modelID, attachiIndex);
 		playTime = 0.0f;

@@ -13,14 +13,13 @@
 //------------------------------------------------------
 void ReadPlayerModelData(int& modelID, std::vector<int>& animID)
 {
-	// µÃﬁºﬁ™∏ƒê∂ê¨
-	// auto playerModel = MV1LoadModel("Model/Otameshi/Heracules/Model_Heracules_Green.mv1");
-	modelID = MV1LoadModel("Model/Otameshi/Heracules/Model_Heracules_Green.mv1");
+	// ”√ﬁŸÇÃì«Ç›çûÇ›
+	modelID = MV1LoadModel("Model/Player/Warrior.mv1");
 
 	// std::vector<int> playerAnim;
 	auto i = 0;
 
-	std::string dirName = "Model/Otameshi/Heracules/Animation/";
+	std::string dirName = "Model/Player/Animation/";
 	std::string extension = "mv1";
 
 	HANDLE hFind;
