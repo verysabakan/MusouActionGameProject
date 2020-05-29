@@ -41,8 +41,8 @@ void Player::Initialize()
 	rol = {};	// 正面
 	angle = 0.0f;
 	// ｱﾆﾒｰｼｮﾝｾｯﾄｱｯﾌﾟ
-	animState = ANIM_IDLE;
-	SetAnimID(modelID, ANIM_IDLE);
+	animState = ANIM_STANCE;
+	SetAnimID(modelID, animState);
 	oldAnimState = animState;	// 前のｱﾆﾒｰｼｮﾝ
 	playTime = 0;
 
@@ -92,17 +92,76 @@ void Player::Render()
 void Player::Behavior(const Vector3& cameraDir)
 {
 	// 入力無し:待機状態
-	animState = ANIM_IDLE;
+	animState = ANIM_STANCE;
 
 	// 移動速度
 	auto moveSpeed = cameraDir * 5.0f;
+
+	// 
+	if (animState == ANIM_DEAD)
+	{
+		
+	}
+	else if (animState == ANIM_DOWN)
+	{
+
+	}
+	else if (animState == ANIM_DAMAGE)
+	{
+
+	}
+	else if (animState == ANIM_STUN)
+	{
+
+	}
+	else if (animState == ANIM_JUMP)
+	{
+
+	}
+	else if (animState == ANIM_SKILL1)
+	{
+
+	}
+	else if (animState == ANIM_SKILL2)
+	{
+
+	}
+	else if (animState == ANIM_SKILL3)
+	{
+
+	}
+	else if (animState == ANIM_ATTACK1)
+	{
+		
+	}
+	else if (animState == ANIM_ATTACK2)
+	{
+
+	}
+	else if (animState == ANIM_BROCK)
+	{
+
+	}
+	else if (animState == ANIM_WALK)
+	{
+
+	}
+	else if (animState == ANIM_RUN)
+	{
+
+	}
+	else if (animState == ANIM_STANCE)
+	{
+
+	}
+
 
 	// 右移動
 	if (CheckHitKey(KEY_INPUT_RIGHT))
 	{
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(moveSpeed.z, moveSpeed.y, -moveSpeed.x);
-		animState = ANIM_FORWARD;
+		animState = ANIM_RUN;
 	}
 
 	// 左移動
@@ -110,7 +169,7 @@ void Player::Behavior(const Vector3& cameraDir)
 	{
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(-moveSpeed.z, moveSpeed.y, moveSpeed.x);
-		animState = ANIM_FORWARD;
+		animState = ANIM_RUN;
 	}
 
 	// ｶﾒﾗ正面方向に移動
@@ -118,7 +177,7 @@ void Player::Behavior(const Vector3& cameraDir)
 	{
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(moveSpeed.x, moveSpeed.y, moveSpeed.z);
-		animState = ANIM_FORWARD;
+		animState = ANIM_RUN;
 	}
 
 	// ｶﾒﾗの方向に移動
@@ -126,16 +185,16 @@ void Player::Behavior(const Vector3& cameraDir)
 	{
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(-moveSpeed.x, moveSpeed.y, -moveSpeed.z);
-		animState = ANIM_FORWARD;
+		animState = ANIM_RUN;
 	}
 
 	// 移動しているときの更新
-	if (animState == ANIM_FORWARD)
+	if (animState == ANIM_RUN)
 	{
 		rol.y = atan2(-moveSpeed.x, -moveSpeed.z);
 		pos.x += moveSpeed.x;
 		pos.z += moveSpeed.z;
-		animState = ANIM_FORWARD;
+		animState = ANIM_RUN;
 	}
 
 	// 移動、回転の設定
