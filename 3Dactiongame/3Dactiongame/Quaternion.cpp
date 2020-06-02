@@ -10,33 +10,33 @@ Quaternion Quaternion::operator*(const Quaternion& q)const
 	Quaternion ret;
 	double d1, d2, d3, d4;
 
-	// t
-	d1 = t * q.t;
-	d2 = -x * q.x;
-	d3 = -y * q.y;
-	d4 = -z * q.z;
-	ret.t = d1 + d2 + d3 + d4;
-
 	// x
-	d1 = t * q.x;
-	d2 = x * q.t;
-	d3 = y * q.z;
-	d4 = -z * q.y;
+	d1 = x * q.w;
+	d2 = y * q.z;
+	d3 = -z * q.y;
+	d4 = w * q.x;
 	ret.x = d1 + d2 + d3 + d4;
 
 	// y
-	d1 = t * q.y;
-	d2 = -x * q.z;
-	d3 = y * q.t;
-	d4 = z * q.x;
+	d1 = -x * q.z;
+	d2 = y * q.w;
+	d3 = z * q.x;
+	d4 = w * q.y;
 	ret.y = d1 + d2 + d3 + d4;
 
 	// z
-	d1 = t * q.z;
-	d2 = x * q.y;
-	d3 = -y * q.x;
-	d4 = z * q.t;
+	d1 = x * q.y;
+	d2 = -y * q.x;
+	d3 = z * q.w;
+	d4 = w * q.z;
 	ret.z = d1 + d2 + d3 + d4;
+
+	// w
+	d1 = -x * q.x;
+	d2 = -y * q.y;
+	d3 = -z * q.z;
+	d4 = w * q.w;
+	ret.w = d1 + d2 + d3 + d4;
 
 	return ret;
 }
@@ -63,10 +63,10 @@ Quaternion CreateRotationQuaternion(const double& radian, Vector3 axis)
 	ccc = cos(0.5 * radian);
 	sss = sin(0.5 * radian);
 
-	ret.t = ccc;
 	ret.x = sss * axis.x;
 	ret.y = sss * axis.y;
 	ret.z = sss * axis.z;
+	ret.w = ccc;
 
 	return ret;
 }
@@ -80,10 +80,10 @@ Quaternion CreateXYZToQuaternion(const Vector3& pos)
 {
 	Quaternion ret;
 
-	ret.t = 0.0;
 	ret.x = pos.x;
-	ret.y = pos.x;
-	ret.z = pos.x;
+	ret.y = pos.y;
+	ret.z = pos.z;
+	ret.w = 0.0;
 	
 	return ret;
 }
@@ -99,17 +99,17 @@ MATRIX QuaternionToMatrix(const Quaternion& q)
 
 	//XŽ²
 	ret.m[0][0] = (float)(1.0f - 2.0f * q.y * q.y - 2.0f * q.z * q.z);
-	ret.m[0][1] = (float)(2.0f * q.x * q.y + 2.0f * q.t * q.z);
-	ret.m[0][2] = (float)(2.0f * q.x * q.z - 2.0f * q.t * q.y);
+	ret.m[0][1] = (float)(2.0f * q.x * q.y + 2.0f * q.w * q.z);
+	ret.m[0][2] = (float)(2.0f * q.x * q.z - 2.0f * q.w * q.y);
 
 	//YŽ²
-	ret.m[1][0] = (float)(2.0f * q.x * q.y - 2.0f * q.t * q.z);
+	ret.m[1][0] = (float)(2.0f * q.x * q.y - 2.0f * q.w * q.z);
 	ret.m[1][1] = (float)(1.0f - 2.0f * q.x * q.x - 2.0f * q.z * q.z);
-	ret.m[1][2] = (float)(2.0f * q.y * q.z + 2.0f * q.t * q.x);
+	ret.m[1][2] = (float)(2.0f * q.y * q.z + 2.0f * q.w * q.x);
 
 	//ZŽ²
-	ret.m[2][0] = (float)(2.0f * q.x * q.z + 2.0f * q.t * q.y);
-	ret.m[2][1] = (float)(2.0f * q.y * q.z - 2.0f * q.t * q.x);
+	ret.m[2][0] = (float)(2.0f * q.x * q.z + 2.0f * q.w * q.y);
+	ret.m[2][1] = (float)(2.0f * q.y * q.z - 2.0f * q.w * q.x);
 	ret.m[2][2] = (float)(1.0f - 2.0f * q.x * q.x - 2.0f * q.y * q.y);
 
 	return ret;

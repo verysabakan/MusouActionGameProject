@@ -11,9 +11,9 @@
 
 struct Quaternion
 {
-	Quaternion() :t(0), x(0), y(0), z(0) {}
-	Quaternion(double in_t, double in_x, double in_y, double in_z) :t(in_t), x(in_x), y(in_y), z(in_z) {}
-	double t, x, y, z;
+	Quaternion() :x(0), y(0), z(0), w(0) {}
+	Quaternion(double in_x, double in_y, double in_z, double in_w) :x(in_x), y(in_y), z(in_z), w(in_w) {}
+	double x, y, z, w;
 
 	Quaternion operator*(const Quaternion& q) const;
 };

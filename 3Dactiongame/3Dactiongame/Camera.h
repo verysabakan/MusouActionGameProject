@@ -20,7 +20,7 @@ class Camera
 private:
 	ModelBase* model;		// ｶﾒﾗｵﾌﾞｼﾞｪｸﾄのﾎﾟｲﾝﾀの保存用
 	Vector3 cameraPos;		// ｶﾒﾗ位置
-	Vector3 targetPos;		// 注視点
+	Vector3 targetLookAtPos;		// 注視点
 	Vector3 cameraUpVec;	// ｶﾒﾗの上方向
 	Vector3 cameraRol;		// ｶﾒﾗの回転
 	Vector3 cameraDir;
@@ -38,6 +38,9 @@ public:
 	void Initialize();		// 初期化
 	void Finalize();		// 終了処理
 	void Update();			// 更新
+	void Renderer();		// 描画
 
 	Vector3 GetCameraDir();	// ｶﾒﾗが向いている方向を返す
+private:
+	void Move();	// ｶﾒﾗの移動回転
 };

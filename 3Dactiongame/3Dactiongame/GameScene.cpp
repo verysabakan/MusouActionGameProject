@@ -113,5 +113,6 @@ void GameScene::Render()
 
 	// ŠeXVˆ—
 	player->Render();
+	camera->Renderer();
 	DrawString(0, 0, "¹Þ°Ñ‰æ–Ê", 0xffffff);
 }
