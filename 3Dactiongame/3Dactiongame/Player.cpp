@@ -7,19 +7,18 @@
 #include <vector>
 #include <cmath>
 #include <DxLib.h>
-#include "ModelBase.h"
+#include "Controller.h"
 #include "Player.h"
 
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
 //------------------------------------------------------
 Player::Player(int mID , std::vector<int>& aID)
-	: ModelBase()
 {
-	modelID = MV1DuplicateModel(mID);
-	for (int i = 0; i < aID.size(); i++) 
+	modelHandle = MV1DuplicateModel(mID);
+	for (int i = 0; i < aID.size(); i++)
 	{
-		animID.push_back(aID[i]);
+		animHandle.push_back(aID[i]);
 	}
 }
 
@@ -29,7 +28,7 @@ Player::Player(int mID , std::vector<int>& aID)
 Player::~Player()
 {
 	// 異常終了のﾁｪｯｸ
-	assert(modelID == NULL);
+	assert(modelHandle == NULL);
 }
 
 //------------------------------------------------------
@@ -37,23 +36,20 @@ Player::~Player()
 //------------------------------------------------------
 void Player::Initialize()
 {
-	pos = {};
-	rol = {};	// 正面
-	angle = 0.0f;
+	pos = {4557, 0, 2782};
 	// ｱﾆﾒｰｼｮﾝｾｯﾄｱｯﾌﾟ
 	animState = ANIM_STANCE;
-	SetAnimID(modelID, animState);
+	SetAnimID(modelHandle, animState);
 	oldAnimState = animState;	// 前のｱﾆﾒｰｼｮﾝ
 	playTime = 0;
-
 	// ﾀｰｹﾞｯﾄの計算
 	// target = ConvertVec3(VTransform(VGet(300.0f, pos.y, pos.z), MGetRotY(rol.y)));
 	//「拡大縮小」「回転」「移動」の設定
 	scl = Vector3(0.5f, 0.5f, 0.5f);
-	MV1SetScale(modelID, scl.ConvertVec());//②拡大縮小
-	MV1SetRotationXYZ(modelID, rol.ConvertVec());//回転
+	MV1SetScale(modelHandle, scl.ConvertVec());//②拡大縮小
+	MV1SetRotationXYZ(modelHandle, rol.ConvertVec());//回転
 	// MV1SetRotationXYZ(model, rol);//回転
-	MV1SetPosition(modelID, pos.ConvertVec());//移動
+	MV1SetPosition(modelHandle, pos.ConvertVec());//移動
 }
 
 //------------------------------------------------------
@@ -62,17 +58,17 @@ void Player::Initialize()
 void Player::Finalize()
 {
 	// ﾓﾃﾞﾙの削除
-	MV1DeleteModel(modelID);
-	modelID = NULL;
+	MV1DeleteModel(modelHandle);
+	modelHandle = NULL;
 }
 
 //------------------------------------------------------
 // @brief	更新
 //------------------------------------------------------
-void Player::Update(const Vector3& cameraDir)
+void Player::Update(const Controller& controll, const Vector3& cameraDir)
 {
 	// 移動の更新
-	Behavior(cameraDir);
+	Behavior(controll, cameraDir);
 	// ｱﾆﾒｰｼｮﾝの更新
 	Animation();
 }
@@ -83,21 +79,21 @@ void Player::Update(const Vector3& cameraDir)
 void Player::Render()
 {
 	// 描画
-	MV1DrawModel(modelID);
+	MV1DrawModel(modelHandle);
 }
 
 //------------------------------------------------------
 // @brief	動作
 //------------------------------------------------------
-void Player::Behavior(const Vector3& cameraDir)
+void Player::Behavior(const Controller& controll, const Vector3& cameraDir)
 {
 	// 入力無し:待機状態
 	animState = ANIM_STANCE;
 
 	// 移動速度
-	auto moveSpeed = cameraDir * 5.0f;
+	moveSpeed = cameraDir * 5.0f;
 
-	// 
+	// 行動別の処理(優先度準)
 	if (animState == ANIM_DEAD)
 	{
 		
@@ -155,9 +151,8 @@ void Player::Behavior(const Vector3& cameraDir)
 
 	}
 
-
 	// 右移動
-	if (CheckHitKey(KEY_INPUT_RIGHT))
+	if (controll.IsPushRIGHT(INPUT_HOLD))
 	{
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(moveSpeed.z, moveSpeed.y, -moveSpeed.x);
@@ -165,7 +160,7 @@ void Player::Behavior(const Vector3& cameraDir)
 	}
 
 	// 左移動
-	if (CheckHitKey(KEY_INPUT_LEFT))
+	if (controll.IsPushLEFT(INPUT_HOLD))
 	{
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(-moveSpeed.z, moveSpeed.y, moveSpeed.x);
@@ -173,7 +168,7 @@ void Player::Behavior(const Vector3& cameraDir)
 	}
 
 	// ｶﾒﾗ正面方向に移動
-	if (CheckHitKey(KEY_INPUT_UP))
+	if (controll.IsPushUP(INPUT_HOLD))
 	{
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(moveSpeed.x, moveSpeed.y, moveSpeed.z);
@@ -181,7 +176,7 @@ void Player::Behavior(const Vector3& cameraDir)
 	}
 
 	// ｶﾒﾗの方向に移動
-	if (CheckHitKey(KEY_INPUT_DOWN))
+	if (controll.IsPushDOWN(INPUT_HOLD))
 	{
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(-moveSpeed.x, moveSpeed.y, -moveSpeed.z);
@@ -198,8 +193,8 @@ void Player::Behavior(const Vector3& cameraDir)
 	}
 
 	// 移動、回転の設定
-	MV1SetPosition(modelID, pos.ConvertVec());
-	MV1SetRotationXYZ(modelID, rol.ConvertVec());
+	MV1SetPosition(modelHandle, pos.ConvertVec());
+	MV1SetRotationXYZ(modelHandle, rol.ConvertVec());
 }
 
 //------------------------------------------------------
@@ -211,7 +206,7 @@ void Player::Animation()
 	if (animState != oldAnimState)
 	{
 		// ｱﾆﾒｰｼｮﾝの切り替え
-		SetAnimID(modelID, animState);
+		SetAnimID(modelHandle, animState);
 		// ひとつ前のｱﾆﾒｰｼｮﾝを保存
 		oldAnimState = animState;
 	}
@@ -224,5 +219,5 @@ void Player::Animation()
 	}
 
 	// modelにｱﾆﾒｰｼｮﾝをｾｯﾄ
-	MV1SetAttachAnimTime(modelID, attachiIndex, playTime);
+	MV1SetAttachAnimTime(modelHandle, attachiIndex, playTime);
 }

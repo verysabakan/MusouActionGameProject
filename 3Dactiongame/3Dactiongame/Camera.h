@@ -6,7 +6,9 @@
 #pragma once
 #include "Quaternion.h"
 
+// ﾌﾟﾛﾄﾀｲﾌﾟ宣言
 class ModelBase;
+class Player;
 
 namespace {
 	const float standardEye = 100.0f;	// 見ている位置を上げる
@@ -18,7 +20,7 @@ namespace {
 class Camera
 {
 private:
-	ModelBase* model;		// ｶﾒﾗｵﾌﾞｼﾞｪｸﾄのﾎﾟｲﾝﾀの保存用
+	ModelBase* model;		// ﾌﾟﾚｲﾔｰｵﾌﾞｼﾞｪｸﾄのﾎﾟｲﾝﾀの保存用
 	Vector3 cameraPos;		// ｶﾒﾗ位置
 	Vector3 targetLookAtPos;		// 注視点
 	Vector3 cameraUpVec;	// ｶﾒﾗの上方向
@@ -32,7 +34,7 @@ private:
 	int camcnt;
 
 public:
-	Camera(ModelBase* m);	// ｺﾝｽﾄﾗｸﾀ
+	Camera(Player* p);	// ｺﾝｽﾄﾗｸﾀ
 	~Camera();				// ﾃﾞｽﾄﾗｸﾀ
 
 	void Initialize();		// 初期化

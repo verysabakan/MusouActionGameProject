@@ -7,12 +7,16 @@
 
 #include "BaseScene.h"
 
+// ÌßÛÄÀ²ÌßéŒ¾
+class SceneManager;
+
 class StageSelScene
 	: public BaseScene
 {
 public:
-	StageSelScene(ISceneSwitcher* switcher);	// ºİ½Ä×¸À
-	~StageSelScene();							// ÃŞ½Ä×¸À
+	//StageSelScene(ISceneSwitcher* switcher,SceneDateManager* dateManager);	// ºİ½Ä×¸À
+	StageSelScene(SceneManager* sManager);
+	~StageSelScene();					// ÃŞ½Ä×¸À
 
 	// -----µ°ÊŞ°×²ÄŞ----- //
 	//virtual void Initialize() override;	// ‰Šú‰»

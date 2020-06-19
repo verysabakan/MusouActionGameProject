@@ -1,24 +1,30 @@
 //------------------------------------------------------
-// @brief	ﾓｰﾄﾞ選択画面
-// 2020 5/7 Ryosuke Iida
+// @brief	ｽﾃｰｼﾞの管理
+// 2020 6/3 Ryosuke Iida
 //------------------------------------------------------
-
+#include <string>
+#include <memory>
 #include <DxLib.h>
-#include "ModeSelScene.h"
+#include "Stage.h"
 
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
 //------------------------------------------------------
-ModeSelScene::ModeSelScene(ISceneSwitcher* switcher)
-	: BaseScene(switcher)
+Stage::Stage(const STAGE_TYPE& sT)
 {
-	// 処理なし
+	std::unique_ptr<LoadStage> loadStage;
+
+	// ｽﾃｰｼﾞの生成に使うﾓﾃﾞﾙを読み込む
+	loadStage->LoadStageDate(modelHandle, collisionModelHandle, skyModelHandle, sT);
+
+	// 読み込んだら必要なくなるので解放
+	loadStage.reset();
 }
 
 //------------------------------------------------------
 // @brief	ﾃﾞｽﾄﾗｸﾀ
 //------------------------------------------------------
-ModeSelScene::~ModeSelScene()
+Stage::~Stage()
 {
 	// 処理なし
 }
@@ -26,40 +32,39 @@ ModeSelScene::~ModeSelScene()
 //------------------------------------------------------
 // @brief	初期化
 //------------------------------------------------------
-void ModeSelScene::Initialize()
+void Stage::Initialize()
 {
-	modelHandle = MV1LoadModel("Model/Fukuoka_Prop.fbx");
+
 }
 
 //------------------------------------------------------
 // @brief	終了処理
 //------------------------------------------------------
-void ModeSelScene::Finalize()
+void Stage::Finalize()
 {
-	MV1DeleteModel(modelHandle);
-	modelHandle = NULL;
+
 }
 
 //------------------------------------------------------
 // @brief	更新
 //------------------------------------------------------
-void ModeSelScene::Update(const Controller& controll)
+void Stage::Update()
 {
-	// 画面に映る位置に３Ｄモデルを移動
-	MV1SetPosition(modelHandle, VGet(320.0f, -300.0f, 600.0f));
-	MV1DrawModel(modelHandle);
 
-	// ﾃﾞﾊﾞｯｸﾞ用ｼｰﾝ切り替えｷｰ:Q
-	if (controll.IsPushC(INPUT_TRG)) {
-		// ｷｬﾗｸﾀｰ選択画面に切り替え
-		sceneSwitcher->SwitchScene(eScene_CharSel);
-	}
 }
 
 //------------------------------------------------------
 // @brief	描画
 //------------------------------------------------------
-void ModeSelScene::Render()
+void Stage::Render()
 {
-	DrawString(0, 0, "ﾓｰﾄﾞ選択画面", 0xffffff);
+	// ステージ３Ｄモデルを描画
+	MV1DrawModel(modelHandle);
+
+	if (collisionModelHandle)
+	{
+		// ﾃﾞﾊﾞｯｸﾞ用
+		MV1DrawModelDebug(collisionModelHandle, GetColor(0, 255, 0),
+			FALSE, 1.0f, TRUE, FALSE);
+	}
 }

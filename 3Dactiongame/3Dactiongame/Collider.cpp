@@ -1,45 +1,49 @@
 //------------------------------------------------------
-// @brief	ｷｬﾗｸﾀｰ選択画面
-// 2020 5/7 Ryosuke Iida
+// @brief	当たり判定
+// 2020 6/18 Ryosuke Iida
 //------------------------------------------------------
 
-#include <DxLib.h>
-#include "CharSelScene.h"
-//#include "Controller.h"
+#include "Collider.h"
+#include "HitCheckCharAndStage.h"
 
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
 //------------------------------------------------------
-CharSelScene::CharSelScene(ISceneSwitcher* switcher)
-	: BaseScene(switcher)
+Collider::Collider(Player* p, Stage* s)
 {
-	// 処理なし
+	player = p;
+	stage = s;
+	hcPlayerAndStage = std::make_unique<HitCheckCharAndStage>(p, s);
 }
 
 //------------------------------------------------------
 // @brief	ﾃﾞｽﾄﾗｸﾀ
 //------------------------------------------------------
-CharSelScene::~CharSelScene()
+Collider::~Collider()
 {
-	// 処理なし
+	
+}
+
+//------------------------------------------------------
+// @brief	初期化
+//------------------------------------------------------
+void Collider::Initialize()
+{
+
+}
+
+//------------------------------------------------------
+// @brief	終了処理
+//------------------------------------------------------
+void Collider::Finalize()
+{
+
 }
 
 //------------------------------------------------------
 // @brief	更新
 //------------------------------------------------------
-void CharSelScene::Update(const Controller& controll)
+void Collider::Update()
 {
-	// ﾃﾞﾊﾞｯｸﾞ用ｼｰﾝ切り替えｷｰ:Q
-	if (controll.IsPushC(INPUT_TRG)) {
-		// ｽﾃｰｼﾞ選択画面に切り替え
-		sceneSwitcher->SwitchScene(eScene_StageSel);
-	}
-}
-
-//------------------------------------------------------
-// @brief	描画
-//------------------------------------------------------
-void CharSelScene::Render()
-{
-	DrawString(0, 0, "ｷｬﾗｸﾀｰ選択画面", 0xffffff);
+	hcPlayerAndStage->HitTerrain();
 }

@@ -1,17 +1,14 @@
 //------------------------------------------------------
-// @brief	ｷｬﾗｸﾀｰ選択画面
-// 2020 5/7 Ryosuke Iida
+// @brief	ｼｰﾝ間のﾃﾞｰﾀ管理
+// 2020 6/17 Ryosuke Iida
 //------------------------------------------------------
 
-#include <DxLib.h>
-#include "CharSelScene.h"
-//#include "Controller.h"
+#include "SceneDateManager.h"
 
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
 //------------------------------------------------------
-CharSelScene::CharSelScene(ISceneSwitcher* switcher)
-	: BaseScene(switcher)
+SceneDateManager::SceneDateManager()
 {
 	// 処理なし
 }
@@ -19,27 +16,23 @@ CharSelScene::CharSelScene(ISceneSwitcher* switcher)
 //------------------------------------------------------
 // @brief	ﾃﾞｽﾄﾗｸﾀ
 //------------------------------------------------------
-CharSelScene::~CharSelScene()
+SceneDateManager::~SceneDateManager()
 {
 	// 処理なし
 }
 
 //------------------------------------------------------
-// @brief	更新
+// @brief	選んだｽﾃｰｼﾞをｾｯﾄ
 //------------------------------------------------------
-void CharSelScene::Update(const Controller& controll)
+void SceneDateManager::SetStageType(const STAGE_TYPE& type)
 {
-	// ﾃﾞﾊﾞｯｸﾞ用ｼｰﾝ切り替えｷｰ:Q
-	if (controll.IsPushC(INPUT_TRG)) {
-		// ｽﾃｰｼﾞ選択画面に切り替え
-		sceneSwitcher->SwitchScene(eScene_StageSel);
-	}
+	stageType = type;
 }
 
 //------------------------------------------------------
-// @brief	描画
+// @brief	格納したｽﾃｰｼﾞﾀｲﾌﾟを取得
 //------------------------------------------------------
-void CharSelScene::Render()
+const STAGE_TYPE SceneDateManager::GetStageType() const
 {
-	DrawString(0, 0, "ｷｬﾗｸﾀｰ選択画面", 0xffffff);
+	return stageType;
 }

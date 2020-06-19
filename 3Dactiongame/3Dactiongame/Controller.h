@@ -47,12 +47,12 @@ public:
 	void Render();	// •`‰æ:Áª¯¸—p
 
 	void SetPadInput(int up, int down, int left, int right, int a, int b, int c, int d);	// Êß¯ÄÞ‘Î‰žÎÞÀÝ‚Ì“o˜^
-	const bool IsPushUP(const INPUT_STATE inputState) const;
-	bool IsPushDOWN(const INPUT_STATE inputState);
-	bool IsPushLEFT(const INPUT_STATE inputState);
-	bool IsPushRIGHT(const INPUT_STATE inputState);
-	bool IsPushA(const INPUT_STATE inputState);
-	bool IsPushB(const INPUT_STATE inputState);
-	bool IsPushC(const INPUT_STATE inputState);
-	bool IsPushD(const INPUT_STATE inputState);
+	const bool &IsPushUP(const INPUT_STATE inputState) const;
+	const bool &IsPushDOWN(const INPUT_STATE inputState) const;
+	const bool &IsPushLEFT(const INPUT_STATE inputState) const;
+	const bool &IsPushRIGHT(const INPUT_STATE inputState) const;
+	const bool &IsPushA(const INPUT_STATE inputState) const;
+	const bool &IsPushB(const INPUT_STATE inputState) const;
+	const bool &IsPushC(const INPUT_STATE inputState) const;
+	const bool &IsPushD(const INPUT_STATE inputState) const;
 };

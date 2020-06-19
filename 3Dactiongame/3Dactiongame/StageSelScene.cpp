@@ -4,15 +4,24 @@
 //------------------------------------------------------
 
 #include <DxLib.h>
+#include "SceneManager.h"
 #include "StageSelScene.h"
 
 //------------------------------------------------------
 // @brief	ºÝ½Ä×¸À
 //------------------------------------------------------
-StageSelScene::StageSelScene(ISceneSwitcher* switcher)
-	: BaseScene(switcher)
+//StageSelScene::StageSelScene(ISceneSwitcher* switcher, 
+//	SceneDateManager* dateManager)
+//	: BaseScene(switcher)
+//{
+//	// ˆ—‚È‚µ
+//}
+
+StageSelScene::StageSelScene(SceneManager* sManager)
+	: BaseScene((ISceneSwitcher*)sManager)
 {
 	// ˆ—‚È‚µ
+	sceneDateManager = (SceneDateManager*)sManager;
 }
 
 //------------------------------------------------------
@@ -28,11 +37,13 @@ StageSelScene::~StageSelScene()
 //------------------------------------------------------
 void StageSelScene::Update(const Controller& controll)
 {
-
+	
 	// ÃÞÊÞ¯¸Þ—p¼°ÝØ‚è‘Ö‚¦·°:Q
-	if (CheckHitKey(KEY_INPUT_U) == 1) {
+	if (controll.IsPushC(INPUT_TRG))
+	{
 		// ¹Þ°Ñ‰æ–Ê‚ÉØ‚è‘Ö‚¦
 		sceneSwitcher->SwitchScene(eScene_Game);
+		sceneDateManager->SetStageType(STAGE_SAMPLE);
 	}
 }
 

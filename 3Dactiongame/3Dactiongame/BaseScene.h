@@ -8,6 +8,7 @@
 #include <memory>
 #include "SceneProcess.h"
 #include "ISceneSwitcher.h"
+#include "SceneDateManager.h"
 
 class BaseScene
 	: public SceneProcess
@@ -23,6 +24,8 @@ public:
 	virtual void Render() override {}				// •`‰æ
 
 protected:
-	ISceneSwitcher* sceneSwitcher;	// ¼°İ‚ÌØ‚è‘Ö‚¦‚ğ“`‚¦‚é
+	ISceneSwitcher* sceneSwitcher;			// ¼°İ‚ÌØ‚è‘Ö‚¦‚ğ“`‚¦‚é
+	SceneDateManager* sceneDateManager;		// ¼°İŠÔ‚ÌÃŞ°À‚Ìó‚¯“n‚µ
+
 };
 

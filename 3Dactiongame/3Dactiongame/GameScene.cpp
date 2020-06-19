@@ -5,33 +5,34 @@
 
 #include <assert.h>
 #include <DxLib.h>
-#include "ModelBase.h"
-#include "Player.h"
 #include "Camera.h"
 #include "GameScene.h"
 #include "Controller.h"
-#include "ModelRead.h"
+#include "LoadModel.h"
+#include "Collider.h"
+#include "PlayerManager.h"
+#include "StageManager.h"
 
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
 //------------------------------------------------------
-GameScene::GameScene(ISceneSwitcher* switcher)
+GameScene::GameScene(ISceneSwitcher* switcher, const STAGE_TYPE& sT)
 	: BaseScene(switcher)
 {
-	// ﾌﾟﾚｲﾔｰのﾓﾃﾞﾙ、ｱﾆﾒｰｼｮﾝの読み込み
-	int playerModel;
-	std::vector<int> playerAnim;
-	ReadPlayerModelData(playerModel, playerAnim);
+	// ｵﾌﾞｼﾞｪｸﾄを構築
+	playerMnager = std::make_unique<PlayerManager>();
+	stageManager = std::make_unique<StageManager>(sT);
+	
 
-	stage = MV1LoadModel("Model/Otameshi/room/droidroom.x");
-
-	// ｵﾌﾞｼﾞｪｸﾄ生成
-	player = std::make_unique<Player>(playerModel ,playerAnim);
 	// playerがnullptrでない場合
-	if (player != nullptr)
+	if (playerMnager->GetPlayer() != nullptr)
 	{
-		camera = std::make_unique<Camera>(player.get());
+		collider = std::make_unique<Collider>(playerMnager->GetPlayer(),
+												stageManager->GetStage());
+		camera = std::make_unique<Camera>(playerMnager->GetPlayer());
 	}
+
+	stageManager->GetStage();
 }
 
 //------------------------------------------------------
@@ -48,8 +49,10 @@ GameScene::~GameScene()
 void GameScene::Initialize()
 {
 	// 各初期化処理
-	player->Initialize();
+	playerMnager->Initialize();
+	stageManager->Initialize();
 	camera->Initialize();
+	collider->Initialize();
 }
 
 //------------------------------------------------------
@@ -58,11 +61,16 @@ void GameScene::Initialize()
 void GameScene::Finalize()
 {
 	// 各終了処理
-	player->Finalize();
+	playerMnager->Finalize();
+	stageManager->Finalize();
+	camera->Finalize();
+	collider->Finalize();
 
 	// ﾘｿｰｽの開放
-	player.reset();
+	playerMnager.reset();
+	stageManager.reset();
 	camera.reset();
+	collider.reset();
 }
 
 //------------------------------------------------------
@@ -71,11 +79,13 @@ void GameScene::Finalize()
 void GameScene::Update(const Controller& controll)
 {
 	// 各更新処理
-	player->Update(camera->GetCameraDir());
+	playerMnager->Update(controll, camera->GetCameraDir());
 	camera->Update();
+	stageManager->Update();
+	collider->Update();
 
 	// ﾃﾞﾊﾞｯｸﾞ用ｼｰﾝ切り替えｷｰ:Q
-	if (CheckHitKey(KEY_INPUT_Y) == 1) {
+	if (controll.IsPushC(INPUT_TRG)) {
 		// ﾀｲﾄﾙ画面に切り替え
 		sceneSwitcher->SwitchScene(eScene_Title);
 	}
@@ -86,6 +96,7 @@ void GameScene::Update(const Controller& controll)
 //------------------------------------------------------
 void GameScene::Render()
 {
+	/*
 	//x座標
 	DrawLine3D(VGet(-500.0f, 0.0f, 0.0f), VGet(+500.0f, 0.0f, 0.0f), 0xff0000);
 	//ｙ座標
@@ -101,18 +112,12 @@ void GameScene::Render()
 	{
 		DrawLine3D(VGet(-500.0f, 0.0f, -500.0f + 100.0f*z), VGet(500.0f, 0.0f, -500.0f + 100.0f*z), 0xff0000);
 	}
+	*/
 
-	// モデルの座標をセット
-	auto Spos = VGet(0.0f, 200.0f, 0.0f);
-	auto Sscale = VGet(0.5f, 0.5f, 0.5f);
-	auto Srol = VGet(0.0f, 0.0f, 0.0f);
-	MV1SetPosition(stage, Spos);
-	MV1SetRotationXYZ(stage, Srol);
-	MV1SetScale(stage, Sscale );
-	MV1DrawModel(stage);
-
-	// 各更新処理
-	player->Render();
+	
+	// 各描画処理
+	playerMnager->Render();
+	stageManager->Render();
 	camera->Renderer();
 	DrawString(0, 0, "ｹﾞｰﾑ画面", 0xffffff);
 }

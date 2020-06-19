@@ -57,13 +57,14 @@ void SceneManager::Update(const Controller& controll)
 	// 次のｼｰﾝがnextSceneにｾｯﾄされていたら
 	if (nextScene != eScene_None) 
 	{
+
 		// 現在のｼｰﾝの終了処理を行う
 		scene->Finalize();
 		// ﾘｿｰｽの開放
 		scene.reset();
 
 		// ｼｰﾝごとの処理
-		if (nextScene == eScene_Title) 
+		if (nextScene == eScene_Title)
 		{
 			scene = std::make_shared<TitleScene>(this);
 		}
@@ -81,7 +82,7 @@ void SceneManager::Update(const Controller& controll)
 		}
 		else if (nextScene == eScene_Game)
 		{
-			scene = std::make_shared<GameScene>(this);
+			scene = std::make_shared<GameScene>(this, GetStageType());
 		}
 
 		// 次のｼｰﾝに行かない
@@ -93,8 +94,6 @@ void SceneManager::Update(const Controller& controll)
 
 	// ｼｰﾝの更新
 	scene->Update(controll);
-
-	//std::shared_ptr<TitleScene>;
 }
 
 //------------------------------------------------------

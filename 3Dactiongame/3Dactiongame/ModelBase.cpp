@@ -1,17 +1,14 @@
 //------------------------------------------------------
-// @brief	ｷｬﾗｸﾀｰ選択画面
-// 2020 5/7 Ryosuke Iida
+// @brief	(ｷｬﾗ)ﾓﾃﾞﾙのための基底
+// 2020 5/19 Ryosuke Iida
 //------------------------------------------------------
 
-#include <DxLib.h>
-#include "CharSelScene.h"
-//#include "Controller.h"
+#include "ModelBase.h"
 
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
 //------------------------------------------------------
-CharSelScene::CharSelScene(ISceneSwitcher* switcher)
-	: BaseScene(switcher)
+ModelBase::ModelBase()
 {
 	// 処理なし
 }
@@ -19,27 +16,30 @@ CharSelScene::CharSelScene(ISceneSwitcher* switcher)
 //------------------------------------------------------
 // @brief	ﾃﾞｽﾄﾗｸﾀ
 //------------------------------------------------------
-CharSelScene::~CharSelScene()
+ModelBase::~ModelBase()
 {
 	// 処理なし
 }
 
 //------------------------------------------------------
-// @brief	更新
+// @brief	ｱﾆﾒｰｼｮﾝIDのｾｯﾄ
 //------------------------------------------------------
-void CharSelScene::Update(const Controller& controll)
+void ModelBase::SetAnimID(int mH, int no)
 {
-	// ﾃﾞﾊﾞｯｸﾞ用ｼｰﾝ切り替えｷｰ:Q
-	if (controll.IsPushC(INPUT_TRG)) {
-		// ｽﾃｰｼﾞ選択画面に切り替え
-		sceneSwitcher->SwitchScene(eScene_StageSel);
-	}
+	MV1DetachAnim(mH, attachiIndex);
+	attachiIndex = MV1AttachAnim(modelHandle, 0, animHandle[no], TRUE);
+	// ｱﾆﾒｰｼｮﾝのﾄｰﾀﾙ時間を計測
+	totalTime = MV1GetAttachAnimTotalTime(modelHandle, attachiIndex);
+	playTime = 0.0f;
 }
 
 //------------------------------------------------------
-// @brief	描画
+// @brief	ﾌﾚｰﾑの座標の取得
 //------------------------------------------------------
-void CharSelScene::Render()
+Vector3 ModelBase::GetFramePosition(int n)
 {
-	DrawString(0, 0, "ｷｬﾗｸﾀｰ選択画面", 0xffffff);
+	// 取得したVECTORをVector3として返す
+	auto vec = MV1GetFramePosition(modelHandle, n);
+	auto vec3 = Vector3(vec.x, vec.y, vec.z);
+	return vec3;
 }

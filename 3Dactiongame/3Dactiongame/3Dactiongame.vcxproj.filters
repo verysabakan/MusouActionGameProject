@@ -25,9 +25,6 @@
     <Filter Include="ヘッダー ファイル\Main">
       <UniqueIdentifier>{fcae8726-bbb2-43bf-9e1d-98a362a5f226}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Constant">
-      <UniqueIdentifier>{c30caccf-8c3c-423e-a949-7df6dfd325b4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Object">
       <UniqueIdentifier>{2bd7faf1-c318-47b5-884a-8766f40da23b}</UniqueIdentifier>
     </Filter>
@@ -45,6 +42,30 @@
     </Filter>
     <Filter Include="ヘッダー ファイル\Object\Player">
       <UniqueIdentifier>{b881916b-6811-4493-a232-4f97221c3d66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\Stage">
+      <UniqueIdentifier>{7bef950d-f8b0-4b2d-a0d1-6a85135ff437}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\Stage">
+      <UniqueIdentifier>{7630d7e4-3988-434a-9a77-4b593c181e59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\Physics">
+      <UniqueIdentifier>{bc63e985-d997-4cd4-bf6a-9d705064f2f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\Physics">
+      <UniqueIdentifier>{050ff46b-9ef1-4525-a7c4-c042655bd979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\HitCheck">
+      <UniqueIdentifier>{5d79e2ee-879b-4aef-96ca-18a2c7866c41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\HitCheck">
+      <UniqueIdentifier>{a9867dd6-777c-4de1-9d87-12f06c32c04b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\HitCheck\Constant">
+      <UniqueIdentifier>{83de8d3c-2645-42fb-8f21-824749bf8cd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\Constant">
+      <UniqueIdentifier>{c30caccf-8c3c-423e-a949-7df6dfd325b4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -66,9 +87,6 @@
     <ClCompile Include="Vector3.cpp">
       <Filter>ソース ファイル\Variable</Filter>
     </ClCompile>
-    <ClCompile Include="ModelRead.cpp">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>ソース ファイル\Object\Player</Filter>
     </ClCompile>
@@ -79,9 +97,6 @@
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
     <ClCompile Include="CharSelScene.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
     <ClCompile Include="ISceneSwitcher.cpp">
@@ -99,6 +114,42 @@
     <ClCompile Include="TitleScene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>ソース ファイル\Object\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadStage.cpp">
+      <Filter>ソース ファイル\Object\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadModel.cpp">
+      <Filter>ソース ファイル\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>ソース ファイル\Object\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneDateManager.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>ソース ファイル\Object\HitCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerManager.cpp">
+      <Filter>ソース ファイル\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="StageManager.cpp">
+      <Filter>ソース ファイル\Object\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="StageModelBase.cpp">
+      <Filter>ソース ファイル\Object\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelBase.cpp">
+      <Filter>ソース ファイル\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="HitCheckCharAndStage.cpp">
+      <Filter>ソース ファイル\Object\HitCheck</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameTask.h">
@@ -110,11 +161,8 @@
     <ClInclude Include="Camera.h">
       <Filter>ヘッダー ファイル\Main</Filter>
     </ClInclude>
-    <ClInclude Include="ModelBase.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
-    </ClInclude>
     <ClInclude Include="MainConstant.h">
-      <Filter>ヘッダー ファイル\Constant</Filter>
+      <Filter>ヘッダー ファイル\Scene\Constant</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>ヘッダー ファイル\Variable</Filter>
@@ -124,9 +172,6 @@
     </ClInclude>
     <ClInclude Include="FrameRate.h">
       <Filter>ヘッダー ファイル\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelRead.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>ヘッダー ファイル\Object\Player</Filter>
@@ -138,9 +183,6 @@
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="CharSelScene.h">
-      <Filter>ヘッダー ファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="ISceneSwitcher.h">
@@ -159,10 +201,52 @@
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="TitleConstant.h">
-      <Filter>ヘッダー ファイル\Constant</Filter>
+      <Filter>ヘッダー ファイル\Scene\Constant</Filter>
     </ClInclude>
     <ClInclude Include="TitleScene.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>ヘッダー ファイル\Object\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadStage.h">
+      <Filter>ヘッダー ファイル\Object\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadModel.h">
+      <Filter>ヘッダー ファイル\Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>ヘッダー ファイル\Object\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="StageType.h">
+      <Filter>ヘッダー ファイル\Object\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneDateManager.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerManager.h">
+      <Filter>ヘッダー ファイル\Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="StageManager.h">
+      <Filter>ヘッダー ファイル\Object\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="HitCheckConstant.h">
+      <Filter>ヘッダー ファイル\Object\HitCheck\Constant</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelBase.h">
+      <Filter>ヘッダー ファイル\Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="StageModelBase.h">
+      <Filter>ヘッダー ファイル\Object\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="HitCheckCharAndStage.h">
+      <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

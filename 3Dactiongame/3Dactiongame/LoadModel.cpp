@@ -5,13 +5,14 @@
 
 #include <DxLib.h>
 #include <memory>
-#include <vector>
-#include "ModelRead.h"
+#include "LoadModel.h"
 
 //------------------------------------------------------
 // @brief	Ãﬂ⁄≤‘∞ÇÃ”√ﬁŸÇì«Ç›çûÇﬁ
+// @param	modelID ì«Ç›çûÇÒÇæ”√ﬁŸÇäiî[
+// @param	animID ì«Ç›çûÇÒÇæ±∆“∞ºÆ›Çäiî[
 //------------------------------------------------------
-void ReadPlayerModelData(int& modelID, std::vector<int>& animID)
+void LoadPlayerModelData(int& modelID, std::vector<int>& animID)
 {
 	// ”√ﬁŸÇÃì«Ç›çûÇ›
 	modelID = MV1LoadModel("Model/Player/Warrior.mv1");
@@ -19,14 +20,14 @@ void ReadPlayerModelData(int& modelID, std::vector<int>& animID)
 	// std::vector<int> playerAnim;
 	auto i = 0;
 
-	std::string dirName = "Model/Player/Animation/";
+	std::string dirPath = "Model/Player/Animation/";
 	std::string extension = "mv1";
 
 	HANDLE hFind;
 	WIN32_FIND_DATA fd;
-	std::string search_name = dirName + "\\*." + extension;
+	std::string searchName = dirPath + "*." + extension;
 
-	hFind = FindFirstFile(search_name.c_str(), &fd);
+	hFind = FindFirstFile(searchName.c_str(), &fd);
 
 	// åüçıé∏îs
 	if (hFind == INVALID_HANDLE_VALUE)
@@ -42,7 +43,7 @@ void ReadPlayerModelData(int& modelID, std::vector<int>& animID)
 		else
 		{
 			std::string fileName = fd.cFileName;
-			fileName.insert(0, dirName);
+			fileName.insert(0, dirPath);
 
 			animID.push_back(MV1LoadModel(fileName.c_str()));
 			i++;

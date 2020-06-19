@@ -5,12 +5,16 @@
 
 #pragma once
 
-#include <memory>
 #include "BaseScene.h"
 
 class SceneManager 
-	: public ISceneSwitcher, SceneProcess
+	: public ISceneSwitcher, SceneDateManager
+	, private SceneProcess
 {
+private:
+	std::shared_ptr<BaseScene> scene;	// ｼｰﾝ管理用変数
+	eScene nextScene;					// 次のｼｰﾝ管理用変数
+
 public:
 	SceneManager();		// ｺﾝｽﾄﾗｸﾀ
 	~SceneManager();	// ﾃﾞｽﾄﾗｸﾀ
@@ -22,8 +26,5 @@ public:
 	virtual void Render() override;		// 描画
 
 	void SwitchScene(eScene nextScene) override;	// 指定したｼｰﾝに変更
-private:
-	std::shared_ptr<BaseScene> scene;	// ｼｰﾝ管理用変数
-	eScene nextScene;					// 次のｼｰﾝ管理用変数			
 };
 

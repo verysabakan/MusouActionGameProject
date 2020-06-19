@@ -11,9 +11,10 @@
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
 //------------------------------------------------------
-Camera::Camera(ModelBase* m)
+Camera::Camera(Player* p)
 {
-	model = m;
+	
+	model = reinterpret_cast<ModelBase*>(p);
 }
 
 //------------------------------------------------------
@@ -29,8 +30,9 @@ Camera::~Camera()
 //------------------------------------------------------
 void Camera::Initialize()
 {
-	camLength = 500.0f;		//中心からの距離
-	cameraPos = { 0, 0, camLength };	// ｶﾒﾗの初期位置
+	camLength = 200.0f;		//中心からの距離
+	auto pPos = model->GetPosition();
+	cameraPos = { pPos.x, pPos.y, pPos.z + camLength };	// ｶﾒﾗの初期位置
 	targetLookAtPos = {};
 	cameraDir = {};
 	cameraUpVec = { 0, 1.0f, 0.0f };	// ｶﾒﾗの上方向
@@ -81,22 +83,22 @@ void Camera::Update()
 
 	if (CheckHitKey(KEY_INPUT_W))
 	{
-		roll = deg1Rad;
+		roll += deg1Rad;
 	}
 
 	if (CheckHitKey(KEY_INPUT_S))
 	{
-		roll = -deg1Rad;
+		roll += -deg1Rad;
 	}
 
 	if (CheckHitKey(KEY_INPUT_A))
 	{
-		yaw = deg1Rad;
+		yaw += deg1Rad;
 	}
 
 	if (CheckHitKey(KEY_INPUT_D))
 	{
-		yaw = -deg1Rad;
+		yaw += -deg1Rad;
 	}
 
 	Move();
@@ -140,8 +142,8 @@ void Camera::Update()
 void Camera::Renderer()
 {
 	//DrawString(200, 16, "ｱｯﾌﾟです", 0xffffff);
-	DrawFormatString(200, 16, 0xffffff, "%d,%d", cameraPos.x, cameraPos.y);
-	DrawFormatString(200, 16, 0xffffff, "%d,%d", targetLookAtPos.x, targetLookAtPos.y);
+	DrawFormatString(200, 16, 0xffffff, "%f,%f,%f", cameraPos.x, cameraPos.y, cameraPos.z);
+	DrawFormatString(200, 32, 0xffffff, "%f,%f,%f", targetLookAtPos.x, targetLookAtPos.y, targetLookAtPos.z);
 }
 
 //------------------------------------------------------

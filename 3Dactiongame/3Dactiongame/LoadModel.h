@@ -5,5 +5,7 @@
 
 #pragma once
 
-void ReadPlayerModelData(int& modelID, std::vector<int>& animID);	// ÌßÚ²Ô°‚ÌÓÃŞÙ‚ğ“Ç‚İ‚Ş
+#include <vector>
+
+void LoadPlayerModelData(int& modelID, std::vector<int>& animID);	// ÌßÚ²Ô°‚ÌÓÃŞÙ‚ğ“Ç‚İ‚Ş
 

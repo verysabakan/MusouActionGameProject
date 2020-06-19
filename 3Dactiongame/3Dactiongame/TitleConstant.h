@@ -5,7 +5,6 @@
 
 #pragma once
 
-
 // MARK‰æ‘œ‚Ì»²½Þ
 #define MARK_POS_X 375
 #define MARK_POS_Y 80

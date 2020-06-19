@@ -69,7 +69,7 @@ void TitleScene::Finalize()
 void TitleScene::Update(const Controller& controll)
 {
 	// ÃÞÊÞ¯¸Þ—p¼°ÝØ‚è‘Ö‚¦·°:Q
-	if (CheckHitKey(KEY_INPUT_P) == 1)
+	if (controll.IsPushC(INPUT_TRG))
 	{
 		// Ó°ÄÞ‘I‘ð‰æ–Ê‚ÉØ‚è‘Ö‚¦
 		sceneSwitcher->SwitchScene(eScene_ModeSel);

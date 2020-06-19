@@ -5,8 +5,9 @@
 
 #pragma once
 
-// ¼°İØ‚è‘Ö‚¦‚Ì‚½‚ß‚Ì’è”
-typedef enum {
+// ¼°İ‚Ìí—Ş
+typedef enum 
+{
 	eScene_Title,		// À²ÄÙ‰æ–Ê
 	eScene_ModeSel,		// Ó°ÄŞ‘I‘ğ‰æ–Ê
 	eScene_CharSel,		// ·¬×¸À°‘I‘ğ‰æ–Ê

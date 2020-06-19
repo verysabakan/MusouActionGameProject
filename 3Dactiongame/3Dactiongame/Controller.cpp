@@ -104,7 +104,8 @@ void Controller::Render()
 // @brief	ﾊﾟｯﾄﾞ対応ﾎﾞﾀﾝの登録
 // @param	対応するﾎﾞﾀﾝの値
 //------------------------------------------------------
-void Controller::SetPadInput(int up, int down, int left, int right, int a, int b, int c, int d)
+void Controller::SetPadInput(int up, int down, int left, int right, 
+								int a, int b, int c, int d)
 {
 	// 対応するﾎﾞﾀﾝを割り振り
 	padInput[PAD_UP] = up;
@@ -122,7 +123,7 @@ void Controller::SetPadInput(int up, int down, int left, int right, int a, int b
 // @param	inputState	現在の入力
 // @return	押されていればtrue
 //------------------------------------------------------
-const bool Controller::IsPushUP(const INPUT_STATE inputState) const
+const bool &Controller::IsPushUP(const INPUT_STATE inputState) const
 {
 	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
 	if (inputState == INPUT_HOLD && input & padInput[PAD_UP])
@@ -146,18 +147,18 @@ const bool Controller::IsPushUP(const INPUT_STATE inputState) const
 // @param	inputState	現在の入力
 // @return	押されていればtrue
 //------------------------------------------------------
-bool Controller::IsPushDOWN(const INPUT_STATE inputState)
+const bool &Controller::IsPushDOWN(const INPUT_STATE inputState) const
 {
 	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
-	if (inputState == INPUT_HOLD && input & padInput[PAD_UP])
+	if (inputState == INPUT_HOLD && input & padInput[PAD_DOWN])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_UP])
+	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_DOWN])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_UP])
+	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_DOWN])
 	{
 		return true;
 	}
@@ -170,18 +171,18 @@ bool Controller::IsPushDOWN(const INPUT_STATE inputState)
 // @param	inputState	現在の入力
 // @return	押されていればtrue
 //------------------------------------------------------
-bool Controller::IsPushLEFT(const INPUT_STATE inputState)
+const bool &Controller::IsPushLEFT(const INPUT_STATE inputState) const
 {
 	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
-	if (inputState == INPUT_HOLD && input & padInput[PAD_UP])
+	if (inputState == INPUT_HOLD && input & padInput[PAD_LEFT])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_UP])
+	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_LEFT])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_UP])
+	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_LEFT])
 	{
 		return true;
 	}
@@ -194,18 +195,18 @@ bool Controller::IsPushLEFT(const INPUT_STATE inputState)
 // @param	inputState	現在の入力
 // @return	押されていればtrue
 //------------------------------------------------------
-bool Controller::IsPushRIGHT(const INPUT_STATE inputState)
+const bool &Controller::IsPushRIGHT(const INPUT_STATE inputState) const
 {
 	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
-	if (inputState == INPUT_HOLD && input & padInput[PAD_UP])
+	if (inputState == INPUT_HOLD && input & padInput[PAD_RIGHT])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_UP])
+	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_RIGHT])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_UP])
+	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_RIGHT])
 	{
 		return true;
 	}
@@ -218,18 +219,18 @@ bool Controller::IsPushRIGHT(const INPUT_STATE inputState)
 // @param	inputState	現在の入力
 // @return	押されていればtrue
 //------------------------------------------------------
-bool Controller::IsPushA(const INPUT_STATE inputState)
+const bool &Controller::IsPushA(const INPUT_STATE inputState) const
 {
 	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
-	if (inputState == INPUT_HOLD && input & padInput[PAD_UP])
+	if (inputState == INPUT_HOLD && input & padInput[PAD_1])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_UP])
+	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_1])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_UP])
+	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_1])
 	{
 		return true;
 	}
@@ -242,18 +243,18 @@ bool Controller::IsPushA(const INPUT_STATE inputState)
 // @param	inputState	現在の入力
 // @return	押されていればtrue
 //------------------------------------------------------
-bool Controller::IsPushB(const INPUT_STATE inputState)
+const bool &Controller::IsPushB(const INPUT_STATE inputState) const
 {
 	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
-	if (inputState == INPUT_HOLD && input & padInput[PAD_UP])
+	if (inputState == INPUT_HOLD && input & padInput[PAD_2])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_UP])
+	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_2])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_UP])
+	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_2])
 	{
 		return true;
 	}
@@ -266,18 +267,18 @@ bool Controller::IsPushB(const INPUT_STATE inputState)
 // @param	inputState	現在の入力
 // @return	押されていればtrue
 //------------------------------------------------------
-bool Controller::IsPushC(const INPUT_STATE inputState)
+const bool &Controller::IsPushC(const INPUT_STATE inputState) const
 {
 	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
-	if (inputState == INPUT_HOLD && input & padInput[PAD_UP])
+	if (inputState == INPUT_HOLD && input & padInput[PAD_3])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_UP])
+	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_3])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_UP])
+	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_3])
 	{
 		return true;
 	}
@@ -290,18 +291,18 @@ bool Controller::IsPushC(const INPUT_STATE inputState)
 // @param	inputState	現在の入力
 // @return	押されていればtrue
 //------------------------------------------------------
-bool Controller::IsPushD(const INPUT_STATE inputState)
+const bool &Controller::IsPushD(const INPUT_STATE inputState) const
 {
 	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
-	if (inputState == INPUT_HOLD && input & padInput[PAD_UP])
+	if (inputState == INPUT_HOLD && input & padInput[PAD_4])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_UP])
+	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_4])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_UP])
+	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_4])
 	{
 		return true;
 	}

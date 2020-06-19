@@ -1,65 +1,71 @@
 //------------------------------------------------------
-// @brief	ﾓｰﾄﾞ選択画面
-// 2020 5/7 Ryosuke Iida
+// @brief	ｽﾃｰｼﾞの管理
+// 2020 6/18 Ryosuke Iida
 //------------------------------------------------------
 
-#include <DxLib.h>
-#include "ModeSelScene.h"
+#include "Stage.h"
+#include "StageManager.h"
 
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
 //------------------------------------------------------
-ModeSelScene::ModeSelScene(ISceneSwitcher* switcher)
-	: BaseScene(switcher)
+StageManager::StageManager(const STAGE_TYPE& sT)
 {
-	// 処理なし
+	// ｵﾌﾞｼﾞｪｸﾄを構築
+	stage = std::make_unique<Stage>(sT);
 }
 
 //------------------------------------------------------
 // @brief	ﾃﾞｽﾄﾗｸﾀ
 //------------------------------------------------------
-ModeSelScene::~ModeSelScene()
+StageManager::~StageManager()
 {
-	// 処理なし
+	
 }
 
 //------------------------------------------------------
 // @brief	初期化
 //------------------------------------------------------
-void ModeSelScene::Initialize()
+void StageManager::Initialize()
 {
-	modelHandle = MV1LoadModel("Model/Fukuoka_Prop.fbx");
+	// 各初期化処理
+	stage->Initialize();
 }
 
 //------------------------------------------------------
-// @brief	終了処理
+// @brief	初期化
 //------------------------------------------------------
-void ModeSelScene::Finalize()
+void StageManager::Finalize()
 {
-	MV1DeleteModel(modelHandle);
-	modelHandle = NULL;
+	// 各終了処理
+	stage->Finalize();
+
+	// ﾘｿｰｽの解放
+	stage.reset();
 }
 
 //------------------------------------------------------
-// @brief	更新
+// @brief	初期化
 //------------------------------------------------------
-void ModeSelScene::Update(const Controller& controll)
+void StageManager::Update()
 {
-	// 画面に映る位置に３Ｄモデルを移動
-	MV1SetPosition(modelHandle, VGet(320.0f, -300.0f, 600.0f));
-	MV1DrawModel(modelHandle);
-
-	// ﾃﾞﾊﾞｯｸﾞ用ｼｰﾝ切り替えｷｰ:Q
-	if (controll.IsPushC(INPUT_TRG)) {
-		// ｷｬﾗｸﾀｰ選択画面に切り替え
-		sceneSwitcher->SwitchScene(eScene_CharSel);
-	}
+	// 各更新処理
+	stage->Update();
 }
 
 //------------------------------------------------------
-// @brief	描画
+// @brief	初期化
 //------------------------------------------------------
-void ModeSelScene::Render()
+void StageManager::Render()
 {
-	DrawString(0, 0, "ﾓｰﾄﾞ選択画面", 0xffffff);
+	// 各描画処理
+	stage->Render();
+}
+
+//------------------------------------------------------
+// @brief	初期化
+//------------------------------------------------------
+Stage* StageManager::GetStage()
+{
+	return stage.get();
 }
