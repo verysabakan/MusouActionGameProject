@@ -10,7 +10,6 @@
 
 // ÌßÛÄÀ²ÌßéŒ¾
 class SceneManager;
-class Controller;
 class FrameRate;
 
 class GameTask
@@ -26,7 +25,6 @@ public:
 
 private:
 	std::unique_ptr<SceneManager> sceneManager;
-	std::unique_ptr<Controller> controll;
 	std::unique_ptr<FrameRate> frameRate;
 };
 

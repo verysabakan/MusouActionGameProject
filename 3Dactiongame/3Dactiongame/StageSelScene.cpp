@@ -6,6 +6,7 @@
 #include <DxLib.h>
 #include "SceneManager.h"
 #include "StageSelScene.h"
+#include "Controller.h"
 
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
@@ -20,7 +21,6 @@
 StageSelScene::StageSelScene(SceneManager* sManager)
 	: BaseScene((ISceneSwitcher*)sManager)
 {
-	// 処理なし
 	sceneDateManager = (SceneDateManager*)sManager;
 }
 
@@ -35,15 +35,14 @@ StageSelScene::~StageSelScene()
 //------------------------------------------------------
 // @brief	更新
 //------------------------------------------------------
-void StageSelScene::Update(const Controller& controll)
+void StageSelScene::Update()
 {
 	
 	// ﾃﾞﾊﾞｯｸﾞ用ｼｰﾝ切り替えｷｰ:Q
-	if (controll.IsPushC(INPUT_TRG))
+	if (lpController.IsPushC(INPUT_TRG))
 	{
-		// ｹﾞｰﾑ画面に切り替え
-		sceneSwitcher->SwitchScene(eScene_Game);
-		sceneDateManager->SetStageType(STAGE_SAMPLE);
+		sceneDateManager->SetStageType(STAGE_SAMPLE);	// 選んだｽﾃｰｼﾞを保存
+		sceneSwitcher->SwitchScene(eScene_Game);		// ｹﾞｰﾑ画面に切り替え
 	}
 }
 

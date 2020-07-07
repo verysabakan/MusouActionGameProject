@@ -13,7 +13,6 @@
 //------------------------------------------------------
 Camera::Camera(Player* p)
 {
-	
 	model = reinterpret_cast<ModelBase*>(p);
 }
 
@@ -30,19 +29,12 @@ Camera::~Camera()
 //------------------------------------------------------
 void Camera::Initialize()
 {
-	camLength = 200.0f;		//’†S‚©‚ç‚Ì‹——£
+	camLength = -200.0f;		// ’†S‚©‚ç‚Ì‰Šú‹——£
 	auto pPos = model->GetPosition();
 	cameraPos = { pPos.x, pPos.y, pPos.z + camLength };	// ¶Ò×‚Ì‰ŠúˆÊ’u
-	targetLookAtPos = {};
-	cameraDir = {};
+	targetLookAtPos = {};				// ’‹“_
+	cameraDir = {};						// Œü‚«
 	cameraUpVec = { 0, 1.0f, 0.0f };	// ¶Ò×‚Ìã•ûŒü
-	cameraRol = {};
-	quaternion.x = quaternion.y = quaternion.z = 0.0f;
-	quaternion.w = 1.0f;
-	camcnt = 0;
-	deg = 90;
-	//camRol = model->GetRotation();
-	//camRol.y = (DX_PI_F / 180) * camDir;
 	SetCameraNearFar(clipNear, clipFar);	// ¶Ò×‚Ì•`‰æ”ÍˆÍ
 }
 
@@ -54,56 +46,28 @@ void Camera::Finalize()
 
 }
 
-float roll = 0;		// roll‰ñ“]
-float pitch = 0;	// pitch‰ñ“]
-float yaw = 0;		// yaw‰ñ“]
-
 //------------------------------------------------------
 // @brief	XV
 //------------------------------------------------------
 void Camera::Update()
 {
-	// ~‚ß‚é‚½‚ß‚Ì‚â‚Â
-	if (CheckHitKey(KEY_INPUT_T))
-	{
-		auto time = 0;
-	}
-
 	cameraDir = (targetLookAtPos - cameraPos).Normalized();	// ¶Ò×‚ÌŒü‚«
 
-	if (CheckHitKey(KEY_INPUT_F))
-	{
-		camLength += 5;
-	}
-
-	if (CheckHitKey(KEY_INPUT_G))
-	{
-		camLength -= 5;
-	}
-
-	if (CheckHitKey(KEY_INPUT_W))
-	{
-		roll += deg1Rad;
-	}
-
-	if (CheckHitKey(KEY_INPUT_S))
-	{
-		roll += -deg1Rad;
-	}
-
-	if (CheckHitKey(KEY_INPUT_A))
-	{
-		yaw += deg1Rad;
-	}
-
-	if (CheckHitKey(KEY_INPUT_D))
-	{
-		yaw += -deg1Rad;
-	}
+	// ¶Ò×‘€ì
+	if (CheckHitKey(KEY_INPUT_F)) camLength += 5;
+	if (CheckHitKey(KEY_INPUT_G)) camLength -= 5;
+	if (CheckHitKey(KEY_INPUT_W)) vertical += deg1Rad;
+	if (CheckHitKey(KEY_INPUT_S)) vertical += -deg1Rad;
+	if (CheckHitKey(KEY_INPUT_A)) horizontal += deg1Rad;
+	if (CheckHitKey(KEY_INPUT_D)) horizontal += -deg1Rad;
 
 	Move();
 
 	/*
+	float roll = 0;		// roll‰ñ“]
+	float pitch = 0;	// pitch‰ñ“]
+	float yaw = 0;		// yaw‰ñ“]
+
 	MATRIX mat;
 	MATRIX matRot;
 	MATRIX matTrans;
@@ -177,8 +141,8 @@ void Camera::Move()
 	float shakeWidth = 5.0f;	// —h‚ç‚·•
 	float shakeAngleSpeed = 0.5f;	// —h‚ç‚·‘¬‚³
 
-									// …•½•ûŒü‚ÌŠp“x•ÏX
-	auto HAngle = yaw;
+	// …•½•ûŒü‚ÌŠp“x•ÏX
+	auto HAngle = horizontal;
 	if (HAngle < -DX_PI_F)
 	{
 		HAngle += DX_TWO_PI_F;
@@ -189,7 +153,7 @@ void Camera::Move()
 	}
 
 	// ‚’¼•ûŒü‚ÌŠp“x•ÏX
-	auto VAngle = roll;
+	auto VAngle = vertical;
 	if (VAngle < -DX_PI_F)
 	{
 		VAngle += DX_TWO_PI_F;

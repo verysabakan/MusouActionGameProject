@@ -52,7 +52,7 @@ void SceneManager::Finalize()
 //------------------------------------------------------
 // @brief	更新
 //------------------------------------------------------
-void SceneManager::Update(const Controller& controll)
+void SceneManager::Update()
 {
 	// 次のｼｰﾝがnextSceneにｾｯﾄされていたら
 	if (nextScene != eScene_None) 
@@ -93,7 +93,7 @@ void SceneManager::Update(const Controller& controll)
 	}
 
 	// ｼｰﾝの更新
-	scene->Update(controll);
+	scene->Update();
 }
 
 //------------------------------------------------------

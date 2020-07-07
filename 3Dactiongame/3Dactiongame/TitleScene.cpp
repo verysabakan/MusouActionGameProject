@@ -7,6 +7,7 @@
 #include <DxLib.h>
 #include "TitleScene.h"
 #include "TitleConstant.h"
+#include "Controller.h"
 
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
@@ -66,10 +67,10 @@ void TitleScene::Finalize()
 //------------------------------------------------------
 // @brief	更新
 //------------------------------------------------------
-void TitleScene::Update(const Controller& controll)
+void TitleScene::Update()
 {
 	// ﾃﾞﾊﾞｯｸﾞ用ｼｰﾝ切り替えｷｰ:Q
-	if (controll.IsPushC(INPUT_TRG))
+	if (lpController.IsPushC(INPUT_TRG))
 	{
 		// ﾓｰﾄﾞ選択画面に切り替え
 		sceneSwitcher->SwitchScene(eScene_ModeSel);

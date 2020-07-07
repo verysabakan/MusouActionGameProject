@@ -26,8 +26,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		gameTask->Render();
 	}
 
-	gameTask->Finalize();
-	gameTask.reset();
+	gameTask->Finalize();	// I—¹ˆ—
+	gameTask.reset();		// Ø¿°½‚ÌŠJ•ú
 
 	return 0;	// ³íI—¹
 }

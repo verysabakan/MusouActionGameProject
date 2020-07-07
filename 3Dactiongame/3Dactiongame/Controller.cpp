@@ -36,11 +36,8 @@ Controller::~Controller()
 //------------------------------------------------------
 void Controller::Update()
 {
-	// ‘O‰ñ“ü—Í
-	inputOld = input;
-
-	// ¡‰ñ‚Ì“ü—Í
-	input = GetJoypadInputState(DX_INPUT_PAD1);
+	inputOld = input;								// ‘O‰ñ“ü—Í
+	input = GetJoypadInputState(DX_INPUT_PAD1);		// ¡‰ñ‚Ì“ü—Í
 
 	// ·°ÎŞ°ÄŞ‚ÌŠ„‚è“–‚Ä
 	char keyInput[keyBuffer];

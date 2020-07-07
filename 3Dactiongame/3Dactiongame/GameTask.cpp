@@ -18,7 +18,6 @@ GameTask::GameTask()
 {
 	// ｵﾌﾞｼﾞｪｸﾄ生成
 	sceneManager = std::make_unique<SceneManager>();
-	controll = std::make_unique<Controller>();
 	frameRate = std::make_unique<FrameRate>();
 }
 
@@ -41,14 +40,14 @@ int GameTask::Initialize()
 	}
 
 	// 画面ﾓｰﾄﾞのｾｯﾄ
-	SetGraphMode(SCREEN_SIZE_X, SCREEN_SIZE_Y, 32);		// (仮)
+	SetGraphMode(SCREEN_SIZE_X, SCREEN_SIZE_Y, 32);		// ｽｸﾘｰﾝのｻｲｽﾞ
 	ChangeWindowMode(TRUE);				// TRUE:ｳｨﾝﾄﾞｳ、FALSE:ﾌﾙｽｸﾘｰﾝ
 	SetDrawScreen(DX_SCREEN_BACK);		// 背面に描画
 	SetBackgroundColor(BACKGROUND_COLOR, BACKGROUND_COLOR, BACKGROUND_COLOR);	// 背景色
-	SetUseZBuffer3D(TRUE);				// zバッファを有効にする
-	SetWriteZBuffer3D(TRUE);			//ｚバッファへの書き込みを有効にする
+	SetUseZBuffer3D(TRUE);				// zﾊﾞｯﾌｧを有効にする
+	SetWriteZBuffer3D(TRUE);			// zﾊﾞｯﾌｧへの書き込みを有効にする
 	
-	// 初期化
+	// 初期化処理
 	sceneManager->Initialize();
 
 	return 0;
@@ -64,11 +63,10 @@ void GameTask::Finalize()
 
 	// ﾘｿｰｽの開放
 	sceneManager.reset();
-	controll.reset();
 	frameRate.reset();
 
 	// DxLibの後始末
-	DxLib_End();
+	DxLib_End();	
 }
 
 //------------------------------------------------------
@@ -76,14 +74,9 @@ void GameTask::Finalize()
 //------------------------------------------------------
 void GameTask::Update()
 {
-	// ﾌﾚｰﾑ計測固定
-	frameRate->Update();
-
-	// ｼｰﾝ別の更新
-	sceneManager->Update(*controll);
-
-	// ｺﾝﾄﾛｰﾗｰの更新
-	controll->Update();
+	frameRate->Update();	// ﾌﾚｰﾑ計測固定
+	lpController.Update();	// ｺﾝﾄﾛｰﾗｰの更新
+	sceneManager->Update();	// ｼｰﾝ別の更新
 }
 
 //------------------------------------------------------
@@ -91,20 +84,9 @@ void GameTask::Update()
 //------------------------------------------------------
 void GameTask::Render()
 {
-	// 画面を初期化
-	ClearDrawScreen();
-
-	// ｼｰﾝ別の描画
-	sceneManager->Render();
-
-	// ｺﾝﾄﾛｰﾗｰの描画:入力ﾁｪｯｸ
-	controll->Render();
-
-	// 現在のﾌﾚｰﾑﾚｰﾄの描画
-	frameRate->Render();
-
-	// 裏画面の内容を表面に反映させる
-	ScreenFlip();
-
-	
+	ClearDrawScreen();		// 画面を初期化
+	sceneManager->Render();	// ｼｰﾝ別の描画
+	lpController.Render();	// ｺﾝﾄﾛｰﾗｰの描画:入力ﾁｪｯｸ
+	frameRate->Render();	// 現在のﾌﾚｰﾑﾚｰﾄの描画
+	ScreenFlip();			// 裏画面の内容を表面に反映させる
 }

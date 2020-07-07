@@ -20,22 +20,18 @@ namespace {
 class Camera
 {
 private:
-	ModelBase* model;		// ﾌﾟﾚｲﾔｰｵﾌﾞｼﾞｪｸﾄのﾎﾟｲﾝﾀの保存用
-	Vector3 cameraPos;		// ｶﾒﾗ位置
-	Vector3 targetLookAtPos;		// 注視点
-	Vector3 cameraUpVec;	// ｶﾒﾗの上方向
-	Vector3 cameraRol;		// ｶﾒﾗの回転
-	Vector3 cameraDir;
-	Quaternion quaternion;	// ｸｫｰﾀﾆｵﾝ
-	float fov;				// 視野角
-	float camLength;
-	int deg;
-	float size;
-	int camcnt;
+	ModelBase* model;			// ﾌﾟﾚｲﾔｰｵﾌﾞｼﾞｪｸﾄのﾎﾟｲﾝﾀの保存用
+	float horizontal;			// 横
+	float vertical;				// 縦
+	Vector3 cameraPos;			// ｶﾒﾗ位置
+	float camLength;			// 中心からの距離
+	Vector3 targetLookAtPos;	// 注視点
+	Vector3 cameraDir;			// ｶﾒﾗが向いている方向
+	Vector3 cameraUpVec;		// ｶﾒﾗの上方向
 
 public:
 	Camera(Player* p);	// ｺﾝｽﾄﾗｸﾀ
-	~Camera();				// ﾃﾞｽﾄﾗｸﾀ
+	~Camera();			// ﾃﾞｽﾄﾗｸﾀ
 
 	void Initialize();		// 初期化
 	void Finalize();		// 終了処理

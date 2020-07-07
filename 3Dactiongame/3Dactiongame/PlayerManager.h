@@ -10,7 +10,6 @@
 
 // ﾌﾟﾛﾄﾀｲﾌﾟ宣言
 class Player;
-class Controller;
 class Camera;
 
 class PlayerManager
@@ -24,7 +23,7 @@ public:
 
 	void Initialize();	// 初期化
 	void Finalize();	// 終了処理
-	void Update(const Controller& controll, const Vector3& cameraDir);		// 更新
+	void Update(const Vector3& cameraDir);		// 更新
 	void Render();	// 描画
 
 	Player* GetPlayer();	// ﾌﾟﾚｲﾔｰを取得

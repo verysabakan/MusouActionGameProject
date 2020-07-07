@@ -27,21 +27,15 @@ FrameRate::~FrameRate()
 //------------------------------------------------------
 void FrameRate::Update()
 {
-	// 現在の時間
-	QueryPerformanceCounter(&qpcEnd);
+	QueryPerformanceCounter(&qpcEnd);	// 現在の時間
 
 	// (現在の時間 - 前ﾌﾚｰﾑの時間) / 周波数 = 経過時間(秒単位)
 	frameTime = static_cast<double>(qpcEnd.QuadPart - qpcStart.QuadPart)
 					/ static_cast<double>(qpf.QuadPart);
 
-	// ﾌﾚｰﾑﾚｰﾄ
-	fps = (double)1 / frameTime;
-
-	// 周波数
-	QueryPerformanceFrequency(&qpf);
-
-	// 計測開始時間の初期化
-	QueryPerformanceCounter(&qpcStart);
+	fps = (double)1 / frameTime;		// ﾌﾚｰﾑﾚｰﾄ
+	QueryPerformanceFrequency(&qpf);	// 周波数
+	QueryPerformanceCounter(&qpcStart);	// 計測開始時間の初期化
 }
 
 //------------------------------------------------------

@@ -5,6 +5,7 @@
 
 #include <DxLib.h>
 #include "ModeSelScene.h"
+#include "Controller.h"
 
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
@@ -43,16 +44,16 @@ void ModeSelScene::Finalize()
 //------------------------------------------------------
 // @brief	更新
 //------------------------------------------------------
-void ModeSelScene::Update(const Controller& controll)
+void ModeSelScene::Update()
 {
 	// 画面に映る位置に３Ｄモデルを移動
 	MV1SetPosition(modelHandle, VGet(320.0f, -300.0f, 600.0f));
 	MV1DrawModel(modelHandle);
 
-	// ﾃﾞﾊﾞｯｸﾞ用ｼｰﾝ切り替えｷｰ:Q
-	if (controll.IsPushC(INPUT_TRG)) {
-		// ｷｬﾗｸﾀｰ選択画面に切り替え
-		sceneSwitcher->SwitchScene(eScene_CharSel);
+	// ﾃﾞﾊﾞｯｸﾞ用ｼｰﾝ切り替えｷｰ:C
+	if (lpController.IsPushC(INPUT_TRG)) 
+	{
+		sceneSwitcher->SwitchScene(eScene_CharSel);	// ｷｬﾗｸﾀｰ選択画面に切り替え
 	}
 }
 

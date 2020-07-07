@@ -5,7 +5,7 @@
 
 #include <DxLib.h>
 #include "CharSelScene.h"
-//#include "Controller.h"
+#include "Controller.h"
 
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
@@ -27,12 +27,12 @@ CharSelScene::~CharSelScene()
 //------------------------------------------------------
 // @brief	更新
 //------------------------------------------------------
-void CharSelScene::Update(const Controller& controll)
+void CharSelScene::Update()
 {
 	// ﾃﾞﾊﾞｯｸﾞ用ｼｰﾝ切り替えｷｰ:Q
-	if (controll.IsPushC(INPUT_TRG)) {
-		// ｽﾃｰｼﾞ選択画面に切り替え
-		sceneSwitcher->SwitchScene(eScene_StageSel);
+	if (lpController.IsPushC(INPUT_TRG)) 
+	{
+		sceneSwitcher->SwitchScene(eScene_StageSel);	// ｽﾃｰｼﾞ選択画面に切り替え
 	}
 }
 

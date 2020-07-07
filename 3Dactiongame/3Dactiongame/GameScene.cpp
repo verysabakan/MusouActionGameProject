@@ -76,18 +76,18 @@ void GameScene::Finalize()
 //------------------------------------------------------
 // @brief	更新
 //------------------------------------------------------
-void GameScene::Update(const Controller& controll)
+void GameScene::Update()
 {
 	// 各更新処理
-	playerMnager->Update(controll, camera->GetCameraDir());
+	playerMnager->Update(camera->GetCameraDir());
 	camera->Update();
 	stageManager->Update();
 	collider->Update();
 
 	// ﾃﾞﾊﾞｯｸﾞ用ｼｰﾝ切り替えｷｰ:Q
-	if (controll.IsPushC(INPUT_TRG)) {
-		// ﾀｲﾄﾙ画面に切り替え
-		sceneSwitcher->SwitchScene(eScene_Title);
+	if (lpController.IsPushC(INPUT_TRG)) 
+	{
+		sceneSwitcher->SwitchScene(eScene_Title);	// ﾀｲﾄﾙ画面に切り替え
 	}
 }
 

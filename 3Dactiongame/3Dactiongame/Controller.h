@@ -8,6 +8,9 @@
 
 //#include <array>
 
+// 定義
+#define lpController Controller::GetInstance()
+
 // 入力状態
 enum INPUT_STATE
 {
@@ -40,8 +43,12 @@ private:
 	int inputOld;					// 前回の入力情報
 
 public:
-	Controller();	// ｺﾝｽﾄﾗｸﾀ
-	~Controller();	// ﾃﾞｽﾄﾗｸﾀ
+	// ｼﾝｸﾞﾙﾄﾝ
+	static Controller &GetInstance(void)
+	{
+		static Controller s_Instance;
+		return (s_Instance);
+	}
 
 	void Update();	// 更新
 	void Render();	// 描画:ﾁｪｯｸ用
@@ -55,4 +62,9 @@ public:
 	const bool &IsPushB(const INPUT_STATE inputState) const;
 	const bool &IsPushC(const INPUT_STATE inputState) const;
 	const bool &IsPushD(const INPUT_STATE inputState) const;
+
+private:
+	Controller();	// ｺﾝｽﾄﾗｸﾀ
+	~Controller();	// ﾃﾞｽﾄﾗｸﾀ
+
 };

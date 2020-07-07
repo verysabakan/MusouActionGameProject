@@ -7,8 +7,8 @@
 #include <vector>
 #include <cmath>
 #include <DxLib.h>
-#include "Controller.h"
 #include "Player.h"
+#include "Controller.h"
 
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
@@ -65,10 +65,10 @@ void Player::Finalize()
 //------------------------------------------------------
 // @brief	更新
 //------------------------------------------------------
-void Player::Update(const Controller& controll, const Vector3& cameraDir)
+void Player::Update(const Vector3& cameraDir)
 {
 	// 移動の更新
-	Behavior(controll, cameraDir);
+	Behavior(cameraDir);
 	// ｱﾆﾒｰｼｮﾝの更新
 	Animation();
 }
@@ -85,7 +85,7 @@ void Player::Render()
 //------------------------------------------------------
 // @brief	動作
 //------------------------------------------------------
-void Player::Behavior(const Controller& controll, const Vector3& cameraDir)
+void Player::Behavior(const Vector3& cameraDir)
 {
 	// 入力無し:待機状態
 	animState = ANIM_STANCE;
@@ -152,7 +152,7 @@ void Player::Behavior(const Controller& controll, const Vector3& cameraDir)
 	}
 
 	// 右移動
-	if (controll.IsPushRIGHT(INPUT_HOLD))
+	if (lpController.IsPushRIGHT(INPUT_HOLD))
 	{
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(moveSpeed.z, moveSpeed.y, -moveSpeed.x);
@@ -160,7 +160,7 @@ void Player::Behavior(const Controller& controll, const Vector3& cameraDir)
 	}
 
 	// 左移動
-	if (controll.IsPushLEFT(INPUT_HOLD))
+	if (lpController.IsPushLEFT(INPUT_HOLD))
 	{
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(-moveSpeed.z, moveSpeed.y, moveSpeed.x);
@@ -168,7 +168,7 @@ void Player::Behavior(const Controller& controll, const Vector3& cameraDir)
 	}
 
 	// ｶﾒﾗ正面方向に移動
-	if (controll.IsPushUP(INPUT_HOLD))
+	if (lpController.IsPushUP(INPUT_HOLD))
 	{
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(moveSpeed.x, moveSpeed.y, moveSpeed.z);
@@ -176,7 +176,7 @@ void Player::Behavior(const Controller& controll, const Vector3& cameraDir)
 	}
 
 	// ｶﾒﾗの方向に移動
-	if (controll.IsPushDOWN(INPUT_HOLD))
+	if (lpController.IsPushDOWN(INPUT_HOLD))
 	{
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(-moveSpeed.x, moveSpeed.y, -moveSpeed.z);

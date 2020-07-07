@@ -17,7 +17,7 @@ public:
 	// ｵｰﾊﾞｰﾗｲﾄﾞ
 	virtual void Initialize() override;	// 初期化
 	virtual void Finalize() override;	// 終了処理
-	virtual void Update(const Controller& controll) override;		// 更新
+	virtual void Update() override;		// 更新
 	virtual void Render() override;		// 描画
 
 private:

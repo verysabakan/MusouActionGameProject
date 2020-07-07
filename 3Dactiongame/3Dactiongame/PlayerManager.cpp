@@ -6,7 +6,6 @@
 #include "PlayerManager.h"
 #include "Player.h"
 #include "LoadModel.h"
-#include "Controller.h"
 #include "Camera.h"
 
 //------------------------------------------------------
@@ -57,10 +56,10 @@ void PlayerManager::Finalize()
 //------------------------------------------------------
 // @brief	更新
 //------------------------------------------------------
-void PlayerManager::Update(const Controller& controll, const Vector3& cameraDir)
+void PlayerManager::Update(const Vector3& cameraDir)
 {
 	// 各更新処理
-	player->Update(controll, cameraDir);
+	player->Update(cameraDir);
 }
 
 //------------------------------------------------------
