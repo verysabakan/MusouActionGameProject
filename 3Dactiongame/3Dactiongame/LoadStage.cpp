@@ -81,5 +81,5 @@ const char* LoadStage::ConvertStageKindToPath(const STAGE_TYPE& sT, const LoadTy
 		return path;
 	}
 
-	return false;
+	return NULL;
 }

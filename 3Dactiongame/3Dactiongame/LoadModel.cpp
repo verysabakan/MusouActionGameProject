@@ -5,6 +5,8 @@
 
 #include <DxLib.h>
 #include <memory>
+#include <string>
+#include <stdexcept>
 #include "LoadModel.h"
 
 //------------------------------------------------------
