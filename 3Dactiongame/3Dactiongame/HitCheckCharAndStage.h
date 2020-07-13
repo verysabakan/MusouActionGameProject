@@ -14,8 +14,8 @@ class StageModelBase;
 class HitCheckCharAndStage
 {
 private:
-	ModelBase* modelBase;
-	StageModelBase* stageModelBase;
+	ModelBase* model;
+	StageModelBase* stage;
 
 public:
 	HitCheckCharAndStage(Player* p, Stage* s);	// ºÝ½Ä×¸À

@@ -28,8 +28,7 @@ void ModelBase::SetAnimID(int mH, int no)
 {
 	MV1DetachAnim(mH, attachiIndex);
 	attachiIndex = MV1AttachAnim(modelHandle, 0, animHandle[no], TRUE);
-	// ±ÆÒ°¼®Ý‚ÌÄ°ÀÙŽžŠÔ‚ðŒv‘ª
-	totalTime = MV1GetAttachAnimTotalTime(modelHandle, attachiIndex);
+	totalTime = MV1GetAttachAnimTotalTime(modelHandle, attachiIndex);	// ±ÆÒ°¼®Ý‚ÌÄ°ÀÙŽžŠÔ‚ðŒv‘ª
 	playTime = 0.0f;
 }
 
