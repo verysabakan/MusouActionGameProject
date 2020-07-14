@@ -93,6 +93,9 @@ void Player::Behavior(const Vector3& cameraDir)
 	// 移動速度
 	moveSpeed = cameraDir * 5.0f;
 
+
+	moveFlag = false;
+
 	// 行動別の処理(優先度準)
 	if (animState == ANIM_DEAD)
 	{
@@ -190,6 +193,7 @@ void Player::Behavior(const Vector3& cameraDir)
 		pos.x += moveSpeed.x;
 		pos.z += moveSpeed.z;
 		animState = ANIM_RUN;
+		moveFlag = true;
 	}
 
 	// 移動、回転の設定

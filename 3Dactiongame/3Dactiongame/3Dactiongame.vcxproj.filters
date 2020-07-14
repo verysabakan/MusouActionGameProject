@@ -150,6 +150,9 @@
     <ClCompile Include="HitCheckCharAndStage.cpp">
       <Filter>ソース ファイル\Object\HitCheck</Filter>
     </ClCompile>
+    <ClCompile Include="MakeForm.cpp">
+      <Filter>ソース ファイル\Object\HitCheck</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameTask.h">
@@ -246,6 +249,9 @@
       <Filter>ヘッダー ファイル\Object\Stage</Filter>
     </ClInclude>
     <ClInclude Include="HitCheckCharAndStage.h">
+      <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="MakeForm.h">
       <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
     </ClInclude>
   </ItemGroup>

@@ -136,6 +136,7 @@
     <ClCompile Include="ISceneSwitcher.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="LoadModel.cpp" />
+    <ClCompile Include="MakeForm.cpp" />
     <ClCompile Include="ModelBase.cpp" />
     <ClCompile Include="ModeSelScene.cpp" />
     <ClCompile Include="Physics.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="HitCheckConstant.h" />
     <ClInclude Include="ISceneSwitcher.h" />
     <ClInclude Include="MainConstant.h" />
+    <ClInclude Include="MakeForm.h" />
     <ClInclude Include="ModelBase.h" />
     <ClInclude Include="LoadModel.h" />
     <ClInclude Include="ModeSelScene.h" />

@@ -10,13 +10,15 @@ class Player;
 class Stage;
 class ModelBase;
 class StageModelBase;
+class MakeForm;
 
 class HitCheckCharAndStage
 {
 private:
 	ModelBase* model;
 	StageModelBase* stage;
-
+	MakeForm* makeForm;
+	
 public:
 	HitCheckCharAndStage(Player* p, Stage* s);	// ºÝ½Ä×¸À
 	virtual ~HitCheckCharAndStage();	// ÃÞ½Ä×¸À

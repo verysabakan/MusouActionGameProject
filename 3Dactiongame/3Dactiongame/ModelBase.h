@@ -50,6 +50,11 @@ protected:
 
 	void SetAnimID(int mH, int no);		// ±ÆÒ°¼®İID‚Ì¾¯Ä
 	
+	//------------------------------------------
+	// ‚Æ‚è‚ ‚¦‚¸‚Ì‚â‚Â«
+	//------------------------------------------
+	bool moveFlag = false;
+
 public:
 	ModelBase();			// ºİ½Ä×¸À
 	~ModelBase();			// ÃŞ½Ä×¸À
@@ -61,8 +66,6 @@ public:
 	float GetHitRadiusPositon() { return hitR; }		// ”¼Œa‚Ìæ“¾
 	std::vector<int> GetAnimHandle() { return animHandle; }	// ±ÆÒ°¼®İÊİÄŞÙ‚Ìæ“¾
 	ANIM_STATE GetAnimState() { return animState; }			// Œ»İ‚Ìó‘Ô‚Ìæ“¾
-	
-
 	Vector3 GetFramePosition(int n);					// ÌÚ°Ñ‚ÌÀ•W‚Ìæ“¾
 
 	//------------------------------------------
@@ -70,7 +73,7 @@ public:
 	//------------------------------------------
 	bool JumpState()		// ¼Ş¬İÌß’†
 	{
-		if (animState = ANIM_JUMP)
+		if (animState == ANIM_JUMP)
 		{
 			true;
 		}
@@ -80,6 +83,11 @@ public:
 	float RiseY()
 	{
 		return moveSpeed.y;
+	}
+
+	bool MoveFlag()
+	{
+		return moveFlag;
 	}
 
 	void SetPosY(const float& y)
