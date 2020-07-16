@@ -3,23 +3,20 @@
 // 2020 6/18 Ryosuke Iida
 //------------------------------------------------------
 
-#include "Collider.h"
-#include "HitCheckCharAndStage.h"
+#include "Collision.h"
 
 //------------------------------------------------------
 // @brief	ºÝ½Ä×¸À
 //------------------------------------------------------
-Collider::Collider(Player* p, Stage* s)
+Collision::Collision()
 {
-	player = p;
-	stage = s;
-	hcPlayerAndStage = std::make_unique<HitCheckCharAndStage>(p, s);
+
 }
 
 //------------------------------------------------------
 // @brief	ÃÞ½Ä×¸À
 //------------------------------------------------------
-Collider::~Collider()
+Collision::~Collision()
 {
 	
 }
@@ -27,7 +24,7 @@ Collider::~Collider()
 //------------------------------------------------------
 // @brief	‰Šú‰»
 //------------------------------------------------------
-void Collider::Initialize()
+void Collision::Initialize()
 {
 
 }
@@ -35,7 +32,7 @@ void Collider::Initialize()
 //------------------------------------------------------
 // @brief	I—¹ˆ—
 //------------------------------------------------------
-void Collider::Finalize()
+void Collision::Finalize()
 {
 
 }
@@ -43,7 +40,7 @@ void Collider::Finalize()
 //------------------------------------------------------
 // @brief	XV
 //------------------------------------------------------
-void Collider::Update()
+void Collision::Update()
 {
-	hcPlayerAndStage->HitTerrain();
+
 }

@@ -127,7 +127,7 @@
     <ClCompile Include="BaseScene.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CharSelScene.cpp" />
-    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="FrameRate.cpp" />
     <ClCompile Include="GameScene.cpp" />
@@ -157,7 +157,7 @@
     <ClInclude Include="BaseScene.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CharSelScene.h" />
-    <ClInclude Include="Collider.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="FrameRate.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="HitCheckCharAndStage.h" />

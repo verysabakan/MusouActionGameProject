@@ -32,6 +32,7 @@ HitCheckCharAndStage::~HitCheckCharAndStage()
 //------------------------------------------------------
 void HitCheckCharAndStage::HitTerrain()
 {
+	/*
 	const int STAGE_OBJECT_MAX_NUM = 512;
 	const int CHARA_MAX_HITCOLL = 2048;
 
@@ -652,6 +653,7 @@ void HitCheckCharAndStage::HitTerrain()
 
 	// ê≥èÌèIóπ
 	return true;
+	*/
 }
 
 

@@ -8,20 +8,14 @@
 #include <memory>
 
 // ÌßÛÄÀ²ÌßéŒ¾
-class Player;
-class Stage;
-class HitCheckCharAndStage;
 
-class Collider
+class Collision
 {
 private:
-	Player* player;
-	Stage* stage;
-	std::unique_ptr<HitCheckCharAndStage> hcPlayerAndStage;
 
 public:
-	Collider(Player* p, Stage* s);		// ºİ½Ä×¸À
-	~Collider();	// ÃŞ½Ä×¸À
+	Collision();		// ºİ½Ä×¸À
+	~Collision();	// ÃŞ½Ä×¸À
 
 	void Initialize();	// ‰Šú‰»
 	void Finalize();	// I—¹ˆ—

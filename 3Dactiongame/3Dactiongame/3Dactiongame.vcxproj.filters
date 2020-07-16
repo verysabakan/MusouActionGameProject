@@ -132,9 +132,6 @@
     <ClCompile Include="SceneDateManager.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>ソース ファイル\Object\HitCheck</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerManager.cpp">
       <Filter>ソース ファイル\Object\Player</Filter>
     </ClCompile>
@@ -151,6 +148,9 @@
       <Filter>ソース ファイル\Object\HitCheck</Filter>
     </ClCompile>
     <ClCompile Include="MakeForm.cpp">
+      <Filter>ソース ファイル\Object\HitCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
       <Filter>ソース ファイル\Object\HitCheck</Filter>
     </ClCompile>
   </ItemGroup>
@@ -230,9 +230,6 @@
     <ClInclude Include="SceneDateManager.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerManager.h">
       <Filter>ヘッダー ファイル\Object\Player</Filter>
     </ClInclude>
@@ -252,6 +249,9 @@
       <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
     </ClInclude>
     <ClInclude Include="MakeForm.h">
+      <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
       <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
     </ClInclude>
   </ItemGroup>

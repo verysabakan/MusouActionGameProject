@@ -9,9 +9,9 @@
 #include "GameScene.h"
 #include "Controller.h"
 #include "LoadModel.h"
-#include "Collider.h"
 #include "PlayerManager.h"
 #include "StageManager.h"
+#include "Collision.h"
 
 //------------------------------------------------------
 // @brief	∫›Ωƒ◊∏¿
@@ -27,8 +27,7 @@ GameScene::GameScene(ISceneSwitcher* switcher, const STAGE_TYPE& sT)
 	// playerÇ™nullptrÇ≈Ç»Ç¢èÍçá
 	if (playerMnager->GetPlayer() != nullptr)
 	{
-		collider = std::make_unique<Collider>(playerMnager->GetPlayer(),
-												stageManager->GetStage());
+		collision = std::make_unique<Collision>();
 		camera = std::make_unique<Camera>(playerMnager->GetPlayer());
 	}
 
@@ -52,7 +51,7 @@ void GameScene::Initialize()
 	playerMnager->Initialize();
 	stageManager->Initialize();
 	camera->Initialize();
-	collider->Initialize();
+	collision->Initialize();
 }
 
 //------------------------------------------------------
@@ -64,13 +63,13 @@ void GameScene::Finalize()
 	playerMnager->Finalize();
 	stageManager->Finalize();
 	camera->Finalize();
-	collider->Finalize();
+	collision->Finalize();
 
 	// ÿø∞ΩÇÃäJï˙
 	playerMnager.reset();
 	stageManager.reset();
 	camera.reset();
-	collider.reset();
+	collision.reset();
 }
 
 //------------------------------------------------------
@@ -82,7 +81,7 @@ void GameScene::Update()
 	playerMnager->Update(camera->GetCameraDir());
 	camera->Update();
 	stageManager->Update();
-	collider->Update();
+	collision->Update();
 
 	// √ﬁ ﬁØ∏ﬁópº∞›êÿÇËë÷Ç¶∑∞:Q
 	if (lpController.IsPushC(INPUT_TRG)) 
