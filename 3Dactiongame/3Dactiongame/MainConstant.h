@@ -5,7 +5,8 @@
 
 #pragma once
 
-namespace {
+namespace 
+{
 	// ½¸Ø°Ý‚Ì‘å‚«‚³
 	const int SCREEN_SIZE_X = 1200;
 	const int SCREEN_SIZE_Y = 720;

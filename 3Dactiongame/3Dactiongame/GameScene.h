@@ -13,7 +13,7 @@
 class PlayerManager;
 class StageManager;
 class Camera;
-class Collision;
+class FlexibleCollision;
 
 class GameScene
 	: public BaseScene
@@ -22,7 +22,7 @@ private:
 	std::unique_ptr<PlayerManager> playerMnager;
 	std::unique_ptr<StageManager> stageManager;
 	std::unique_ptr<Camera> camera;
-	std::unique_ptr<Collision> collision;
+	std::unique_ptr<FlexibleCollision> fCollision;
 
 public:
 	GameScene(ISceneSwitcher* switcher, const STAGE_TYPE& sT);	// ºÝ½Ä×¸À

@@ -20,6 +20,12 @@ enum TITLE_PARTS
 class TitleScene
 	: public BaseScene
 {
+private:
+	// •Ï”‚Ì’è‹`
+	int titleImage[TITLE_PARTS_MAX];	// À²ÄÙ‰æ‘œ:Êß°Â‚²‚Æ
+	int bgImage;						// BACKGROUND:”wŒi‰æ‘œ
+	int pabImage;						// PRESS ANY BUTTON:½À°ÄÎŞÀİ‰æ‘œ
+
 public:
 	TitleScene(ISceneSwitcher* switcher);	// ºİ½Ä×¸À
 	~TitleScene();							// ÃŞ½Ä×¸À
@@ -30,11 +36,5 @@ public:
 	virtual void Update() override;		// XV
 	virtual void Render() override;		// •`‰æ
 
-private:
-
-	// •Ï”‚Ì’è‹`
-	int titleImage[TITLE_PARTS_MAX];	// À²ÄÙ‰æ‘œ:Êß°Â‚²‚Æ
-	int bgImage;						// BACKGROUND:”wŒi‰æ‘œ
-	int pabImage;						// PRESS ANY BUTTON:½À°ÄÎŞÀİ‰æ‘œ
 };
 

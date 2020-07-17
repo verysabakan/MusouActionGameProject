@@ -14,13 +14,9 @@ class Collision
 private:
 
 public:
-	Collision();		// ｺﾝｽﾄﾗｸﾀ
-	~Collision();	// ﾃﾞｽﾄﾗｸﾀ
+	Collision();			// ｺﾝｽﾄﾗｸﾀ
+	virtual ~Collision();	// 純粋仮想ﾃﾞｽﾄﾗｸﾀ
 
-	void Initialize();	// 初期化
-	void Finalize();	// 終了処理
-	void Update();		// 更新
-	// void Render();	// 描画
-
+	//virtual bool Test(const Shape& s1, const Shape& s2) = 0;
 };
 

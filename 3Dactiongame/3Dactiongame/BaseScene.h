@@ -13,6 +13,10 @@
 class BaseScene
 	: public SceneProcess
 {
+protected:
+	ISceneSwitcher* sceneSwitcher;			// ¼°İ‚ÌØ‚è‘Ö‚¦‚ğ“`‚¦‚é
+	SceneDateManager* sceneDateManager;		// ¼°İŠÔ‚ÌÃŞ°À‚Ìó‚¯“n‚µ
+
 public:
 	BaseScene(ISceneSwitcher* switcher);	// ºİ½Ä×¸À
 	virtual ~BaseScene();					// ÃŞ½Ä×¸À
@@ -22,10 +26,6 @@ public:
 	virtual void Finalize() override {}			// I—¹ˆ—
 	virtual void Update() override {}			// XV
 	virtual void Render() override {}				// •`‰æ
-
-protected:
-	ISceneSwitcher* sceneSwitcher;			// ¼°İ‚ÌØ‚è‘Ö‚¦‚ğ“`‚¦‚é
-	SceneDateManager* sceneDateManager;		// ¼°İŠÔ‚ÌÃŞ°À‚Ìó‚¯“n‚µ
 
 };
 

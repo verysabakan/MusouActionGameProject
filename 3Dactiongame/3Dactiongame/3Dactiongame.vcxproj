@@ -129,6 +129,7 @@
     <ClCompile Include="CharSelScene.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="FlexibleCollision.cpp" />
     <ClCompile Include="FrameRate.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GameTask.cpp" />
@@ -139,6 +140,7 @@
     <ClCompile Include="MakeForm.cpp" />
     <ClCompile Include="ModelBase.cpp" />
     <ClCompile Include="ModeSelScene.cpp" />
+    <ClCompile Include="ObjectTypeBace.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
@@ -158,6 +160,8 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CharSelScene.h" />
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="ObjectTypeConstant.h" />
+    <ClInclude Include="FlexibleCollision.h" />
     <ClInclude Include="FrameRate.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="HitCheckCharAndStage.h" />
@@ -168,6 +172,7 @@
     <ClInclude Include="ModelBase.h" />
     <ClInclude Include="LoadModel.h" />
     <ClInclude Include="ModeSelScene.h" />
+    <ClInclude Include="ObjectTypeBace.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerManager.h" />

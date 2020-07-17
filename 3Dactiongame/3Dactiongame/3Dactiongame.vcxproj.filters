@@ -67,6 +67,15 @@
     <Filter Include="ヘッダー ファイル\Scene\Constant">
       <UniqueIdentifier>{c30caccf-8c3c-423e-a949-7df6dfd325b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Object\HitCheck\ObjectType">
+      <UniqueIdentifier>{0b3c1418-99a3-4a98-9e47-50def84ad6b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\HitCheck\ObjectType">
+      <UniqueIdentifier>{6a199976-a201-4d4f-87c5-dca1298eb562}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\HitCheck\ObjectType\Constant">
+      <UniqueIdentifier>{45d5963b-b996-4bb6-99bd-b08f94ab1133}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -152,6 +161,12 @@
     </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>ソース ファイル\Object\HitCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="FlexibleCollision.cpp">
+      <Filter>ソース ファイル\Object\HitCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectTypeBace.cpp">
+      <Filter>ソース ファイル\Object\HitCheck\ObjectType</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +268,15 @@
     </ClInclude>
     <ClInclude Include="Collision.h">
       <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="FlexibleCollision.h">
+      <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectTypeBace.h">
+      <Filter>ヘッダー ファイル\Object\HitCheck\ObjectType</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectTypeConstant.h">
+      <Filter>ヘッダー ファイル\Object\HitCheck\ObjectType\Constant</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

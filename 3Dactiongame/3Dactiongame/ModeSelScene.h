@@ -10,6 +10,9 @@
 class ModeSelScene
 	: public BaseScene
 {
+private:
+	int modelHandle;
+
 public:
 	ModeSelScene(ISceneSwitcher* switcher);	// ºİ½Ä×¸À
 	~ModeSelScene();						// ÃŞ½Ä×¸À
@@ -20,7 +23,5 @@ public:
 	virtual void Update() override;		// XV
 	virtual void Render() override;		// •`‰æ
 
-private:
-	int modelHandle;
 };
 

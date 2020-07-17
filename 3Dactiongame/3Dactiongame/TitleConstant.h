@@ -5,22 +5,25 @@
 
 #pragma once
 
-// MARK‰æ‘œ‚Ì»²½Þ
-#define MARK_POS_X 375
-#define MARK_POS_Y 80
+namespace 
+{
+	// MARK‰æ‘œ‚Ì»²½Þ
+	const int MARK_POS_X = 375;
+	const int MARK_POS_Y = 80;
 
-// EW‰æ‘œ‚Ì»²½Þ
-#define EW_POS_X 470
-#define EW_POS_Y 150
+	// EW‰æ‘œ‚Ì»²½Þ
+	const int EW_POS_X = 470;
+	const int EW_POS_Y = 150;
 
-// EXTREME‰æ‘œ‚Ì»²½Þ
-#define EXTREME_POS_X 350
-#define EXTREME_POS_Y 270
+	// EXTREME‰æ‘œ‚Ì»²½Þ
+	const int EXTREME_POS_X = 350;
+	const int EXTREME_POS_Y = 270;
 
-// WARRIORS‰æ‘œ‚Ì»²½Þ
-#define WARRIORS_POS_X 350
-#define WARRIORS_POS_Y 330
+	// WARRIORS‰æ‘œ‚Ì»²½Þ
+	const int WARRIORS_POS_X = 350;
+	const int WARRIORS_POS_Y = 330;
 
-// START‰æ‘œ‚Ì»²½Þ
-#define START_POS_X 470
-#define START_POS_Y 600
+	// START‰æ‘œ‚Ì»²½Þ
+	const int START_POS_X = 470;
+	const int START_POS_Y = 600;
+}

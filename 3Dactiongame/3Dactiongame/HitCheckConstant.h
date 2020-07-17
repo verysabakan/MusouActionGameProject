@@ -6,11 +6,11 @@
 #pragma once
 
 // єШјЮ®Э‚МЋн—Ю
-typedef enum
+enum class StageCollType
 {
 	STAGECOLLTYPE_WALL,			// •З
 	STAGECOLLTYPE_FLOOR,		// Џ°
 	STAGECOLLTYPE_CEILING,		// “V€д
 
 	STAGECOLLTYPE_NUM			// єШјЮ®Э‚МЋн—Юђ”
-} StageCollType;
+};

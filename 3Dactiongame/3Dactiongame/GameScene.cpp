@@ -11,7 +11,7 @@
 #include "LoadModel.h"
 #include "PlayerManager.h"
 #include "StageManager.h"
-#include "Collision.h"
+#include "FlexibleCollision.h"
 
 //------------------------------------------------------
 // @brief	∫›Ωƒ◊∏¿
@@ -27,7 +27,7 @@ GameScene::GameScene(ISceneSwitcher* switcher, const STAGE_TYPE& sT)
 	// playerÇ™nullptrÇ≈Ç»Ç¢èÍçá
 	if (playerMnager->GetPlayer() != nullptr)
 	{
-		collision = std::make_unique<Collision>();
+		fCollision = std::make_unique<FlexibleCollision>();
 		camera = std::make_unique<Camera>(playerMnager->GetPlayer());
 	}
 
@@ -51,7 +51,7 @@ void GameScene::Initialize()
 	playerMnager->Initialize();
 	stageManager->Initialize();
 	camera->Initialize();
-	collision->Initialize();
+	fCollision->Initialize();
 }
 
 //------------------------------------------------------
@@ -63,13 +63,13 @@ void GameScene::Finalize()
 	playerMnager->Finalize();
 	stageManager->Finalize();
 	camera->Finalize();
-	collision->Finalize();
+	fCollision->Finalize();
 
 	// ÿø∞ΩÇÃäJï˙
 	playerMnager.reset();
 	stageManager.reset();
 	camera.reset();
-	collision.reset();
+	fCollision.reset();
 }
 
 //------------------------------------------------------
@@ -81,7 +81,7 @@ void GameScene::Update()
 	playerMnager->Update(camera->GetCameraDir());
 	camera->Update();
 	stageManager->Update();
-	collision->Update();
+	fCollision->Update();
 
 	// √ﬁ ﬁØ∏ﬁópº∞›êÿÇËë÷Ç¶∑∞:Q
 	if (lpController.IsPushC(INPUT_TRG)) 
