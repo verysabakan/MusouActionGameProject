@@ -19,6 +19,8 @@ public:
 	void Update(const Vector3& cameraDir);		// XV
 	void Render();		// •`‰æ
 
+	virtual ObjectType GetType() override;		// µÌŞ¼Şª¸Ä‚Ìí—Ş‚ğæ“¾
+
 private:
 	void Behavior(const Vector3& cameraDir);		// “®ì
 	void Animation();		// ˆÚ“®

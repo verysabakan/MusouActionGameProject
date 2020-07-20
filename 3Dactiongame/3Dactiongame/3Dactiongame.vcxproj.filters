@@ -159,14 +159,14 @@
     <ClCompile Include="MakeForm.cpp">
       <Filter>ソース ファイル\Object\HitCheck</Filter>
     </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>ソース ファイル\Object\HitCheck</Filter>
-    </ClCompile>
     <ClCompile Include="FlexibleCollision.cpp">
       <Filter>ソース ファイル\Object\HitCheck</Filter>
     </ClCompile>
     <ClCompile Include="ObjectTypeBace.cpp">
       <Filter>ソース ファイル\Object\HitCheck\ObjectType</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionBase.cpp">
+      <Filter>ソース ファイル\Object\HitCheck</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -266,9 +266,6 @@
     <ClInclude Include="MakeForm.h">
       <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
     </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
-    </ClInclude>
     <ClInclude Include="FlexibleCollision.h">
       <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
     </ClInclude>
@@ -277,6 +274,9 @@
     </ClInclude>
     <ClInclude Include="ObjectTypeConstant.h">
       <Filter>ヘッダー ファイル\Object\HitCheck\ObjectType\Constant</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionBase.h">
+      <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

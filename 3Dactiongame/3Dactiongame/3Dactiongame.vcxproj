@@ -127,7 +127,7 @@
     <ClCompile Include="BaseScene.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CharSelScene.cpp" />
-    <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="CollisionBase.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="FlexibleCollision.cpp" />
     <ClCompile Include="FrameRate.cpp" />
@@ -159,7 +159,7 @@
     <ClInclude Include="BaseScene.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CharSelScene.h" />
-    <ClInclude Include="Collision.h" />
+    <ClInclude Include="CollisionBase.h" />
     <ClInclude Include="ObjectTypeConstant.h" />
     <ClInclude Include="FlexibleCollision.h" />
     <ClInclude Include="FrameRate.h" />

@@ -9,9 +9,10 @@
 
 class ObjectTypeBace
 {
+public:
 	ObjectTypeBace();				// ºÝ½Ä×¸À
 	virtual ~ObjectTypeBace();		// ÃÞ½Ä×¸À
 
-	virtual ObjectType GetType() = 0;	
+	virtual ObjectType GetType() = 0;	// µÌÞ¼Þª¸Ä‚ÌŽí—Þ‚ðŽæ“¾:•K‚¸ŽÀ‘•
 };
 

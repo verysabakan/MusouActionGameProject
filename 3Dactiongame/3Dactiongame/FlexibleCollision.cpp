@@ -10,7 +10,14 @@
 //------------------------------------------------------
 FlexibleCollision::FlexibleCollision()
 {
-
+	/*
+	colTable[SHAPE_CIRCLE][SHAPE_CIRCLE] = new CircleAndCircle();
+	colTable[SHAPE_CIRCLE][SHAPE_RECT] = new CircleAndRect();
+	colTable[SHAPE_RECT][SHAPE_CIRCLE] = new CircleAndRect();
+	colTable[SHAPE_RECT][SHAPE_RECT] = new RectAndRect();
+	*/
+	
+	colTable[ObjectType::OBJECTTYPE_PLAYER][ObjectType::OBJECTTYPE_PLAYER] = std::make_unique<CollisionBase>();
 }
 
 //------------------------------------------------------
@@ -18,7 +25,7 @@ FlexibleCollision::FlexibleCollision()
 //------------------------------------------------------
 FlexibleCollision::~FlexibleCollision()
 {
-
+	// èàóùÇ»Çµ
 }
 //------------------------------------------------------
 // @brief	èâä˙âª
@@ -42,4 +49,12 @@ void FlexibleCollision::Finalize()
 void FlexibleCollision::Update()
 {
 
+}
+
+//------------------------------------------------------
+// @brief	ìñÇΩÇËîªíË
+//------------------------------------------------------
+bool FlexibleCollision::HitCheck(const ObjectType& o1, const ObjectType& o2)
+{
+	return true;
 }

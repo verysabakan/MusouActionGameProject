@@ -225,3 +225,11 @@ void Player::Animation()
 	// model‚É±ÆÒ°¼®Ý‚ð¾¯Ä
 	MV1SetAttachAnimTime(modelHandle, attachiIndex, playTime);
 }
+
+//------------------------------------------------------
+// @brief	±ÆÒ°¼®Ý
+//------------------------------------------------------
+ObjectType Player::GetType()
+{
+	return ObjectType::OBJECTTYPE_PLAYER;
+}

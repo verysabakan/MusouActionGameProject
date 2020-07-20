@@ -8,8 +8,10 @@
 #include <DxLib.h>
 #include <vector>
 #include "Vector3.h"
+#include "ObjectTypeBace.h"
 
 class ModelBase
+	:public ObjectTypeBace
 {
 protected:
 	// Œ»İ‚Ì±ÆÒ°¼®İ‚Ìó‘ÔAM:ˆÚ“®
@@ -65,8 +67,10 @@ public:
 	Vector3 GetHitSpherePositon() { return hitpos; }	// “–‚½‚Á‚½‹…‚ÌˆÊ’u‚Ìæ“¾
 	float GetHitRadiusPositon() { return hitR; }		// ”¼Œa‚Ìæ“¾
 	std::vector<int> GetAnimHandle() { return animHandle; }	// ±ÆÒ°¼®İÊİÄŞÙ‚Ìæ“¾
-	ANIM_STATE GetAnimState() { return animState; }			// Œ»İ‚Ìó‘Ô‚Ìæ“¾
+	ANIM_STATE GetAnimState() { return animState; }			// Œ»İ‚Ì±ÆÒ°¼®İ‚Ìæ“¾
 	Vector3 GetFramePosition(int n);					// ÌÚ°Ñ‚ÌÀ•W‚Ìæ“¾
+
+	virtual ObjectType GetType() override;				// µÌŞ¼Şª¸Ä‚Ìí—Ş‚ğæ“¾
 
 	//------------------------------------------
 	// ‚Æ‚è‚ ‚¦‚¸‚Ì‚â‚Â«
