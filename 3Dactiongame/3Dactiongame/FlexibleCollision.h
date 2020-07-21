@@ -17,7 +17,7 @@ private:
 	//EnumArray<int, IndexEnum> intArray(0);
 	
 	std::unique_ptr<CollisionBase> colTable[static_cast<int>(ObjectType::OBJECTTYPE_NUM)][static_cast<int>(ObjectType::OBJECTTYPE_NUM)];
-
+	constexpr std::initializer_list<ObjectType> all;
 public:
 	FlexibleCollision();	// ºÝ½Ä×¸À
 	~FlexibleCollision();	// ÃÞ½Ä×¸À
@@ -28,5 +28,6 @@ public:
 	// void Render();	// •`‰æ
 
 	virtual bool HitCheck(const ObjectType& o1, const ObjectType& o2) override;
+
 };
 

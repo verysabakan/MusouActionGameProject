@@ -17,7 +17,10 @@ FlexibleCollision::FlexibleCollision()
 	colTable[SHAPE_RECT][SHAPE_RECT] = new RectAndRect();
 	*/
 	
-	colTable[ObjectType::OBJECTTYPE_PLAYER][ObjectType::OBJECTTYPE_PLAYER] = std::make_unique<CollisionBase>();
+	for (ObjectType i; i < ObjectType::OBJECTTYPE_NUM; )
+	{
+		colTable[static_cast<int>(ObjectType::OBJECTTYPE_PLAYER)][static_cast<int>(ObjectType::OBJECTTYPE_PLAYER)] = std::make_unique<CollisionBase>();
+	}
 }
 
 //------------------------------------------------------

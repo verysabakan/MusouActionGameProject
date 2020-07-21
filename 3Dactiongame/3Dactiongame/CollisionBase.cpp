@@ -20,5 +20,3 @@ CollisionBase::~CollisionBase()
 {
 	// ˆ—‚È‚µ
 }
-
-
