@@ -81,7 +81,7 @@ void GameScene::Update()
 	playerMnager->Update(camera->GetCameraDir());
 	camera->Update();
 	stageManager->Update();
-	fCollision->Update();
+	fCollision->HitCheck();
 
 	// ÃÞÊÞ¯¸Þ—p¼°ÝØ‚è‘Ö‚¦·°:Q
 	if (lpController.IsPushC(INPUT_TRG)) 

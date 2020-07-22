@@ -76,6 +76,12 @@
     <Filter Include="ヘッダー ファイル\Object\HitCheck\ObjectType\Constant">
       <UniqueIdentifier>{45d5963b-b996-4bb6-99bd-b08f94ab1133}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Object\ObjectList">
+      <UniqueIdentifier>{90b79b03-67e5-40ae-b2e3-f571678db179}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\ObjectList">
+      <UniqueIdentifier>{61750521-717e-452f-aa5f-636c0410c48e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -153,9 +159,6 @@
     <ClCompile Include="ModelBase.cpp">
       <Filter>ソース ファイル\Object\Player</Filter>
     </ClCompile>
-    <ClCompile Include="HitCheckCharAndStage.cpp">
-      <Filter>ソース ファイル\Object\HitCheck</Filter>
-    </ClCompile>
     <ClCompile Include="MakeForm.cpp">
       <Filter>ソース ファイル\Object\HitCheck</Filter>
     </ClCompile>
@@ -167,6 +170,15 @@
     </ClCompile>
     <ClCompile Include="CollisionBase.cpp">
       <Filter>ソース ファイル\Object\HitCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAndTerrain.cpp">
+      <Filter>ソース ファイル\Object\HitCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectList.cpp">
+      <Filter>ソース ファイル\Object\ObjectList</Filter>
+    </ClCompile>
+    <ClCompile Include="AddList.cpp">
+      <Filter>ソース ファイル\Object\ObjectList</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -260,9 +272,6 @@
     <ClInclude Include="StageModelBase.h">
       <Filter>ヘッダー ファイル\Object\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="HitCheckCharAndStage.h">
-      <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
-    </ClInclude>
     <ClInclude Include="MakeForm.h">
       <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
     </ClInclude>
@@ -277,6 +286,15 @@
     </ClInclude>
     <ClInclude Include="CollisionBase.h">
       <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAndTerrain.h">
+      <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectList.h">
+      <Filter>ヘッダー ファイル\Object\ObjectList</Filter>
+    </ClInclude>
+    <ClInclude Include="AddList.h">
+      <Filter>ヘッダー ファイル\Object\ObjectList</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

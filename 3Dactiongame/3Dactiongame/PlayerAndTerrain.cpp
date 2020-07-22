@@ -1,14 +1,14 @@
 //------------------------------------------------------
-// @brief	当たり判定
-// 2020 7/18 Ryosuke Iida
+// @brief	ﾌﾟﾚｲﾔｰと地形の当たり判定
+// 2020 7/22 Ryosuke Iida
 //------------------------------------------------------
 
-#include "CollisionBase.h"
+#include "PlayerAndTerrain.h"
 
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
 //------------------------------------------------------
-CollisionBase::CollisionBase()
+PlayerAndTerrain::PlayerAndTerrain()
 {
 	// 処理なし
 }
@@ -16,7 +16,15 @@ CollisionBase::CollisionBase()
 //------------------------------------------------------
 // @brief	ﾃﾞｽﾄﾗｸﾀ
 //------------------------------------------------------
-CollisionBase::~CollisionBase()
+PlayerAndTerrain::~PlayerAndTerrain()
 {
 	// 処理なし
+}
+
+//------------------------------------------------------
+// @brief	ﾌﾟﾚｲﾔｰと地形の判定処理
+//------------------------------------------------------
+bool PlayerAndTerrain::HitCheck(const ObjectType& o1, const ObjectType& o2)
+{
+
 }

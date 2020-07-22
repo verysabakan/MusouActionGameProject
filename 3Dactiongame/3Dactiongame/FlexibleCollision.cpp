@@ -4,6 +4,7 @@
 //------------------------------------------------------
 
 #include "FlexibleCollision.h"
+#include "PlayerAndTerrain.h"
 
 //------------------------------------------------------
 // @brief	ºÝ½Ä×¸À
@@ -16,11 +17,9 @@ FlexibleCollision::FlexibleCollision()
 	colTable[SHAPE_RECT][SHAPE_CIRCLE] = new CircleAndRect();
 	colTable[SHAPE_RECT][SHAPE_RECT] = new RectAndRect();
 	*/
-	
-	for (ObjectType i; i < ObjectType::OBJECTTYPE_NUM; )
-	{
-		colTable[static_cast<int>(ObjectType::OBJECTTYPE_PLAYER)][static_cast<int>(ObjectType::OBJECTTYPE_PLAYER)] = std::make_unique<CollisionBase>();
-	}
+
+	colTable[static_cast<int>(ObjectType::OBJECTTYPE_PLAYER)][static_cast<int>(ObjectType::OBJECTTYPE_TERRAIN)]
+		= std::make_shared<PlayerAndTerrain>();	// ÌßÚ²Ô°‚Æ’nŒ`‚Ì“–‚½‚è”»’è
 }
 
 //------------------------------------------------------
@@ -59,5 +58,5 @@ void FlexibleCollision::Update()
 //------------------------------------------------------
 bool FlexibleCollision::HitCheck(const ObjectType& o1, const ObjectType& o2)
 {
-	return true;
+	return colTable[o1.GetType()][o2.GetType()]->HitCheck(o1, o2);
 }
