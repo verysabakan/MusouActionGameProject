@@ -15,5 +15,13 @@ enum class ObjectType
 	OBJECTTYPE_OBSTACLE,		// 障害物
 	OBJECTTYPE_TERRAIN,			// 地形
 
-	OBJECTTYPE_NUM				// 当たり判定を取るｵﾌﾞｼﾞｪｸﾄの種類数
+	NONE,						// 何もない
+	OBJECTTYPE_NUM				// 当たり判定を取るｵﾌﾞｼﾞｪｸﾄの種類数(最大値)
 };
+
+ObjectType begin(ObjectType);					// ObjectTypeの先頭の要素を返す
+ObjectType end(ObjectType);						// ObjectTypeの末端を返す
+//ObjectType operator*(ObjectType& type);			// 自分自身を返す
+ObjectType operator++(ObjectType& type);		// ObjectTypeの++の計算
+ObjectType operator+(ObjectType& type, int k);	// ObjectTypeに対する足し算
+ObjectType operator-(ObjectType& type, int k);	// ObjectTypeに対する引き算

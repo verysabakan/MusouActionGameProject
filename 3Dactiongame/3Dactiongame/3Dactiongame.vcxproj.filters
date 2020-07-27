@@ -82,6 +82,9 @@
     <Filter Include="ヘッダー ファイル\Object\ObjectList">
       <UniqueIdentifier>{61750521-717e-452f-aa5f-636c0410c48e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Object\HitCheck\ObjectType\Constant">
+      <UniqueIdentifier>{47b24094-b85c-46c3-a45b-2b6935d1298b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -179,6 +182,9 @@
     </ClCompile>
     <ClCompile Include="AddList.cpp">
       <Filter>ソース ファイル\Object\ObjectList</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectTypeConstant.cpp">
+      <Filter>ソース ファイル\Object\HitCheck\ObjectType\Constant</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -281,9 +287,6 @@
     <ClInclude Include="ObjectTypeBace.h">
       <Filter>ヘッダー ファイル\Object\HitCheck\ObjectType</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectTypeConstant.h">
-      <Filter>ヘッダー ファイル\Object\HitCheck\ObjectType\Constant</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionBase.h">
       <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
     </ClInclude>
@@ -295,6 +298,9 @@
     </ClInclude>
     <ClInclude Include="AddList.h">
       <Filter>ヘッダー ファイル\Object\ObjectList</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectTypeConstant.h">
+      <Filter>ヘッダー ファイル\Object\HitCheck\ObjectType\Constant</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

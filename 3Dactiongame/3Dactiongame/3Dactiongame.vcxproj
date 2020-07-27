@@ -142,6 +142,7 @@
     <ClCompile Include="ModeSelScene.cpp" />
     <ClCompile Include="ObjectList.cpp" />
     <ClCompile Include="ObjectTypeBace.cpp" />
+    <ClCompile Include="ObjectTypeConstant.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerAndTerrain.cpp" />
