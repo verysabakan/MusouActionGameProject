@@ -21,7 +21,7 @@ enum class ObjectType
 
 ObjectType begin(ObjectType);					// ObjectTypeの先頭の要素を返す
 ObjectType end(ObjectType);						// ObjectTypeの末端を返す
-//ObjectType operator*(ObjectType& type);			// 自分自身を返す
+ObjectType operator*(ObjectType& type);			// 自分自身を返す
 ObjectType operator++(ObjectType& type);		// ObjectTypeの++の計算
 ObjectType operator+(ObjectType& type, int k);	// ObjectTypeに対する足し算
 ObjectType operator-(ObjectType& type, int k);	// ObjectTypeに対する引き算

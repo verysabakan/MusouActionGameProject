@@ -42,15 +42,16 @@ void FlexibleCollision::Initialize()
 //------------------------------------------------------
 void FlexibleCollision::Finalize()
 {
-
-}
-
-//------------------------------------------------------
-// @brief	çXêV
-//------------------------------------------------------
-void FlexibleCollision::Update()
-{
-
+	auto i = begin();
+	/*
+	for (ObjectType i = begin(i); i < end(i); ++i) 
+	{
+		for (ObjectType j = begin(j); j < end(j); ++j) 
+		{
+			
+			//colTable[i][j].reset();
+		}
+	}*/
 }
 
 //------------------------------------------------------
@@ -58,5 +59,6 @@ void FlexibleCollision::Update()
 //------------------------------------------------------
 bool FlexibleCollision::HitCheck(const ObjectType& o1, const ObjectType& o2)
 {
-	return colTable[o1.GetType()][o2.GetType()]->HitCheck(o1, o2);
+	//return colTable[o1.GetType()][o2.GetType()]->HitCheck(o1, o2);
+	return false;
 }

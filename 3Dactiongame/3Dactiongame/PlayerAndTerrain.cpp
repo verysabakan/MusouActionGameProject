@@ -26,5 +26,5 @@ PlayerAndTerrain::~PlayerAndTerrain()
 //------------------------------------------------------
 bool PlayerAndTerrain::HitCheck(const ObjectType& o1, const ObjectType& o2)
 {
-
+	return false;
 }

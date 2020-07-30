@@ -8,11 +8,11 @@
 #include "CollisionBase.h"
 
 class PlayerAndTerrain
-	:private CollisionBase
+	:public CollisionBase
 {
 public:
-    PlayerAndTerrain() {}
-    virtual ~PlayerAndTerrain() {}
+    PlayerAndTerrain();
+    virtual ~PlayerAndTerrain();
 
     bool HitCheck(const ObjectType& o1, const ObjectType& o2);  // ÌßÚ²Ô°‚Æ’nŒ`‚Ì”»’èˆ—
 

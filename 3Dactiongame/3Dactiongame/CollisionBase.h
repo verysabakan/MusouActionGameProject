@@ -5,7 +5,6 @@
 
 #pragma once
 
-#include <memory>
 #include "ObjectTypeConstant.h"
 
 // ÌßÛÄÀ²ÌßéŒ¾

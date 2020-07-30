@@ -12,15 +12,12 @@ class FlexibleCollision
 	:private CollisionBase
 {
 private:
-	//CollisionBase* colTable[static_cast<int>(ObjectType::OBJECTTYPE_NUM)][static_cast<int>(ObjectType::OBJECTTYPE_NUM)];
-
-	//EnumArray<int, IndexEnum> intArray(0);
-	
+	// 当たり判定テーブル
 	std::shared_ptr<CollisionBase> colTable[static_cast<int>(ObjectType::OBJECTTYPE_NUM)][static_cast<int>(ObjectType::OBJECTTYPE_NUM)];
-	
+
 public:
 	FlexibleCollision();	// ｺﾝｽﾄﾗｸﾀ
-	~FlexibleCollision();	// ﾃﾞｽﾄﾗｸﾀ
+	virtual ~FlexibleCollision();	// ﾃﾞｽﾄﾗｸﾀ
 
 	void Initialize();		// 初期化
 	void Finalize();		// 終了処理

@@ -22,7 +22,6 @@ ObjectType end(ObjectType)
 	return ObjectType::OBJECTTYPE_NUM;
 }
 
-/*
 //------------------------------------------------------
 // @brief	©•ª©g‚ğ•Ô‚·
 //------------------------------------------------------
@@ -30,7 +29,6 @@ ObjectType operator*(ObjectType& id)
 {
 	return id;
 }
-*/
 
 //------------------------------------------------------
 // @brief	ObjectType‚Ì++‚ÌŒvZ
