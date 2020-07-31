@@ -13,7 +13,7 @@ class FlexibleCollision
 {
 private:
 	// “–‚½‚è”»’èƒe[ƒuƒ‹
-	std::shared_ptr<CollisionBase> colTable[static_cast<int>(ObjectType::OBJECTTYPE_NUM)][static_cast<int>(ObjectType::OBJECTTYPE_NUM)];
+	std::unique_ptr<CollisionBase> colTable[static_cast<int>(ObjectType::OBJECTTYPE_NUM)][static_cast<int>(ObjectType::OBJECTTYPE_NUM)];
 
 public:
 	FlexibleCollision();	// ºİ½Ä×¸À

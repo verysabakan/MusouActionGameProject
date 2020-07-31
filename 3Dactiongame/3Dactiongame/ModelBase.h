@@ -64,13 +64,13 @@ public:
 	Vector3 GetPosition() { return pos; }	// 位置を取得
 	Vector3 GetRotation() { return rol; }	// 回転を取得
 	Vector3 GetTarget() { return target; }	// 目標を取得
-	Vector3 GetHitSpherePositon() { return hitpos; }	// 当たった球の位置の取得
-	float GetHitRadiusPositon() { return hitR; }		// 半径の取得
+	Vector3 GetHitSpherePositon() { return hitpos; }		// 当たった球の位置の取得
+	float GetHitRadiusPositon() { return hitR; }			// 半径の取得
 	std::vector<int> GetAnimHandle() { return animHandle; }	// ｱﾆﾒｰｼｮﾝﾊﾝﾄﾞﾙの取得
 	ANIM_STATE GetAnimState() { return animState; }			// 現在のｱﾆﾒｰｼｮﾝの取得
-	Vector3 GetFramePosition(int n);					// ﾌﾚｰﾑの座標の取得
+	Vector3 GetFramePosition(int n);						// ﾌﾚｰﾑの座標の取得
 
-	virtual ObjectType GetType() override;				// ｵﾌﾞｼﾞｪｸﾄの種類を取得
+	//virtual ObjectType GetType() override {}				// ｵﾌﾞｼﾞｪｸﾄの種類を取得
 
 	//------------------------------------------
 	// とりあえずのやつ↓

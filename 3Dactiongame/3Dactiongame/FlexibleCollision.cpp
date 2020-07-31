@@ -19,7 +19,7 @@ FlexibleCollision::FlexibleCollision()
 	*/
 
 	colTable[static_cast<int>(ObjectType::OBJECTTYPE_PLAYER)][static_cast<int>(ObjectType::OBJECTTYPE_TERRAIN)]
-		= std::make_shared<PlayerAndTerrain>();	// ﾌﾟﾚｲﾔｰと地形の当たり判定
+		= std::make_unique<PlayerAndTerrain>();	// ﾌﾟﾚｲﾔｰと地形の当たり判定
 }
 
 //------------------------------------------------------
@@ -42,7 +42,6 @@ void FlexibleCollision::Initialize()
 //------------------------------------------------------
 void FlexibleCollision::Finalize()
 {
-	auto i = begin();
 	/*
 	for (ObjectType i = begin(i); i < end(i); ++i) 
 	{
@@ -51,7 +50,8 @@ void FlexibleCollision::Finalize()
 			
 			//colTable[i][j].reset();
 		}
-	}*/
+	}
+	*/
 }
 
 //------------------------------------------------------
