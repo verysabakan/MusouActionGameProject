@@ -87,12 +87,21 @@ void Player::Render()
 //------------------------------------------------------
 void Player::Behavior(const Vector3& cameraDir)
 {
+	moveSpeed = {};
+
+	// ---------------
+	// とりあえずのやつ
+	moveSpeed.y += gravity;
+	//pos.y += moveSpeed.y;
+	if (lpController.IsPushC(INPUT_TRG) && moveSpeed.y == 0.0f)
+	{
+		moveSpeed.y = 30.0f;
+		jumpFlag = true;
+	}
+	// ---------------
+
 	// 入力無し:待機状態
 	animState = ANIM_STANCE;
-
-	// 移動速度
-	moveSpeed = cameraDir * 5.0f;
-
 
 	moveFlag = false;
 
@@ -115,7 +124,7 @@ void Player::Behavior(const Vector3& cameraDir)
 	}
 	else if (animState == ANIM_JUMP)
 	{
-
+		
 	}
 	else if (animState == ANIM_SKILL1)
 	{
@@ -157,6 +166,10 @@ void Player::Behavior(const Vector3& cameraDir)
 	// 右移動
 	if (lpController.IsPushRIGHT(INPUT_HOLD))
 	{
+
+		// 移動速度
+		moveSpeed.x = cameraDir.x * 5.0f;
+		moveSpeed.z = cameraDir.z * 5.0f;
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(moveSpeed.z, moveSpeed.y, -moveSpeed.x);
 		animState = ANIM_RUN;
@@ -165,6 +178,9 @@ void Player::Behavior(const Vector3& cameraDir)
 	// 左移動
 	if (lpController.IsPushLEFT(INPUT_HOLD))
 	{
+		// 移動速度
+		moveSpeed.x = cameraDir.x * 5.0f;
+		moveSpeed.z = cameraDir.z * 5.0f;
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(-moveSpeed.z, moveSpeed.y, moveSpeed.x);
 		animState = ANIM_RUN;
@@ -173,6 +189,9 @@ void Player::Behavior(const Vector3& cameraDir)
 	// ｶﾒﾗ正面方向に移動
 	if (lpController.IsPushUP(INPUT_HOLD))
 	{
+		// 移動速度
+		moveSpeed.x = cameraDir.x * 5.0f;
+		moveSpeed.z = cameraDir.z * 5.0f;
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(moveSpeed.x, moveSpeed.y, moveSpeed.z);
 		animState = ANIM_RUN;
@@ -181,6 +200,9 @@ void Player::Behavior(const Vector3& cameraDir)
 	// ｶﾒﾗの方向に移動
 	if (lpController.IsPushDOWN(INPUT_HOLD))
 	{
+		// 移動速度
+		moveSpeed.x = cameraDir.x * 5.0f;
+		moveSpeed.z = cameraDir.z * 5.0f;
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(-moveSpeed.x, moveSpeed.y, -moveSpeed.z);
 		animState = ANIM_RUN;
@@ -190,8 +212,8 @@ void Player::Behavior(const Vector3& cameraDir)
 	if (animState == ANIM_RUN)
 	{
 		rol.y = atan2(-moveSpeed.x, -moveSpeed.z);
-		pos.x += moveSpeed.x;
-		pos.z += moveSpeed.z;
+		//pos.x += moveSpeed.x;
+		//pos.z += moveSpeed.z;
 		animState = ANIM_RUN;
 		moveFlag = true;
 	}

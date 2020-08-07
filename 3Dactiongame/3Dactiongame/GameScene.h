@@ -8,6 +8,7 @@
 #include <memory>
 #include "BaseScene.h"
 #include "StageType.h"
+#include "AddList.h"
 
 // ÌßÛÄÀ²ÌßéŒ¾
 class PlayerManager;
@@ -23,6 +24,8 @@ private:
 	std::unique_ptr<StageManager> stageManager;
 	std::unique_ptr<Camera> camera;
 	std::unique_ptr<FlexibleCollision> fCollision;
+
+	OBJECT_LIST_PTR objListPtr;
 
 public:
 	GameScene(ISceneSwitcher* switcher, const STAGE_TYPE& sT);	// ºİ½Ä×¸À

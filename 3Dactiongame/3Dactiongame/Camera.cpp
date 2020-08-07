@@ -11,9 +11,9 @@
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
 //------------------------------------------------------
-Camera::Camera(Player* p)
+Camera::Camera(ModelBase* p)
 {
-	model = reinterpret_cast<ModelBase*>(p);
+	model = p;
 }
 
 //------------------------------------------------------
@@ -29,7 +29,7 @@ Camera::~Camera()
 //------------------------------------------------------
 void Camera::Initialize()
 {
-	camLength = -200.0f;		// 中心からの初期距離
+	camLength = -230.0f;		// 中心からの初期距離
 	auto pPos = model->GetPosition();
 	cameraPos = { pPos.x, pPos.y, pPos.z + camLength };	// ｶﾒﾗの初期位置
 	targetLookAtPos = {};				// 注視点
@@ -56,10 +56,10 @@ void Camera::Update()
 	// ｶﾒﾗ操作
 	if (CheckHitKey(KEY_INPUT_F)) camLength += 5;
 	if (CheckHitKey(KEY_INPUT_G)) camLength -= 5;
-	if (CheckHitKey(KEY_INPUT_W)) vertical += deg1Rad;
-	if (CheckHitKey(KEY_INPUT_S)) vertical += -deg1Rad;
-	if (CheckHitKey(KEY_INPUT_A)) horizontal += deg1Rad;
-	if (CheckHitKey(KEY_INPUT_D)) horizontal += -deg1Rad;
+	if (CheckHitKey(KEY_INPUT_W)) vertical += deg1Rad * 1.5f;
+	if (CheckHitKey(KEY_INPUT_S)) vertical += -deg1Rad * 1.5f;
+	if (CheckHitKey(KEY_INPUT_A)) horizontal += deg1Rad * 1.5f;
+	if (CheckHitKey(KEY_INPUT_D)) horizontal += -deg1Rad * 1.5f;
 
 	Move();
 
@@ -130,7 +130,7 @@ void Camera::Move()
 		return;
 	}
 
-	auto StepTime = 0.01f;	// 推移時間
+	auto StepTime = 0.1f;	// 推移時間
 	Vector3 origPosition = cameraPos;	// 揺らしを無視した位置
 	Vector3 origLookAtPosition = targetLookAtPos;	// 揺らしを無視したﾀｰｹﾞｯﾄ位置
 	Vector3 shakePosition = { 0.0f, 0.0f, 0.0f };	// 揺らしたときの位置
@@ -192,7 +192,7 @@ void Camera::Move()
 
 	// 目標注視点座標の算出
 	targetLookAtPos = pc->GetPosition();
-	targetLookAtPos.y += 50.0f;
+	targetLookAtPos.y += 70.0f;
 
 	// 目標座標の算出
 	Vector3 targetPosition;

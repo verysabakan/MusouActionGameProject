@@ -30,7 +30,7 @@ private:
 	Vector3 cameraUpVec;		// ╤рв┌л▐Ц∙Ш▄Э
 
 public:
-	Camera(Player* p);	// ╨щ╫дв╦ю
+	Camera(ModelBase* p);	// ╨щ╫дв╦ю
 	~Camera();			// цч╫дв╦ю
 
 	void Initialize();		// ▐┴┼З┴╩

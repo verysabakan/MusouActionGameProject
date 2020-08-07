@@ -25,7 +25,7 @@ public:
 	virtual void Initialize() override {}		// ‰Šú‰»
 	virtual void Finalize() override {}			// I—¹ˆ—
 	virtual void Update() override {}			// XV
-	virtual void Render() override {}				// •`‰æ
+	virtual void Render() override {}			// •`‰æ
 
 };
 

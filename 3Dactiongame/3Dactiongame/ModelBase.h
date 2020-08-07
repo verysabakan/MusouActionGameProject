@@ -56,6 +56,8 @@ protected:
 	// Ç∆ÇËÇ†Ç¶Ç∏ÇÃÇ‚Ç¬Å´
 	//------------------------------------------
 	bool moveFlag = false;
+	bool jumpFlag = false;
+	float gravity;
 
 public:
 	ModelBase();			// ∫›Ωƒ◊∏¿
@@ -97,5 +99,30 @@ public:
 	void SetPosY(const float& y)
 	{
 		pos.y = y;
+	}
+
+	void SetMoveSpeedY(const float& y)
+	{
+		moveSpeed.y = y;
+	}
+	
+	void SetGravity(const float& g)
+	{
+		gravity = g;
+	}
+
+	bool JumpFlag()
+	{
+		return jumpFlag;
+	}
+
+	Vector3 GetMoveSpeed()
+	{
+		return moveSpeed;
+	}
+
+	void SetPos(const Vector3& p)
+	{
+		pos = p;
 	}
 };

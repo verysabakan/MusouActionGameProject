@@ -24,6 +24,8 @@ private:
 	LARGE_INTEGER qpcStart;
 	LARGE_INTEGER qpcEnd;
 
+	LONGLONG oldUpdateTime;	// 前回の更新時間
+
 	//60FPSに固定する場合の1フレームにかけられる時間
 	const double FRAME_TIME = 1.0 / 60.0;
 };

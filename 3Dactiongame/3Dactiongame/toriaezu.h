@@ -1,0 +1,15 @@
+#pragma once
+
+class ModelBase;
+class Stage;
+
+// Ãﬂ€ƒ¿≤ÃﬂêÈåæ
+bool HitCheckStageAndPlayer(ModelBase* p, Stage* colS);
+
+void TorimaInitialize();
+void TorimaUpdate(ModelBase* p);
+
+bool GameClear(ModelBase* p);
+bool GameOver(ModelBase* p);
+
+void Draw();

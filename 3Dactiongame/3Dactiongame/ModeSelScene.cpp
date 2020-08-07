@@ -51,7 +51,7 @@ void ModeSelScene::Update()
 	MV1DrawModel(modelHandle);
 
 	// ÃŞÊŞ¯¸Ş—p¼°İØ‚è‘Ö‚¦·°:C
-	if (lpController.IsPushC(INPUT_TRG)) 
+	if (CheckHitKey(KEY_INPUT_P))
 	{
 		sceneSwitcher->SwitchScene(eScene_CharSel);	// ·¬×¸À°‘I‘ğ‰æ–Ê‚ÉØ‚è‘Ö‚¦
 	}

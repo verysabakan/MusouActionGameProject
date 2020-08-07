@@ -85,6 +85,9 @@
     <Filter Include="ソース ファイル\Object\HitCheck\ObjectType\Constant">
       <UniqueIdentifier>{47b24094-b85c-46c3-a45b-2b6935d1298b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\とりあえずなやつ">
+      <UniqueIdentifier>{65bdab5a-cd4d-42a9-a5aa-03dd9bf9328c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -177,14 +180,14 @@
     <ClCompile Include="PlayerAndTerrain.cpp">
       <Filter>ソース ファイル\Object\HitCheck</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectList.cpp">
-      <Filter>ソース ファイル\Object\ObjectList</Filter>
-    </ClCompile>
     <ClCompile Include="AddList.cpp">
       <Filter>ソース ファイル\Object\ObjectList</Filter>
     </ClCompile>
     <ClCompile Include="ObjectTypeConstant.cpp">
       <Filter>ソース ファイル\Object\HitCheck\ObjectType\Constant</Filter>
+    </ClCompile>
+    <ClCompile Include="toriaezu.cpp">
+      <Filter>ソース ファイル\とりあえずなやつ</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -293,14 +296,14 @@
     <ClInclude Include="PlayerAndTerrain.h">
       <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectList.h">
-      <Filter>ヘッダー ファイル\Object\ObjectList</Filter>
-    </ClInclude>
     <ClInclude Include="AddList.h">
       <Filter>ヘッダー ファイル\Object\ObjectList</Filter>
     </ClInclude>
     <ClInclude Include="ObjectTypeConstant.h">
       <Filter>ヘッダー ファイル\Object\HitCheck\ObjectType\Constant</Filter>
+    </ClInclude>
+    <ClInclude Include="toriaezu.h">
+      <Filter>ソース ファイル\とりあえずなやつ</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

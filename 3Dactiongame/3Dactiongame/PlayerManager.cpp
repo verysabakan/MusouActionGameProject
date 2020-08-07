@@ -11,7 +11,7 @@
 //------------------------------------------------------
 // @brief	ºİ½Ä×¸À
 //------------------------------------------------------
-PlayerManager::PlayerManager()
+PlayerManager::PlayerManager(const WEAK_LIST& weakList)
 {
 	// -------------------------------------------
 	// ‚±‚Ì“Ç‚İ‚İ•û–@‚ÍŒã‚Å•ÏX‚·‚é
@@ -23,6 +23,8 @@ PlayerManager::PlayerManager()
 
 	// µÌŞ¼Şª¸Ä¶¬
 	player = std::make_unique<Player>(playerModel, playerAnim);
+	//OBJECT_PTR ii = std::make_unique<Player>(playerModel, playerAnim);
+	//AddList() (weakList, );
 }
 
 //------------------------------------------------------
@@ -71,10 +73,9 @@ void PlayerManager::Render()
 }
 
 //------------------------------------------------------
-// @brief	ÌßÚ²Ô°‚ğæ“¾
+// @brief	ÌßÚ²Ô°‚ÌŠî”Õ‚ğæ“¾
 //------------------------------------------------------
-Player* PlayerManager::GetPlayer()
+ModelBase* PlayerManager::GetPlayer()
 {
-	return player.get();
+	return reinterpret_cast<ModelBase*>(player.get());
 }
-
