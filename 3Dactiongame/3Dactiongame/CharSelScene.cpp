@@ -30,7 +30,7 @@ CharSelScene::~CharSelScene()
 void CharSelScene::Update()
 {
 	// ÃŞÊŞ¯¸Ş—p¼°İØ‚è‘Ö‚¦·°:Q
-	if (CheckHitKey(KEY_INPUT_P))
+	if (lpController.IsPushD(INPUT_TRG))
 	{
 		sceneSwitcher->SwitchScene(eScene_StageSel);	// ½Ã°¼Ş‘I‘ğ‰æ–Ê‚ÉØ‚è‘Ö‚¦
 	}

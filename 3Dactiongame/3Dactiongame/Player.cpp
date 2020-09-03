@@ -65,10 +65,10 @@ void Player::Finalize()
 //------------------------------------------------------
 // @brief	更新
 //------------------------------------------------------
-void Player::Update(const Vector3& cameraDir)
+void Player::Update()
 {
 	// 移動の更新
-	Behavior(cameraDir);
+	Behavior();
 	// ｱﾆﾒｰｼｮﾝの更新
 	Animation();
 }
@@ -85,7 +85,7 @@ void Player::Render()
 //------------------------------------------------------
 // @brief	動作
 //------------------------------------------------------
-void Player::Behavior(const Vector3& cameraDir)
+void Player::Behavior()
 {
 	moveSpeed = {};
 
@@ -168,8 +168,8 @@ void Player::Behavior(const Vector3& cameraDir)
 	{
 
 		// 移動速度
-		moveSpeed.x = cameraDir.x * 5.0f;
-		moveSpeed.z = cameraDir.z * 5.0f;
+		moveSpeed.x = moveDir.x * 5.0f;
+		moveSpeed.z = moveDir.z * 5.0f;
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(moveSpeed.z, moveSpeed.y, -moveSpeed.x);
 		animState = ANIM_RUN;
@@ -179,8 +179,8 @@ void Player::Behavior(const Vector3& cameraDir)
 	if (lpController.IsPushLEFT(INPUT_HOLD))
 	{
 		// 移動速度
-		moveSpeed.x = cameraDir.x * 5.0f;
-		moveSpeed.z = cameraDir.z * 5.0f;
+		moveSpeed.x = moveDir.x * 5.0f;
+		moveSpeed.z = moveDir.z * 5.0f;
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(-moveSpeed.z, moveSpeed.y, moveSpeed.x);
 		animState = ANIM_RUN;
@@ -190,8 +190,8 @@ void Player::Behavior(const Vector3& cameraDir)
 	if (lpController.IsPushUP(INPUT_HOLD))
 	{
 		// 移動速度
-		moveSpeed.x = cameraDir.x * 5.0f;
-		moveSpeed.z = cameraDir.z * 5.0f;
+		moveSpeed.x = moveDir.x * 5.0f;
+		moveSpeed.z = moveDir.z * 5.0f;
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(moveSpeed.x, moveSpeed.y, moveSpeed.z);
 		animState = ANIM_RUN;
@@ -201,8 +201,8 @@ void Player::Behavior(const Vector3& cameraDir)
 	if (lpController.IsPushDOWN(INPUT_HOLD))
 	{
 		// 移動速度
-		moveSpeed.x = cameraDir.x * 5.0f;
-		moveSpeed.z = cameraDir.z * 5.0f;
+		moveSpeed.x = moveDir.x * 5.0f;
+		moveSpeed.z = moveDir.z * 5.0f;
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(-moveSpeed.x, moveSpeed.y, -moveSpeed.z);
 		animState = ANIM_RUN;

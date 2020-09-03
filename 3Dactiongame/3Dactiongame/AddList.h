@@ -9,9 +9,9 @@
 #include <list>
 
 // ﾌﾟﾛﾄﾀｲﾌﾟ宣言
-class ObjectTypeBase;
+class ObjectBase;
 
-using OBJECT_PTR = std::shared_ptr<ObjectTypeBase>;		// 個々のｵﾌﾞｼﾞｪｸﾄのﾎﾟｲﾝﾀ
+using OBJECT_PTR = std::shared_ptr<ObjectBase>;		// 個々のｵﾌﾞｼﾞｪｸﾄのﾎﾟｲﾝﾀ
 using OBJECT_LIST = std::list<OBJECT_PTR>;				// 個々のｵﾌﾞｼﾞｪｸﾄのﾎﾟｲﾝﾀのﾘｽﾄ
 using OBJECT_LIST_PTR = std::shared_ptr<OBJECT_LIST>;	// OBJECT_PTR_List最初のｱﾄﾞﾚｽ
 using WEAK_LIST = std::weak_ptr<OBJECT_LIST>;			// 弱参照、除くためﾎﾟｲﾝﾀ

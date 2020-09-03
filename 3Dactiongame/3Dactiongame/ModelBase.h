@@ -8,10 +8,10 @@
 #include <DxLib.h>
 #include <vector>
 #include "Vector3.h"
-#include "ObjectTypeBace.h"
+#include "ObjectBase.h"
 
 class ModelBase
-	:public ObjectTypeBace
+	:public ObjectBase
 {
 protected:
 	// Œ»İ‚Ì±ÆÒ°¼®İ‚Ìó‘ÔAM:ˆÚ“®
@@ -72,11 +72,11 @@ public:
 	ANIM_STATE GetAnimState() { return animState; }			// Œ»İ‚Ì±ÆÒ°¼®İ‚Ìæ“¾
 	Vector3 GetFramePosition(int n);						// ÌÚ°Ñ‚ÌÀ•W‚Ìæ“¾
 
-	//virtual ObjectType GetType() override {}				// µÌŞ¼Şª¸Ä‚Ìí—Ş‚ğæ“¾
-
 	//------------------------------------------
 	// ‚Æ‚è‚ ‚¦‚¸‚Ì‚â‚Â«
 	//------------------------------------------
+	//virtual ObjectType GetType() override {}				// µÌŞ¼Şª¸Ä‚Ìí—Ş‚ğæ“¾
+
 	bool JumpState()		// ¼Ş¬İÌß’†
 	{
 		if (animState == ANIM_JUMP)
@@ -105,7 +105,7 @@ public:
 	{
 		moveSpeed.y = y;
 	}
-	
+
 	void SetGravity(const float& g)
 	{
 		gravity = g;

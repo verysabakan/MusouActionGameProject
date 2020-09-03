@@ -11,7 +11,7 @@
 class StageModelBase;
 
 class Stage
-	: private StageModelBase
+	: public StageModelBase
 {
 public:
 	Stage(const STAGE_TYPE& sT);	// ºÝ½Ä×¸À

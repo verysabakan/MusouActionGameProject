@@ -6,12 +6,14 @@
 #pragma once
 
 #include <memory>
+#include "ManagerBase.h"
 
 
 // ﾌﾟﾛﾄﾀｲﾌﾟ宣言
 class Stage;
 
 class StageManager
+	:public ManagerBase
 {
 private:
 	std::unique_ptr<Stage> stage;
@@ -20,11 +22,13 @@ public:
 	StageManager(const STAGE_TYPE& sT);		// ｺﾝｽﾄﾗｸﾀ
 	~StageManager();	// ﾃﾞｽﾄﾗｸﾀ
 
-	void Initialize();	// 初期化
-	void Finalize();	// 終了処理
-	void Update();		// 更新
-	void Render();	// 描画
+	virtual void Initialize() override;	// 初期化
+	virtual void Finalize() override;	// 終了処理
+	virtual void Update() override;		// 更新
+	virtual void Render() override;		// 描画
 
 	Stage* GetStage();	// ｽﾃｰｼﾞを取得
+
+	bool GetManagerType(MANAGER_TYPE type);	// ﾀｲﾌﾟの取得(どのﾀｲﾌﾟか確かめる)
 };
 

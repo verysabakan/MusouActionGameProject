@@ -11,7 +11,7 @@
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
 //------------------------------------------------------
-PlayerManager::PlayerManager(const WEAK_LIST& weakList)
+PlayerManager::PlayerManager()
 {
 	// -------------------------------------------
 	// この読み込み方法は後で変更する
@@ -20,11 +20,12 @@ PlayerManager::PlayerManager(const WEAK_LIST& weakList)
 	std::vector<int> playerAnim;
 	// 必要なﾃﾞｰﾀの読み込み
 	LoadPlayerModelData(playerModel, playerAnim);
-
+	
 	// ｵﾌﾞｼﾞｪｸﾄ生成
-	player = std::make_unique<Player>(playerModel, playerAnim);
-	//OBJECT_PTR ii = std::make_unique<Player>(playerModel, playerAnim);
-	//AddList() (weakList, );
+	objList = std::make_shared<OBJECT_LIST>();
+	AddList(objList, std::make_shared<Player>(playerModel, playerAnim));
+
+	camera = std::make_unique<Camera>(GetPlayer());
 }
 
 //------------------------------------------------------
@@ -40,7 +41,12 @@ PlayerManager::~PlayerManager()
 //------------------------------------------------------
 void PlayerManager::Initialize()
 {
-	player->Initialize();
+	// 各初期化処理
+	for (auto i = objList->begin(); i != objList->end(); i++)
+	{
+		(*i)->Initialize();
+	}
+	camera->Initialize();
 }
 
 //------------------------------------------------------
@@ -48,20 +54,29 @@ void PlayerManager::Initialize()
 //------------------------------------------------------
 void PlayerManager::Finalize()
 {
-	// 各終了処理
-	player->Finalize();
-
-	// ﾘｿｰｽの開放
-	player.reset();
+	// 各終了処、ﾘｿｰｽの開放
+	for (auto i = objList->begin(); i != objList->end(); i++)
+	{
+		
+		(*i)->Finalize();
+		(*i).reset();
+	}
+	camera->Finalize();
+	camera.reset();
 }
 
 //------------------------------------------------------
 // @brief	更新
 //------------------------------------------------------
-void PlayerManager::Update(const Vector3& cameraDir)
+void PlayerManager::Update()
 {
 	// 各更新処理
-	player->Update(cameraDir);
+	SetPlayerMoveDir(camera->GetCameraDir());
+	for (auto i = objList->begin(); i != objList->end(); i++)
+	{
+		(*i)->Update();
+	}
+	camera->Update();
 }
 
 //------------------------------------------------------
@@ -69,13 +84,39 @@ void PlayerManager::Update(const Vector3& cameraDir)
 //------------------------------------------------------
 void PlayerManager::Render()
 {
-	player->Render();
+	// 各描画処理
+	for (auto i = objList->begin(); i != objList->end(); i++)
+	{
+		(*i)->Render();
+	}
+	camera->Renderer();
 }
 
 //------------------------------------------------------
-// @brief	ﾌﾟﾚｲﾔｰの基盤を取得
+// @brief	ObjectBaseの取得
+//			このままだと一人プレイしかできないので
+//			複数人でできるようにする
 //------------------------------------------------------
 ModelBase* PlayerManager::GetPlayer()
 {
-	return reinterpret_cast<ModelBase*>(player.get());
+	return dynamic_cast<ModelBase*>(objList->begin()->get());
+}
+
+//------------------------------------------------------
+// @brief	各ｶﾒﾗからのﾌﾟﾚｲﾔｰの動く方向の受け渡し処理
+//------------------------------------------------------
+void PlayerManager::SetPlayerMoveDir(const Vector3& cameraDir)
+{
+	for (auto i = objList->begin(); i != objList->end(); i++)
+	{
+		(*i)->SetMoveDir(cameraDir);
+	}
+}
+
+//------------------------------------------------------
+// @brief	ﾀｲﾌﾟの取得(どのﾀｲﾌﾟか確かめる)
+//------------------------------------------------------
+bool PlayerManager::GetManagerType(MANAGER_TYPE type)
+{
+	return (type == MANAGER_TYPE::PLAYER_MANAGER);
 }

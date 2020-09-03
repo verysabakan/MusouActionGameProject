@@ -69,3 +69,11 @@ Stage* StageManager::GetStage()
 {
 	return stage.get();
 }
+
+//------------------------------------------------------
+// @brief	À²Ìß‚ÌŽæ“¾(‚Ç‚ÌÀ²Ìß‚©Šm‚©‚ß‚é)
+//------------------------------------------------------
+bool StageManager::GetManagerType(MANAGER_TYPE type)
+{
+	return (type == MANAGER_TYPE::TERRAIN_MANAGER);
+}

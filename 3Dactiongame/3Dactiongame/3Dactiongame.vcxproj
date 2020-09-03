@@ -124,7 +124,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AddList.cpp" />
     <ClCompile Include="BaseScene.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CharSelScene.cpp" />
@@ -134,13 +133,18 @@
     <ClCompile Include="FrameRate.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GameTask.cpp" />
+    <ClCompile Include="GeneralManager.cpp" />
+    <ClCompile Include="GMList.cpp" />
     <ClCompile Include="ISceneSwitcher.cpp" />
+    <ClCompile Include="ManagerBase.cpp" />
+    <ClCompile Include="ManagerTypeConstant.cpp" />
+    <ClCompile Include="ObjectList.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="LoadModel.cpp" />
     <ClCompile Include="MakeForm.cpp" />
     <ClCompile Include="ModelBase.cpp" />
     <ClCompile Include="ModeSelScene.cpp" />
-    <ClCompile Include="ObjectTypeBace.cpp" />
+    <ClCompile Include="ObjectBase.cpp" />
     <ClCompile Include="ObjectTypeConstant.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -159,11 +163,15 @@
     <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AddList.h" />
     <ClInclude Include="BaseScene.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CharSelScene.h" />
     <ClInclude Include="CollisionBase.h" />
+    <ClInclude Include="GeneralManager.h" />
+    <ClInclude Include="GMList.h" />
+    <ClInclude Include="ManagerBase.h" />
+    <ClInclude Include="ManagerTypeConstant.h" />
+    <ClInclude Include="ObjectList.h" />
     <ClInclude Include="ObjectTypeConstant.h" />
     <ClInclude Include="FlexibleCollision.h" />
     <ClInclude Include="FrameRate.h" />
@@ -175,7 +183,7 @@
     <ClInclude Include="ModelBase.h" />
     <ClInclude Include="LoadModel.h" />
     <ClInclude Include="ModeSelScene.h" />
-    <ClInclude Include="ObjectTypeBace.h" />
+    <ClInclude Include="ObjectBase.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAndTerrain.h" />

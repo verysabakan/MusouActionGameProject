@@ -15,7 +15,7 @@ bool stageHitFlag = false;
 bool HitCheckStageAndPlayer(ModelBase* p, Stage* colS)
 {
 	auto pModelBase = p;
-	auto sModelBase = reinterpret_cast<StageModelBase*>(colS);
+	auto sModelBase = dynamic_cast<StageModelBase*>(colS);
 
 	const int STAGE_OBJECT_MAX_NUM = 128;	// 512
 	const int CHARA_MAX_HITCOLL = 512;		// 2048

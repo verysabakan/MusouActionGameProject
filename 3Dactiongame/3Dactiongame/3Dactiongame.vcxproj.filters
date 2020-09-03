@@ -88,6 +88,18 @@
     <Filter Include="ソース ファイル\とりあえずなやつ">
       <UniqueIdentifier>{65bdab5a-cd4d-42a9-a5aa-03dd9bf9328c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Manager">
+      <UniqueIdentifier>{e3f7959e-ae8d-4ed9-ade9-c4fdfd002252}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Manager">
+      <UniqueIdentifier>{273ac2e5-2fc5-43fd-91f0-b222e86cf3d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Manager\Constant">
+      <UniqueIdentifier>{d64d6027-5b8b-40bb-be7c-69625a498d7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Manager\Constant">
+      <UniqueIdentifier>{1489df8b-9081-4d20-99be-5233a228cd6b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -153,12 +165,6 @@
     <ClCompile Include="SceneDateManager.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerManager.cpp">
-      <Filter>ソース ファイル\Object\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="StageManager.cpp">
-      <Filter>ソース ファイル\Object\Stage</Filter>
-    </ClCompile>
     <ClCompile Include="StageModelBase.cpp">
       <Filter>ソース ファイル\Object\Stage</Filter>
     </ClCompile>
@@ -171,23 +177,41 @@
     <ClCompile Include="FlexibleCollision.cpp">
       <Filter>ソース ファイル\Object\HitCheck</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectTypeBace.cpp">
-      <Filter>ソース ファイル\Object\HitCheck\ObjectType</Filter>
-    </ClCompile>
     <ClCompile Include="CollisionBase.cpp">
       <Filter>ソース ファイル\Object\HitCheck</Filter>
     </ClCompile>
     <ClCompile Include="PlayerAndTerrain.cpp">
       <Filter>ソース ファイル\Object\HitCheck</Filter>
     </ClCompile>
-    <ClCompile Include="AddList.cpp">
-      <Filter>ソース ファイル\Object\ObjectList</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectTypeConstant.cpp">
       <Filter>ソース ファイル\Object\HitCheck\ObjectType\Constant</Filter>
     </ClCompile>
     <ClCompile Include="toriaezu.cpp">
       <Filter>ソース ファイル\とりあえずなやつ</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectList.cpp">
+      <Filter>ソース ファイル\Object\ObjectList</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneralManager.cpp">
+      <Filter>ソース ファイル\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GMList.cpp">
+      <Filter>ソース ファイル\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectBase.cpp">
+      <Filter>ソース ファイル\Object\HitCheck\ObjectType</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerManager.cpp">
+      <Filter>ソース ファイル\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="StageManager.cpp">
+      <Filter>ソース ファイル\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagerBase.cpp">
+      <Filter>ソース ファイル\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagerTypeConstant.cpp">
+      <Filter>ソース ファイル\Manager\Constant</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -266,12 +290,6 @@
     <ClInclude Include="SceneDateManager.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerManager.h">
-      <Filter>ヘッダー ファイル\Object\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="StageManager.h">
-      <Filter>ヘッダー ファイル\Object\Stage</Filter>
-    </ClInclude>
     <ClInclude Include="HitCheckConstant.h">
       <Filter>ヘッダー ファイル\Object\HitCheck\Constant</Filter>
     </ClInclude>
@@ -287,23 +305,41 @@
     <ClInclude Include="FlexibleCollision.h">
       <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectTypeBace.h">
-      <Filter>ヘッダー ファイル\Object\HitCheck\ObjectType</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionBase.h">
       <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
     </ClInclude>
     <ClInclude Include="PlayerAndTerrain.h">
       <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
     </ClInclude>
-    <ClInclude Include="AddList.h">
-      <Filter>ヘッダー ファイル\Object\ObjectList</Filter>
-    </ClInclude>
     <ClInclude Include="ObjectTypeConstant.h">
       <Filter>ヘッダー ファイル\Object\HitCheck\ObjectType\Constant</Filter>
     </ClInclude>
     <ClInclude Include="toriaezu.h">
       <Filter>ソース ファイル\とりあえずなやつ</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectList.h">
+      <Filter>ヘッダー ファイル\Object\ObjectList</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneralManager.h">
+      <Filter>ヘッダー ファイル\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GMList.h">
+      <Filter>ヘッダー ファイル\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectBase.h">
+      <Filter>ヘッダー ファイル\Object\HitCheck\ObjectType</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerManager.h">
+      <Filter>ヘッダー ファイル\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="StageManager.h">
+      <Filter>ヘッダー ファイル\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerBase.h">
+      <Filter>ヘッダー ファイル\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerTypeConstant.h">
+      <Filter>ヘッダー ファイル\Manager\Constant</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,27 +5,16 @@
 
 #pragma once
 
-#include <memory>
 #include "BaseScene.h"
 #include "StageType.h"
-#include "AddList.h"
 
-// ÌßÛÄÀ²ÌßéŒ¾
-class PlayerManager;
-class StageManager;
-class Camera;
-class FlexibleCollision;
+class GeneralManager;
 
 class GameScene
 	: public BaseScene
 {
 private:
-	std::unique_ptr<PlayerManager> playerMnager;
-	std::unique_ptr<StageManager> stageManager;
-	std::unique_ptr<Camera> camera;
-	std::unique_ptr<FlexibleCollision> fCollision;
-
-	OBJECT_LIST_PTR objListPtr;
+	std::unique_ptr<GeneralManager> generalManager;
 
 public:
 	GameScene(ISceneSwitcher* switcher, const STAGE_TYPE& sT);	// ºİ½Ä×¸À

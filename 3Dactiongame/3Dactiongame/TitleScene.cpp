@@ -70,7 +70,7 @@ void TitleScene::Finalize()
 void TitleScene::Update()
 {
 	// ÃÞÊÞ¯¸Þ—p¼°ÝØ‚è‘Ö‚¦·°:Q
-	if (CheckHitKey(KEY_INPUT_P))
+	if (lpController.IsPushD(INPUT_TRG))
 	{
 		// Ó°ÄÞ‘I‘ð‰æ–Ê‚ÉØ‚è‘Ö‚¦
 		sceneSwitcher->SwitchScene(eScene_ModeSel);

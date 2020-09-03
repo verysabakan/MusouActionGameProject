@@ -39,7 +39,7 @@ void StageSelScene::Update()
 {
 	
 	// ÃŞÊŞ¯¸Ş—p¼°İØ‚è‘Ö‚¦·°:Q
-	if (CheckHitKey(KEY_INPUT_P))
+	if (lpController.IsPushD(INPUT_TRG))
 	{
 		sceneDateManager->SetStageType(STAGE_SAMPLE);	// ‘I‚ñ‚¾½Ã°¼Ş‚ğ•Û‘¶
 		sceneSwitcher->SwitchScene(eScene_Game);		// ¹Ş°Ñ‰æ–Ê‚ÉØ‚è‘Ö‚¦
