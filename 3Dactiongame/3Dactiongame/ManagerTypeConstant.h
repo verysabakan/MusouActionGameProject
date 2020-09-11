@@ -9,6 +9,7 @@
 enum class MANAGER_TYPE
 {
 	PLAYER_MANAGER,		// Ãﬂ⁄≤‘∞
+	STAGE_MANAGER,		// Ω√∞ºﬁ
 	ENAMY_MANAGER,		// ¥»–∞
 	SHOT_MANAGER,		// íe
 	WEAPON_MANAGER,		// ïêäÌ

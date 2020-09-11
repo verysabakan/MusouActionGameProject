@@ -6,6 +6,7 @@
 #include <DxLib.h>
 #include "Controller.h"
 
+// Áª¯¸—p
 bool up = false;
 bool trg = false;
 

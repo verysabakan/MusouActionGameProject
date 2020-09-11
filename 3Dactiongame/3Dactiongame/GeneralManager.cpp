@@ -3,8 +3,7 @@
 // 2020 9/3 Ryosuke Iida
 //------------------------------------------------------
 
-#include <vector>
-#include <array>
+#include <assert.h>
 
 #include "GeneralManager.h"
 #include "LoadModel.h"
@@ -19,30 +18,17 @@
 //------------------------------------------------------
 GeneralManager::GeneralManager(const STAGE_TYPE& sT)
 {
-	// ｵﾌﾞｼﾞｪｸﾄを構築、格納
+	// 生成
 	mgrList = std::make_shared<MANAGER_LIST>();
 	AddList(mgrList, std::make_shared<PlayerManager>());
 	AddList(mgrList, std::make_shared<StageManager>(sT));
-	//AddList(mgrList, std::make_shared<FlexibleCollision>());
+
+	fCollision = std::make_unique<FlexibleCollision>();
 
 	//------------------------------------------------------
 	// とりあえずのやつ
 	TorimaInitialize();
-
 	//------------------------------------------------------
-
-	/*
-	if (!playerMnager) playerMnager = std::make_unique<PlayerManager>();
-	if (!stageManager) stageManager = std::make_unique<StageManager>(sT);
-
-	// playerがnullptrでない場合
-	if (playerMnager->GetPlayer() != nullptr)
-	{
-		fCollision = std::make_unique<FlexibleCollision>();
-
-	}
-	*/
-	//AddList(mgrList, std::make_shared<Player>(playerModel, playerAnim));
 }
 
 //------------------------------------------------------
@@ -50,7 +36,11 @@ GeneralManager::GeneralManager(const STAGE_TYPE& sT)
 //------------------------------------------------------
 GeneralManager::~GeneralManager()
 {
-	// 処理なし
+	// 異常終了のﾁｪｯｸ
+	for (auto i = mgrList->begin(); i != mgrList->end(); i++)
+	{
+		assert((*i) == NULL);
+	}
 }
 
 //------------------------------------------------------
@@ -63,6 +53,7 @@ void GeneralManager::Initialize()
 	{
 		(*i)->Initialize();
 	}
+	fCollision->Initialize();
 }
 
 //------------------------------------------------------
@@ -74,7 +65,12 @@ void GeneralManager::Finalize()
 	for (auto i = mgrList->begin(); i != mgrList->end(); i++)
 	{
 		(*i)->Finalize();
+		i->reset();
 	}
+	fCollision->Finalize();
+
+	// ﾘｿｰｽの開放
+	fCollision.reset();
 }
 
 //------------------------------------------------------
@@ -82,29 +78,59 @@ void GeneralManager::Finalize()
 //------------------------------------------------------
 void GeneralManager::Update()
 {
-	MANAGER_LIST temporaryList(mgrList->size());	// 一時的なﾘｽﾄ
-	auto pMgr = std::remove_copy_if(mgrList->begin(), mgrList->end(), temporaryList.begin(),
-		[](MANAGER_PTR& mgr) {return !(mgr->GetManagerType(MANAGER_TYPE::PLAYER_MANAGER));});
-	auto sMgr = std::remove_copy_if(mgrList->begin(), mgrList->end(), temporaryList.begin(),
-		[](MANAGER_PTR& mgr) {return !(mgr->GetManagerType(MANAGER_TYPE::TERRAIN_MANAGER));});
-
-	std::for_each(temporaryList.begin(), pMgr, [&](auto& preyType)
-	{
-		PlayerManager pM = preyType
-	});
-
-	//------------------------------------------------------
-	// とりあえずのやつ
-	HitCheckStageAndPlayer(playerMnager->GetPlayer(), stageManager->GetStage());
-
-	TorimaUpdate(playerMnager->GetPlayer());
-	//------------------------------------------------------
-
 	// 各更新
 	for (auto i = mgrList->begin(); i != mgrList->end(); i++)
 	{
-		(*i)->Update();
+		(*i)->Update();	}
+
+	// 全ての更新が終わった後の処理
+	for (auto m1 = mgrList->begin(); m1 != mgrList->end(); m1++)
+	{
+		for (auto m2 = mgrList->begin(); m2 != mgrList->end(); m2++)
+		{
+			for (auto i = (*m1)->GetObjectList()->begin(); i != (*m1)->GetObjectList()->end(); i++)
+			{
+				for (auto j = (*m2)->GetObjectList()->begin(); j != (*m2)->GetObjectList()->end(); j++)
+				{
+					//fCollision->HitCheck((*i), (*j));
+					//------------------------------------------------------
+					// とりあえずのやつ
+					if ((*i)->GetType() == OBJECT_TYPE::OBJECT_TYPE_PLAYER &&
+						(*j)->GetType() == OBJECT_TYPE::OBJECT_TYPE_TERRAIN)
+					{
+						HitCheckStageAndPlayer((*i), (*j));
+						TorimaUpdate((*i));
+					}
+					//------------------------------------------------------
+				}
+			}
+		}
 	}
+	int f = 0;
+	/*
+	for (auto m1 = mgrList->begin(); m1 != mgrList->end(); m1++)
+	{
+		for (auto m2 = mgrList->begin(); m2 != mgrList->end(); m2++)
+		{
+			for (auto i = (*m1)->GetObjectList()->begin(); i != (*m1)->GetObjectList()->end(); i++)
+			{
+				for (auto j = (*m2)->GetObjectList()->begin(); j != (*m2)->GetObjectList()->end(); j++)
+				{
+					//fCollision->HitCheck((*i), (*j));
+					//------------------------------------------------------
+					// とりあえずのやつ
+					if ((*i)->GetType() == OBJECT_TYPE::OBJECT_TYPE_PLAYER &&
+						(*j)->GetType() == OBJECT_TYPE::OBJECT_TYPE_TERRAIN)
+					{
+						HitCheckStageAndPlayer((*i), (*j));
+						TorimaUpdate((*i));
+					}
+					//------------------------------------------------------
+				}
+			}
+		}
+	}
+	*/
 }
 
 //------------------------------------------------------

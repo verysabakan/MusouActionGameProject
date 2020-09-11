@@ -15,6 +15,7 @@
 //------------------------------------------------------
 Player::Player(int mID , std::vector<int>& aID)
 {
+	// ﾓﾃﾞﾙを読み込み、複製
 	modelHandle = MV1DuplicateModel(mID);
 	for (int i = 0; i < aID.size(); i++)
 	{
@@ -38,9 +39,9 @@ void Player::Initialize()
 {
 	pos = {4557, 0, 2782};
 	// ｱﾆﾒｰｼｮﾝｾｯﾄｱｯﾌﾟ
-	animState = ANIM_STANCE;
-	SetAnimID(modelHandle, animState);
-	oldAnimState = animState;	// 前のｱﾆﾒｰｼｮﾝ
+	actionState = ACTION_STATE::ACTION_STATE_STANCE;
+	SetAnimID(modelHandle, actionState);
+	oldActionState = actionState;	// 前のｱﾆﾒｰｼｮﾝ
 	playTime = 0;
 	// ﾀｰｹﾞｯﾄの計算
 	// target = ConvertVec3(VTransform(VGet(300.0f, pos.y, pos.z), MGetRotY(rol.y)));
@@ -50,6 +51,8 @@ void Player::Initialize()
 	MV1SetRotationXYZ(modelHandle, rol.ConvertVec());//回転
 	// MV1SetRotationXYZ(model, rol);//回転
 	MV1SetPosition(modelHandle, pos.ConvertVec());//移動
+
+	gravity = 0;	// 重力
 }
 
 //------------------------------------------------------
@@ -92,73 +95,73 @@ void Player::Behavior()
 	// ---------------
 	// とりあえずのやつ
 	moveSpeed.y += gravity;
-	//pos.y += moveSpeed.y;
+	pos.y += moveSpeed.y;
 	if (lpController.IsPushC(INPUT_TRG) && moveSpeed.y == 0.0f)
 	{
-		moveSpeed.y = 30.0f;
+		moveSpeed.y += 100.0f;
 		jumpFlag = true;
 	}
 	// ---------------
 
 	// 入力無し:待機状態
-	animState = ANIM_STANCE;
+	actionState = ACTION_STATE::ACTION_STATE_STANCE;
 
 	moveFlag = false;
 
 	// 行動別の処理(優先度準)
-	if (animState == ANIM_DEAD)
+	if (actionState == ACTION_STATE::ACTION_STATE_DEAD)
 	{
 		
 	}
-	else if (animState == ANIM_DOWN)
+	else if (actionState == ACTION_STATE::ACTION_STATE_DOWN)
 	{
 
 	}
-	else if (animState == ANIM_DAMAGE)
+	else if (actionState == ACTION_STATE::ACTION_STATE_DAMAGE)
 	{
 
 	}
-	else if (animState == ANIM_STUN)
+	else if (actionState == ACTION_STATE::ACTION_STATE_STUN)
 	{
 
 	}
-	else if (animState == ANIM_JUMP)
+	else if (actionState == ACTION_STATE::ACTION_STATE_JUMP)
 	{
 		
 	}
-	else if (animState == ANIM_SKILL1)
+	else if (actionState == ACTION_STATE::ACTION_STATE_SKILL1)
 	{
 
 	}
-	else if (animState == ANIM_SKILL2)
+	else if (actionState == ACTION_STATE::ACTION_STATE_SKILL2)
 	{
 
 	}
-	else if (animState == ANIM_SKILL3)
+	else if (actionState == ACTION_STATE::ACTION_STATE_SKILL3)
 	{
 
 	}
-	else if (animState == ANIM_ATTACK1)
+	else if (actionState == ACTION_STATE::ACTION_STATE_ATTACK1)
 	{
 		
 	}
-	else if (animState == ANIM_ATTACK2)
+	else if (actionState == ACTION_STATE::ACTION_STATE_ATTACK2)
 	{
 
 	}
-	else if (animState == ANIM_BROCK)
+	else if (actionState == ACTION_STATE::ACTION_STATE_BROCK)
 	{
 
 	}
-	else if (animState == ANIM_WALK)
+	else if (actionState == ACTION_STATE::ACTION_STATE_WALK)
 	{
 
 	}
-	else if (animState == ANIM_RUN)
+	else if (actionState == ACTION_STATE::ACTION_STATE_RUN)
 	{
 
 	}
-	else if (animState == ANIM_STANCE)
+	else if (actionState == ACTION_STATE::ACTION_STATE_STANCE)
 	{
 
 	}
@@ -172,7 +175,7 @@ void Player::Behavior()
 		moveSpeed.z = moveDir.z * 5.0f;
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(moveSpeed.z, moveSpeed.y, -moveSpeed.x);
-		animState = ANIM_RUN;
+		actionState = ACTION_STATE::ACTION_STATE_RUN;
 	}
 
 	// 左移動
@@ -183,7 +186,7 @@ void Player::Behavior()
 		moveSpeed.z = moveDir.z * 5.0f;
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(-moveSpeed.z, moveSpeed.y, moveSpeed.x);
-		animState = ANIM_RUN;
+		actionState = ACTION_STATE::ACTION_STATE_RUN;
 	}
 
 	// ｶﾒﾗ正面方向に移動
@@ -194,7 +197,7 @@ void Player::Behavior()
 		moveSpeed.z = moveDir.z * 5.0f;
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(moveSpeed.x, moveSpeed.y, moveSpeed.z);
-		animState = ANIM_RUN;
+		actionState = ACTION_STATE::ACTION_STATE_RUN;
 	}
 
 	// ｶﾒﾗの方向に移動
@@ -205,16 +208,16 @@ void Player::Behavior()
 		moveSpeed.z = moveDir.z * 5.0f;
 		// 進む方向の速度に変換
 		moveSpeed = Vector3(-moveSpeed.x, moveSpeed.y, -moveSpeed.z);
-		animState = ANIM_RUN;
+		actionState = ACTION_STATE::ACTION_STATE_RUN;
 	}
 
 	// 移動しているときの更新
-	if (animState == ANIM_RUN)
+	if (actionState == ACTION_STATE::ACTION_STATE_RUN)
 	{
 		rol.y = atan2(-moveSpeed.x, -moveSpeed.z);
 		//pos.x += moveSpeed.x;
 		//pos.z += moveSpeed.z;
-		animState = ANIM_RUN;
+		actionState = ACTION_STATE::ACTION_STATE_RUN;
 		moveFlag = true;
 	}
 
@@ -229,12 +232,12 @@ void Player::Behavior()
 void Player::Animation()
 {
 	// 前と違っていたら更新する
-	if (animState != oldAnimState)
+	if (actionState != oldActionState)
 	{
 		// ｱﾆﾒｰｼｮﾝの切り替え
-		SetAnimID(modelHandle, animState);
+		SetAnimID(modelHandle, actionState);
 		// ひとつ前のｱﾆﾒｰｼｮﾝを保存
-		oldAnimState = animState;
+		oldActionState = actionState;
 	}
 
 	// ｱﾆﾒｰｼｮﾝの再生
@@ -249,9 +252,9 @@ void Player::Animation()
 }
 
 //------------------------------------------------------
-// @brief	ｱﾆﾒｰｼｮﾝ
+// @brief	ｵﾌﾞｼﾞｪｸﾄの種類を取得
 //------------------------------------------------------
-ObjectType Player::GetType()
+OBJECT_TYPE Player::GetType()
 {
-	return ObjectType::OBJECTTYPE_PLAYER;
+	return OBJECT_TYPE::OBJECT_TYPE_PLAYER;
 }

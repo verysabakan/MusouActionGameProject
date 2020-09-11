@@ -21,3 +21,10 @@ ManagerBase::~ManagerBase()
 	// ˆ—‚È‚µ
 }
 
+//------------------------------------------------------
+// @brief	objList‚ğ•Ô‚·
+//------------------------------------------------------
+OBJECT_LIST_PTR ManagerBase::GetObjectList()
+{
+	return objList;
+}

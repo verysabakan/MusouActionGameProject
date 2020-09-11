@@ -5,15 +5,17 @@
 
 #include <DxLib.h>
 #include <cmath>
+#include <assert.h>
 #include "Camera.h"
-#include "ModelBase.h"
+#include "ObjectBase.h"
+#include "Controller.h"
 
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
 //------------------------------------------------------
-Camera::Camera(ModelBase* p)
+Camera::Camera(const std::shared_ptr<ObjectBase>& p)
 {
-	model = p;
+	player = p;
 }
 
 //------------------------------------------------------
@@ -21,7 +23,8 @@ Camera::Camera(ModelBase* p)
 //------------------------------------------------------
 Camera::~Camera()
 {
-	// 処理なし
+	// 異常終了のﾁｪｯｸ
+	assert(player == NULL);
 }
 
 //------------------------------------------------------
@@ -30,7 +33,7 @@ Camera::~Camera()
 void Camera::Initialize()
 {
 	camLength = -230.0f;		// 中心からの初期距離
-	auto pPos = model->GetPosition();
+	auto pPos = player->GetPosition();
 	cameraPos = { pPos.x, pPos.y, pPos.z + camLength };	// ｶﾒﾗの初期位置
 	targetLookAtPos = {};				// 注視点
 	cameraDir = {};						// 向き
@@ -43,7 +46,8 @@ void Camera::Initialize()
 //------------------------------------------------------
 void Camera::Finalize()
 {
-
+	// ﾘｿｰｽの開放
+	player.reset();
 }
 
 //------------------------------------------------------
@@ -54,8 +58,10 @@ void Camera::Update()
 	cameraDir = (targetLookAtPos - cameraPos).Normalized();	// ｶﾒﾗの向き
 
 	// ｶﾒﾗ操作
+	// 設定で変更できるようにする
 	if (CheckHitKey(KEY_INPUT_F)) camLength += 5;
 	if (CheckHitKey(KEY_INPUT_G)) camLength -= 5;
+	// ｽﾃｨｯｸによるものに変える
 	if (CheckHitKey(KEY_INPUT_W)) vertical += deg1Rad * 1.5f;
 	if (CheckHitKey(KEY_INPUT_S)) vertical += -deg1Rad * 1.5f;
 	if (CheckHitKey(KEY_INPUT_A)) horizontal += deg1Rad * 1.5f;
@@ -105,9 +111,10 @@ void Camera::Update()
 //------------------------------------------------------
 void Camera::Renderer()
 {
-	//DrawString(200, 16, "ｱｯﾌﾟです", 0xffffff);
 	DrawFormatString(200, 16, 0xffffff, "%f,%f,%f", cameraPos.x, cameraPos.y, cameraPos.z);
 	DrawFormatString(200, 32, 0xffffff, "%f,%f,%f", targetLookAtPos.x, targetLookAtPos.y, targetLookAtPos.z);
+
+	DrawFormatString(200, 48, 0xffffff, "%f,%f", vertical, horizontal);
 }
 
 //------------------------------------------------------
@@ -124,13 +131,13 @@ Vector3 Camera::GetCameraDir()
 void Camera::Move()
 {
 	// ﾌﾟﾚｲﾔｰが存在しない場合は何もしない
-	auto pc = model;
+	auto pc = player;
 	if (pc == NULL)
 	{
 		return;
 	}
 
-	auto StepTime = 0.1f;	// 推移時間
+	auto StepTime = 0.08f;	// 推移時間
 	Vector3 origPosition = cameraPos;	// 揺らしを無視した位置
 	Vector3 origLookAtPosition = targetLookAtPos;	// 揺らしを無視したﾀｰｹﾞｯﾄ位置
 	Vector3 shakePosition = { 0.0f, 0.0f, 0.0f };	// 揺らしたときの位置
@@ -143,24 +150,26 @@ void Camera::Move()
 
 	// 水平方向の角度変更
 	auto HAngle = horizontal;
+	
 	if (HAngle < -DX_PI_F)
 	{
-		HAngle += DX_TWO_PI_F;
+		horizontal += DX_TWO_PI_F;
 	}
 	if (HAngle > DX_PI_F)
 	{
-		HAngle -= DX_TWO_PI_F;
+		horizontal -= DX_TWO_PI_F;
 	}
 
 	// 垂直方向の角度変更
 	auto VAngle = vertical;
-	if (VAngle < -DX_PI_F)
+
+	if (VAngle < -DX_PI_F / 2.0f + 0.6f)
 	{
-		VAngle += DX_TWO_PI_F;
+		vertical = -DX_PI_F / 2.0f + 0.6f;
 	}
-	if (VAngle > DX_PI_F)
+	if (VAngle > DX_PI_F / 2.0f - 0.6f)
 	{
-		VAngle -= DX_TWO_PI_F;
+		vertical = DX_PI_F / 2.0f - 0.6f;
 	}
 
 	/*

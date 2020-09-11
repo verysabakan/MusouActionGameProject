@@ -4,10 +4,11 @@
 //------------------------------------------------------
 
 #pragma once
+#include <memory>
 #include "Quaternion.h"
 
 // ÌßÛÄÀ²ÌßéŒ¾
-class ModelBase;
+class ObjectBase;
 class Player;
 
 namespace {
@@ -20,7 +21,7 @@ namespace {
 class Camera
 {
 private:
-	ModelBase* model;			// ÌßÚ²Ô°µÌŞ¼Şª¸Ä‚ÌÎß²İÀ‚Ì•Û‘¶—p
+	std::shared_ptr<ObjectBase> player;// ÌßÚ²Ô°µÌŞ¼Şª¸Ä‚ÌÎß²İÀ‚Ì•Û‘¶—p
 	float horizontal;			// ‰¡
 	float vertical;				// c
 	Vector3 cameraPos;			// ¶Ò×ˆÊ’u
@@ -30,7 +31,7 @@ private:
 	Vector3 cameraUpVec;		// ¶Ò×‚Ìã•ûŒü
 
 public:
-	Camera(ModelBase* p);	// ºİ½Ä×¸À
+	Camera(const std::shared_ptr<ObjectBase>& p);	// ºİ½Ä×¸À
 	~Camera();			// ÃŞ½Ä×¸À
 
 	void Initialize();		// ‰Šú‰»

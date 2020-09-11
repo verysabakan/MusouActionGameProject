@@ -15,6 +15,7 @@
 GameScene::GameScene(ISceneSwitcher* switcher, const STAGE_TYPE& sT)
 	: BaseScene(switcher)
 {
+	// ê∂ê¨
 	generalManager = std::make_unique<GeneralManager>(sT);
 }
 
@@ -68,5 +69,5 @@ void GameScene::Update()
 void GameScene::Render()
 {
 	// äeï`âÊèàóù
-	generalManager->Update();
+	generalManager->Render();
 }

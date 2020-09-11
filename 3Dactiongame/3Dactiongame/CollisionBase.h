@@ -5,7 +5,9 @@
 
 #pragma once
 
+#include <memory>
 #include "ObjectTypeConstant.h"
+#include "ObjectBase.h"
 
 // ﾌﾟﾛﾄﾀｲﾌﾟ宣言
 
@@ -15,7 +17,7 @@ public:
 	CollisionBase();			// ｺﾝｽﾄﾗｸﾀ
 	virtual ~CollisionBase();	// 純粋仮想ﾃﾞｽﾄﾗｸﾀ
 
-	virtual bool HitCheck(const ObjectType& o1, const ObjectType& o2) = 0;	// 各当たり判定処理:必ず実装
+	virtual bool HitCheck(const std::shared_ptr<ObjectBase>& o1, const std::shared_ptr<ObjectBase>& o2) = 0;	// 各当たり判定処理:必ず実装
 
 };
 

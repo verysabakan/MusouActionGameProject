@@ -21,11 +21,13 @@ class GMList
 protected:
 	MANAGER_LIST_PTR mgrList;
 
+protected:
+	void AddList(MANAGER_WEAK_LIST w, MANAGER_PTR o);	// Ø½Ä‚É’Ç‰Á
+
 public:
 	GMList();			// ºÝ½Ä×¸À
 	virtual ~GMList();	// ÃÞ½Ä×¸À
 
-	void AddList(MANAGER_WEAK_LIST w, MANAGER_PTR o);	// Ø½Ä‚É’Ç‰Á
 };
 
 

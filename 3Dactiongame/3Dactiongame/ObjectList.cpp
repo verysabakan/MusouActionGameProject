@@ -1,5 +1,5 @@
 //------------------------------------------------------
-// @brief	µÌŞ¼Şª¸Ä‚ğŠi”[‚·‚é‚½‚ß‚ÌØ½Ä
+// @brief	·¬×¸À°‚ğŠi”[‚·‚é‚½‚ß‚ÌØ½Ä(•¶š‚¶‚á‚È‚¢‚æ)
 // 2020 9/3 Ryosuke Iida
 //------------------------------------------------------
 
@@ -26,7 +26,8 @@ ObjectList::~ObjectList()
 // @param	w —v‘f‚ğ’Ç‰Á‚·‚éØ½Ä
 // @param	o ’Ç‰Á‚·‚é—v‘f
 //------------------------------------------------------
-void ObjectList::AddList(OBJCT_WEAK_LIST w, OBJECT_PTR o)
+void ObjectList::AddList(OBJECT_WEAK_LIST w, OBJECT_PTR o)
 {
+	auto kk = o;
 	w.lock()->push_back(o);
 }

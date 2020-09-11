@@ -3,6 +3,7 @@
 // 2020 6/3 Ryosuke Iida
 //------------------------------------------------------
 #include <string>
+#include <assert.h>
 #include <memory>
 #include <DxLib.h>
 #include "Stage.h"
@@ -12,7 +13,8 @@
 //------------------------------------------------------
 Stage::Stage(const STAGE_TYPE& sT)
 {
-	std::unique_ptr<LoadStage> loadStage;
+	// ¶¬
+	std::unique_ptr<LoadStage> loadStage = std::make_unique<LoadStage>();
 
 	// ½Ã°¼Ş‚Ì¶¬‚Ég‚¤ÓÃŞÙ‚ğ“Ç‚İ‚Ş
 	loadStage->LoadStageDate(modelHandle, collisionModelHandle, skyModelHandle, sT);
@@ -26,7 +28,10 @@ Stage::Stage(const STAGE_TYPE& sT)
 //------------------------------------------------------
 Stage::~Stage()
 {
-	// ˆ—‚È‚µ
+	// ˆÙíI—¹‚ÌÁª¯¸
+	assert(modelHandle == NULL);
+	assert(collisionModelHandle == NULL);
+	assert(skyModelHandle == NULL);
 }
 
 //------------------------------------------------------
@@ -34,7 +39,7 @@ Stage::~Stage()
 //------------------------------------------------------
 void Stage::Initialize()
 {
-
+	
 }
 
 //------------------------------------------------------
@@ -67,4 +72,12 @@ void Stage::Render()
 		MV1DrawModelDebug(collisionModelHandle, GetColor(0, 255, 0),
 			FALSE, 1.0f, TRUE, FALSE);
 	}
+}
+
+//------------------------------------------------------
+// @brief	µÌŞ¼Şª¸Ä‚Ìí—Ş‚ğæ“¾
+//------------------------------------------------------
+OBJECT_TYPE Stage::GetType()
+{
+	return OBJECT_TYPE::OBJECT_TYPE_TERRAIN;
 }

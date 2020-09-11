@@ -1,15 +1,16 @@
 #pragma once
 
-class ModelBase;
-class Stage;
+#include <memory>
+
+class ObjectBase;
 
 // Ãﬂ€ƒ¿≤ÃﬂêÈåæ
-bool HitCheckStageAndPlayer(ModelBase* p, Stage* colS);
+bool HitCheckStageAndPlayer(const std::shared_ptr<ObjectBase>& p, const std::shared_ptr<ObjectBase>& s);
 
 void TorimaInitialize();
-void TorimaUpdate(ModelBase* p);
+void TorimaUpdate(const std::shared_ptr<ObjectBase>& p);
 
-bool GameClear(ModelBase* p);
-bool GameOver(ModelBase* p);
+bool GameClear(const std::shared_ptr<ObjectBase>& p);
+bool GameOver(const std::shared_ptr<ObjectBase>& p);
 
 void Draw();

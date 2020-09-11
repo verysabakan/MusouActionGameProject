@@ -67,23 +67,11 @@
     <Filter Include="ヘッダー ファイル\Scene\Constant">
       <UniqueIdentifier>{c30caccf-8c3c-423e-a949-7df6dfd325b4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Object\HitCheck\ObjectType">
-      <UniqueIdentifier>{0b3c1418-99a3-4a98-9e47-50def84ad6b8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Object\HitCheck\ObjectType">
-      <UniqueIdentifier>{6a199976-a201-4d4f-87c5-dca1298eb562}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Object\HitCheck\ObjectType\Constant">
-      <UniqueIdentifier>{45d5963b-b996-4bb6-99bd-b08f94ab1133}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Object\ObjectList">
       <UniqueIdentifier>{90b79b03-67e5-40ae-b2e3-f571678db179}</UniqueIdentifier>
     </Filter>
     <Filter Include="ヘッダー ファイル\Object\ObjectList">
       <UniqueIdentifier>{61750521-717e-452f-aa5f-636c0410c48e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Object\HitCheck\ObjectType\Constant">
-      <UniqueIdentifier>{47b24094-b85c-46c3-a45b-2b6935d1298b}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\とりあえずなやつ">
       <UniqueIdentifier>{65bdab5a-cd4d-42a9-a5aa-03dd9bf9328c}</UniqueIdentifier>
@@ -99,6 +87,18 @@
     </Filter>
     <Filter Include="ヘッダー ファイル\Manager\Constant">
       <UniqueIdentifier>{1489df8b-9081-4d20-99be-5233a228cd6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\HitCheck\ObjectBase">
+      <UniqueIdentifier>{0b3c1418-99a3-4a98-9e47-50def84ad6b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\HitCheck\ObjectBase\Constant">
+      <UniqueIdentifier>{47b24094-b85c-46c3-a45b-2b6935d1298b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\HitCheck\ObjectBase">
+      <UniqueIdentifier>{6a199976-a201-4d4f-87c5-dca1298eb562}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\HitCheck\ObjectBase\Constant">
+      <UniqueIdentifier>{45d5963b-b996-4bb6-99bd-b08f94ab1133}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -165,15 +165,6 @@
     <ClCompile Include="SceneDateManager.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="StageModelBase.cpp">
-      <Filter>ソース ファイル\Object\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelBase.cpp">
-      <Filter>ソース ファイル\Object\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="MakeForm.cpp">
-      <Filter>ソース ファイル\Object\HitCheck</Filter>
-    </ClCompile>
     <ClCompile Include="FlexibleCollision.cpp">
       <Filter>ソース ファイル\Object\HitCheck</Filter>
     </ClCompile>
@@ -184,22 +175,16 @@
       <Filter>ソース ファイル\Object\HitCheck</Filter>
     </ClCompile>
     <ClCompile Include="ObjectTypeConstant.cpp">
-      <Filter>ソース ファイル\Object\HitCheck\ObjectType\Constant</Filter>
+      <Filter>ソース ファイル\Object\HitCheck\ObjectBase\Constant</Filter>
     </ClCompile>
     <ClCompile Include="toriaezu.cpp">
       <Filter>ソース ファイル\とりあえずなやつ</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectList.cpp">
-      <Filter>ソース ファイル\Object\ObjectList</Filter>
     </ClCompile>
     <ClCompile Include="GeneralManager.cpp">
       <Filter>ソース ファイル\Manager</Filter>
     </ClCompile>
     <ClCompile Include="GMList.cpp">
       <Filter>ソース ファイル\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectBase.cpp">
-      <Filter>ソース ファイル\Object\HitCheck\ObjectType</Filter>
     </ClCompile>
     <ClCompile Include="PlayerManager.cpp">
       <Filter>ソース ファイル\Manager</Filter>
@@ -212,6 +197,15 @@
     </ClCompile>
     <ClCompile Include="ManagerTypeConstant.cpp">
       <Filter>ソース ファイル\Manager\Constant</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionStateConstant.cpp">
+      <Filter>ソース ファイル\Object\HitCheck\ObjectBase\Constant</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectList.cpp">
+      <Filter>ソース ファイル\Object\ObjectList</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectBase.cpp">
+      <Filter>ソース ファイル\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -293,15 +287,6 @@
     <ClInclude Include="HitCheckConstant.h">
       <Filter>ヘッダー ファイル\Object\HitCheck\Constant</Filter>
     </ClInclude>
-    <ClInclude Include="ModelBase.h">
-      <Filter>ヘッダー ファイル\Object\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="StageModelBase.h">
-      <Filter>ヘッダー ファイル\Object\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="MakeForm.h">
-      <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
-    </ClInclude>
     <ClInclude Include="FlexibleCollision.h">
       <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
     </ClInclude>
@@ -312,22 +297,16 @@
       <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
     </ClInclude>
     <ClInclude Include="ObjectTypeConstant.h">
-      <Filter>ヘッダー ファイル\Object\HitCheck\ObjectType\Constant</Filter>
+      <Filter>ヘッダー ファイル\Object\HitCheck\ObjectBase\Constant</Filter>
     </ClInclude>
     <ClInclude Include="toriaezu.h">
       <Filter>ソース ファイル\とりあえずなやつ</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectList.h">
-      <Filter>ヘッダー ファイル\Object\ObjectList</Filter>
     </ClInclude>
     <ClInclude Include="GeneralManager.h">
       <Filter>ヘッダー ファイル\Manager</Filter>
     </ClInclude>
     <ClInclude Include="GMList.h">
       <Filter>ヘッダー ファイル\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectBase.h">
-      <Filter>ヘッダー ファイル\Object\HitCheck\ObjectType</Filter>
     </ClInclude>
     <ClInclude Include="PlayerManager.h">
       <Filter>ヘッダー ファイル\Manager</Filter>
@@ -340,6 +319,15 @@
     </ClInclude>
     <ClInclude Include="ManagerTypeConstant.h">
       <Filter>ヘッダー ファイル\Manager\Constant</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionStateConstant.h">
+      <Filter>ヘッダー ファイル\Object\HitCheck\ObjectBase\Constant</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectList.h">
+      <Filter>ヘッダー ファイル\Object\ObjectList</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectBase.h">
+      <Filter>ヘッダー ファイル\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

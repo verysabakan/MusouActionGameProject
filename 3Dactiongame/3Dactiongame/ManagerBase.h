@@ -1,16 +1,18 @@
 //------------------------------------------------------
-// @brief	µÌŞ¼Şª¸Ä‚ğŠi”[‚·‚é‚½‚ß‚ÌØ½Ä
+// @brief	ÏÈ°¼Ş¬°‚ÌŠî’ê
 // 2020 9/3 Ryosuke Iida
 //------------------------------------------------------
 
 #pragma once
 
-#include "ManagerTypeConstant.h"
+//#include "ManagerTypeConstant.h"
+#include "ObjectList.h"
 
 class ManagerBase
+	:public ObjectList
 {
 public:
-	ManagerBase();	// ºİ½Ä×¸À
+	ManagerBase();			// ºİ½Ä×¸À
 	virtual ~ManagerBase();	// ÃŞ½Ä×¸À
 
 	virtual void Initialize() {}	// ‰Šú‰»
@@ -18,6 +20,6 @@ public:
 	virtual void Update() {}		// XV
 	virtual void Render() {}		// •`‰æ
 
-	virtual bool GetManagerType(MANAGER_TYPE type) = 0;	// µÌŞ¼Şª¸Ä‚ÌÀ²Ìßæ“¾ŠÖ”
+	OBJECT_LIST_PTR GetObjectList();	// OBJECT_LIST_PTR‚Ìæ“¾
 };
 

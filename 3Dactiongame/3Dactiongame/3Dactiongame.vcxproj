@@ -124,6 +124,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ActionStateConstant.cpp" />
     <ClCompile Include="BaseScene.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CharSelScene.cpp" />
@@ -141,10 +142,8 @@
     <ClCompile Include="ObjectList.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="LoadModel.cpp" />
-    <ClCompile Include="MakeForm.cpp" />
-    <ClCompile Include="ModelBase.cpp" />
-    <ClCompile Include="ModeSelScene.cpp" />
     <ClCompile Include="ObjectBase.cpp" />
+    <ClCompile Include="ModeSelScene.cpp" />
     <ClCompile Include="ObjectTypeConstant.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -156,13 +155,13 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StageManager.cpp" />
-    <ClCompile Include="StageModelBase.cpp" />
     <ClCompile Include="StageSelScene.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="toriaezu.cpp" />
     <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActionStateConstant.h" />
     <ClInclude Include="BaseScene.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CharSelScene.h" />
@@ -179,11 +178,9 @@
     <ClInclude Include="HitCheckConstant.h" />
     <ClInclude Include="ISceneSwitcher.h" />
     <ClInclude Include="MainConstant.h" />
-    <ClInclude Include="MakeForm.h" />
-    <ClInclude Include="ModelBase.h" />
+    <ClInclude Include="ObjectBase.h" />
     <ClInclude Include="LoadModel.h" />
     <ClInclude Include="ModeSelScene.h" />
-    <ClInclude Include="ObjectBase.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAndTerrain.h" />
@@ -198,7 +195,6 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="StageManager.h" />
-    <ClInclude Include="StageModelBase.h" />
     <ClInclude Include="StageSelScene.h" />
     <ClInclude Include="StageType.h" />
     <ClInclude Include="TitleConstant.h" />

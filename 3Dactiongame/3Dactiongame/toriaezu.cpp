@@ -3,7 +3,7 @@
 #include "HitCheckConstant.h"
 #include "MainConstant.h"
 
-#include "ModelBase.h"
+#include "ObjectBase.h"
 #include "Stage.h"
 
 // charaの374攻撃,1521,3565
@@ -12,16 +12,14 @@
 bool stageHitFlag = false;
 
 // とりあえずのｽﾃｰｼﾞとの当たり判定
-bool HitCheckStageAndPlayer(ModelBase* p, Stage* colS)
+bool HitCheckStageAndPlayer(const std::shared_ptr<ObjectBase>& p, const std::shared_ptr<ObjectBase>& s)
 {
-	auto pModelBase = p;
-	auto sModelBase = dynamic_cast<StageModelBase*>(colS);
+	auto pObjectBase = p;
+	auto sObjectBase = s;
 
 	const int STAGE_OBJECT_MAX_NUM = 128;	// 512
 	const int CHARA_MAX_HITCOLL = 512;		// 2048
 
-	
-	
 	int i;
 	int j;
 	int k;
@@ -44,18 +42,18 @@ bool HitCheckStageAndPlayer(ModelBase* p, Stage* colS)
 
 	SearchDistance = 200.0f;
 
-	TempMoveVector = pModelBase->GetMoveSpeed().ConvertVec();
+	TempMoveVector = pObjectBase->GetMoveSpeed().ConvertVec();
 
 	// 移動後の座標を算出
-	nextPos = VAdd(pModelBase->GetPosition().ConvertVec(), TempMoveVector);
+	nextPos = VAdd(pObjectBase->GetPosition().ConvertVec(), TempMoveVector);
 
 	// 当たり判定結果情報の数を初期化
 	HitNum = 0;
 
 	// キャラクターの周囲にあるステージポリゴンを取得する
 	HitDim[HitNum] = MV1CollCheck_Sphere(
-		sModelBase->GetCollisionModelHandle(), -1,
-		(pModelBase->GetPosition()).ConvertVec(), SearchDistance);
+		sObjectBase->GetCollisionModelHandle(), -1,
+		(pObjectBase->GetPosition()).ConvertVec(), SearchDistance);
 	if (HitDim[HitNum].HitNum != 0)
 	{
 		HitNum++;
@@ -74,7 +72,7 @@ bool HitCheckStageAndPlayer(ModelBase* p, Stage* colS)
 		if (CollisionModelHandle != -1)
 		{
 			HitDim[HitNum] = MV1CollCheck_Sphere(CollisionModelHandle, -1,
-				(pModelBase->GetPosition()).ConvertVec(), SearchDistance);
+				(pObjectBase->GetPosition()).ConvertVec(), SearchDistance);
 			if (HitDim[HitNum].HitNum != 0)
 			{
 				HitNum++;
@@ -85,7 +83,7 @@ bool HitCheckStageAndPlayer(ModelBase* p, Stage* colS)
 			}
 		}
 	}*/
-	
+
 	// 壁ポリゴンと床ポリゴンと天井ポリゴンの数を初期化する
 	for (i = 0; i < static_cast<int>(StageCollType::STAGECOLLTYPE_NUM); i++)
 	{
@@ -107,25 +105,25 @@ bool HitCheckStageAndPlayer(ModelBase* p, Stage* colS)
 				CollType = StageCollType::STAGECOLLTYPE_WALL;
 			}
 			else
-			// 法線が下向きかどうかで処理を分岐
-			if (PolyNormal->y <= 0.0f)
-			{
-				// ジャンプ中かつ上昇中の場合は天井ポリゴンとして処理し、
-				// そうではない場合は壁ポリゴンとして処理する
-				if (pModelBase->JumpState()&& pModelBase->RiseY() > 0.0f)
+				// 法線が下向きかどうかで処理を分岐
+				if (PolyNormal->y <= 0.0f)
 				{
-					CollType = StageCollType::STAGECOLLTYPE_CEILING;
+					// ジャンプ中かつ上昇中の場合は天井ポリゴンとして処理し、
+					// そうではない場合は壁ポリゴンとして処理する
+					if (pObjectBase->JumpState() && pObjectBase->RiseY() > 0.0f)
+					{
+						CollType = StageCollType::STAGECOLLTYPE_CEILING;
+					}
+					else
+					{
+						CollType = StageCollType::STAGECOLLTYPE_WALL;
+					}
 				}
 				else
 				{
-					CollType = StageCollType::STAGECOLLTYPE_WALL;
+					// それ以外の場合は床ポリゴンとする
+					CollType = StageCollType::STAGECOLLTYPE_FLOOR;
 				}
-			}
-			else
-			{
-				// それ以外の場合は床ポリゴンとする
-				CollType = StageCollType::STAGECOLLTYPE_FLOOR;
-			}
 
 			// ポリゴンの数が上限に達していない場合はタイプ別のポリゴン配列に登録する
 			if (HitPolyNum[static_cast<int>(CollType)] < CHARA_MAX_HITCOLL)
@@ -175,7 +173,7 @@ bool HitCheckStageAndPlayer(ModelBase* p, Stage* colS)
 			//+ 10.0f;
 
 		// 下端の値を床判定用に補正
-		if (pModelBase->JumpState())
+		if (pObjectBase->JumpState())
 		{
 			LineBottomPos.y += CHARA_HIT_FLOOR_Y_ADJUST_JUMP;
 		}
@@ -240,13 +238,13 @@ bool HitCheckStageAndPlayer(ModelBase* p, Stage* colS)
 			nextPos.y = MaxY;
 
 			// Ｙ軸方向の移動速度は０に
-			pModelBase->SetMoveSpeedY(0.0f);
+			pObjectBase->SetMoveSpeedY(0.0f);
 
 			// 接触したポリゴンのマテリアルタイプを取得する
 			//CInfo->OnMaterialType = StageData_GetCollisionModelMaterialType(HitPoly[static_cast<int>(StageCollType::STAGECOLLTYPE_FLOOR)][MaxIndex]->MaterialIndex);
 
 			// もしジャンプ中だった場合は着地状態に移行する
-			//if (pModelBase->JumpState())
+			//if (pObjectBase->JumpState())
 			//{
 			//	if (!Chara_Landed(CInfo))
 			//	{
@@ -277,8 +275,7 @@ bool HitCheckStageAndPlayer(ModelBase* p, Stage* colS)
 	}
 
 	// 新しい座標を保存する
-	pModelBase->SetPos(ConvertVec3(nextPos));
-	
+	pObjectBase->SetPos(ConvertVec3(nextPos));
 
 	return true;	// 正常
 }
@@ -304,11 +301,11 @@ void TorimaInitialize()
 	GetGraphSize(gameOver.image, &gameOver.x, &gameOver.y);
 }
 
-const float gravityAcc = -98.0f/60.0f;
-float gravity;
+const float gravityAcc = -9.8f/60.0f;
+float gravity = 0;
 
 // 更新
-void TorimaUpdate(ModelBase* p)
+void TorimaUpdate(const std::shared_ptr<ObjectBase>& p)
 {
 	//------------ 重力
 	if (stageHitFlag)
@@ -324,7 +321,7 @@ void TorimaUpdate(ModelBase* p)
 }
 
 // ｹﾞｰﾑｸﾘｱ
-bool GameClear(ModelBase* p)
+bool GameClear(const std::shared_ptr<ObjectBase>& p)
 {
 	// ｸﾘｱ場所についたら
 	//if ()
@@ -336,7 +333,7 @@ bool GameClear(ModelBase* p)
 }
 
 // ｹﾞｰﾑｵｰﾊﾞｰ
-bool GameOver(ModelBase* p)
+bool GameOver(const std::shared_ptr<ObjectBase>& p)
 {
 	// 下に落ちたら
 	if (p->GetPosition().y < -50.0f)

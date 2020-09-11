@@ -11,10 +11,10 @@ class PlayerAndTerrain
 	:public CollisionBase
 {
 public:
-    PlayerAndTerrain();
-    virtual ~PlayerAndTerrain();
+    PlayerAndTerrain();				// ｺﾝｽﾄﾗｸﾀ
+    virtual ~PlayerAndTerrain();	// ﾃﾞｽﾄﾗｸﾀ
 
-    bool HitCheck(const ObjectType& o1, const ObjectType& o2);  // ﾌﾟﾚｲﾔｰと地形の判定処理
+    virtual bool HitCheck(const std::shared_ptr<ObjectBase>& o1, const std::shared_ptr<ObjectBase>& o2) override;  // ﾌﾟﾚｲﾔｰと地形の判定処理
 
 };
 

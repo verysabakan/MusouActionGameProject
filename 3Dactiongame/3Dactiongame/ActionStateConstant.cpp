@@ -1,56 +1,56 @@
 //------------------------------------------------------
-// @brief	µÌŞ¼Şª¸Ä‚Ìí—Ş
-// 2020 7/27 Ryosuke Iida
+// @brief	·¬×‚Ìs“®ó‘Ô
+// 2020 9/8 Ryosuke Iida
 //------------------------------------------------------
 
 #include <type_traits>
-#include "ObjectTypeConstant.h"
+#include "ActionStateConstant.h"
 
 //------------------------------------------------------
-// @brief	OBJECT_TYPE‚Ìæ“ª‚Ì—v‘f‚ğ•Ô‚·
+// @brief	ObjectType‚Ìæ“ª‚Ì—v‘f‚ğ•Ô‚·
 //------------------------------------------------------
-OBJECT_TYPE begin(OBJECT_TYPE)
+ACTION_STATE begin(ACTION_STATE)
 {
-	return OBJECT_TYPE::OBJECT_TYPE_PLAYER;
+	return ACTION_STATE::ACTION_STATE_DEAD;
 }
 
 //------------------------------------------------------
-// @brief	OBJECT_TYPE‚Ì––’[‚ğ•Ô‚·
+// @brief	ObjectType‚Ì––’[‚ğ•Ô‚·
 //------------------------------------------------------
-OBJECT_TYPE end(OBJECT_TYPE)
+ACTION_STATE end(ACTION_STATE)
 {
-	return OBJECT_TYPE::OBJECT_TYPE_NUM;
+	return ACTION_STATE::ACTION_STATE_NUM;
 }
 
 //------------------------------------------------------
 // @brief	©•ª©g‚ğ•Ô‚·
 //------------------------------------------------------
-OBJECT_TYPE operator*(OBJECT_TYPE& id)
+ACTION_STATE operator*(ACTION_STATE& id)
 {
 	return id;
 }
 
 //------------------------------------------------------
-// @brief	OBJECT_TYPE‚Ì++‚ÌŒvZ
+// @brief	ObjectType‚Ì++‚ÌŒvZ
 //------------------------------------------------------
-OBJECT_TYPE operator++(OBJECT_TYPE& id)
+ACTION_STATE operator++(ACTION_STATE& id)
 {
 	// underlying_type‚ÅÃŞÌ«ÙÄ‚ÌŠî’êŒ^int‚ğæ“¾‚µ‰ÁZ‚·‚é
-	return id = OBJECT_TYPE(std::underlying_type<OBJECT_TYPE>::type(id) + 1);
+	return id = ACTION_STATE(std::underlying_type<ACTION_STATE>::type(id) + 1);
 }
 
 //------------------------------------------------------
-// @brief	OBJECT_TYPE‚É‘Î‚·‚é‘«‚µZ
+// @brief	ObjectType‚É‘Î‚·‚é‘«‚µZ
 //------------------------------------------------------
-OBJECT_TYPE operator+(OBJECT_TYPE& id, int k)
+ACTION_STATE operator+(ACTION_STATE& id, int k)
 {
-	return static_cast<OBJECT_TYPE>(static_cast<int> (id) + k);
+	return static_cast<ACTION_STATE>(static_cast<int> (id) + k);
 }
 
 //------------------------------------------------------
-// @brief	OBJECT_TYPE‚É‘Î‚·‚éˆø‚«Z
+// @brief	ObjectType‚É‘Î‚·‚éˆø‚«Z
 //------------------------------------------------------
-OBJECT_TYPE operator-(OBJECT_TYPE& id, int k)
+ACTION_STATE operator-(ACTION_STATE& id, int k)
 {
-	return static_cast<OBJECT_TYPE>(static_cast<int> (id) - k);
+	return static_cast<ACTION_STATE>(static_cast<int> (id) - k);
 }

@@ -5,26 +5,26 @@
 
 #pragma once
 
-#include "ManagerBase.h"
-#include "GMList.h"
 #include "StageType.h"
+#include "GMList.h"
 
 // ﾌﾟﾛﾄﾀｲﾌﾟ宣言
-class PlayerManager;
-class StageManager;
 class FlexibleCollision;
 
 class GeneralManager
-	:private GMList,
-	public ManagerBase
+	:private GMList
 {
+private:
+	std::unique_ptr<FlexibleCollision> fCollision;
+
 public:
 	GeneralManager(const STAGE_TYPE& sT);	// ｺﾝｽﾄﾗｸﾀ
 	~GeneralManager();	// ﾃﾞｽﾄﾗｸﾀ
 
-	virtual void Initialize() override;	// 初期化
-	virtual void Finalize() override;	// 終了処理
-	virtual void Update() override;		// 更新
-	virtual void Render() override;		// 描画
+	void Initialize();	// 初期化
+	void Finalize();	// 終了処理
+	void Update();		// 更新
+	void Render();		// 描画
+
 };
 

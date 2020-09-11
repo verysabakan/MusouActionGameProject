@@ -5,22 +5,20 @@
 #pragma once
 
 #include "LoadStage.h"
-#include "StageModelBase.h"
-
-// ﾌﾟﾛﾄﾀｲﾌﾟ宣言
-class StageModelBase;
+#include "ObjectBase.h"
 
 class Stage
-	: public StageModelBase
+	: public ObjectBase
 {
 public:
 	Stage(const STAGE_TYPE& sT);	// ｺﾝｽﾄﾗｸﾀ
 	~Stage();	// ﾃﾞｽﾄﾗｸﾀ
 
-	void Initialize();	// 初期化
-	void Finalize();	// 終了処理
-	void Update();		// 更新
-	void Render();		// 描画
+	virtual void Initialize() override;	// 初期化
+	virtual void Finalize() override;	// 終了処理
+	virtual void Update() override;		// 更新
+	virtual void Render() override;		// 描画
 
+	virtual OBJECT_TYPE GetType() override;		// ｵﾌﾞｼﾞｪｸﾄの種類を取得
 };
 

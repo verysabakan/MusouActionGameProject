@@ -24,7 +24,8 @@ PlayerAndTerrain::~PlayerAndTerrain()
 //------------------------------------------------------
 // @brief	ÌßÚ²Ô°‚Æ’nŒ`‚Ì”»’èˆ—
 //------------------------------------------------------
-bool PlayerAndTerrain::HitCheck(const ObjectType& o1, const ObjectType& o2)
+bool PlayerAndTerrain::HitCheck(const std::shared_ptr<ObjectBase>& o1, const std::shared_ptr<ObjectBase>& o2)
 {
+	int i = 0;
 	return false;
 }

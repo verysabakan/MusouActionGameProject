@@ -8,16 +8,9 @@
 #include <memory>
 #include "ManagerBase.h"
 
-
-// ÌßÛÄÀ²ÌßéŒ¾
-class Stage;
-
 class StageManager
 	:public ManagerBase
 {
-private:
-	std::unique_ptr<Stage> stage;
-
 public:
 	StageManager(const STAGE_TYPE& sT);		// ºİ½Ä×¸À
 	~StageManager();	// ÃŞ½Ä×¸À
@@ -27,8 +20,5 @@ public:
 	virtual void Update() override;		// XV
 	virtual void Render() override;		// •`‰æ
 
-	Stage* GetStage();	// ½Ã°¼Ş‚ğæ“¾
-
-	bool GetManagerType(MANAGER_TYPE type);	// À²Ìß‚Ìæ“¾(‚Ç‚ÌÀ²Ìß‚©Šm‚©‚ß‚é)
 };
 

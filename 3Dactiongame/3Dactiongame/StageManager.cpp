@@ -12,7 +12,8 @@
 StageManager::StageManager(const STAGE_TYPE& sT)
 {
 	// ｵﾌﾞｼﾞｪｸﾄを構築
-	stage = std::make_unique<Stage>(sT);
+	objList = std::make_shared<OBJECT_LIST>();
+	AddList(objList, std::make_shared<Stage>(sT));
 }
 
 //------------------------------------------------------
@@ -20,7 +21,7 @@ StageManager::StageManager(const STAGE_TYPE& sT)
 //------------------------------------------------------
 StageManager::~StageManager()
 {
-	
+	// 処理なし
 }
 
 //------------------------------------------------------
@@ -29,7 +30,10 @@ StageManager::~StageManager()
 void StageManager::Initialize()
 {
 	// 各初期化処理
-	stage->Initialize();
+	for (auto i = objList->begin(); i != objList->end(); i++)
+	{
+		(*i)->Initialize();
+	}
 }
 
 //------------------------------------------------------
@@ -37,11 +41,12 @@ void StageManager::Initialize()
 //------------------------------------------------------
 void StageManager::Finalize()
 {
-	// 各終了処理
-	stage->Finalize();
-
-	// ﾘｿｰｽの解放
-	stage.reset();
+	// 各終了処理、ﾘｿｰｽの開放
+	for (auto i = objList->begin(); i != objList->end(); i++)
+	{
+		(*i)->Finalize();
+		(*i).reset();
+	}
 }
 
 //------------------------------------------------------
@@ -50,7 +55,10 @@ void StageManager::Finalize()
 void StageManager::Update()
 {
 	// 各更新処理
-	stage->Update();
+	for (auto i = objList->begin(); i != objList->end(); i++)
+	{
+		(*i)->Update();
+	}
 }
 
 //------------------------------------------------------
@@ -59,21 +67,8 @@ void StageManager::Update()
 void StageManager::Render()
 {
 	// 各描画処理
-	stage->Render();
-}
-
-//------------------------------------------------------
-// @brief	初期化
-//------------------------------------------------------
-Stage* StageManager::GetStage()
-{
-	return stage.get();
-}
-
-//------------------------------------------------------
-// @brief	ﾀｲﾌﾟの取得(どのﾀｲﾌﾟか確かめる)
-//------------------------------------------------------
-bool StageManager::GetManagerType(MANAGER_TYPE type)
-{
-	return (type == MANAGER_TYPE::TERRAIN_MANAGER);
+	for (auto i = objList->begin(); i != objList->end(); i++)
+	{
+		(*i)->Render();
+	}
 }
