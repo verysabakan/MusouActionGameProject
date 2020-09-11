@@ -92,4 +92,5 @@ void PlayerManager::Render()
 		(*i)->Render();
 	}
 	camera->Renderer();
+	
 }

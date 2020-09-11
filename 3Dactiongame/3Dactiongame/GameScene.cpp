@@ -55,7 +55,7 @@ void GameScene::Update()
 {
 	// 各更新処理
 	generalManager->Update();
-
+	
 	// ﾃﾞﾊﾞｯｸﾞ用ｼｰﾝ切り替えｷｰ:Q
 	if (lpController.IsPushD(INPUT_TRG))
 	{

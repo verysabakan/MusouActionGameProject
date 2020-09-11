@@ -39,6 +39,9 @@ void Camera::Initialize()
 	cameraDir = {};						// 向き
 	cameraUpVec = { 0, 1.0f, 0.0f };	// ｶﾒﾗの上方向
 	SetCameraNearFar(clipNear, clipFar);	// ｶﾒﾗの描画範囲
+
+	horizontal = 0;
+	vertical = 0;
 }
 
 //------------------------------------------------------
@@ -55,17 +58,16 @@ void Camera::Finalize()
 //------------------------------------------------------
 void Camera::Update()
 {
-	cameraDir = (targetLookAtPos - cameraPos).Normalized();	// ｶﾒﾗの向き
-
 	// ｶﾒﾗ操作
 	// 設定で変更できるようにする
 	if (CheckHitKey(KEY_INPUT_F)) camLength += 5;
 	if (CheckHitKey(KEY_INPUT_G)) camLength -= 5;
 	// ｽﾃｨｯｸによるものに変える
-	if (CheckHitKey(KEY_INPUT_W)) vertical += deg1Rad * 1.5f;
-	if (CheckHitKey(KEY_INPUT_S)) vertical += -deg1Rad * 1.5f;
-	if (CheckHitKey(KEY_INPUT_A)) horizontal += deg1Rad * 1.5f;
-	if (CheckHitKey(KEY_INPUT_D)) horizontal += -deg1Rad * 1.5f;
+	float x = 0;
+	float y = 0;
+	if (lpController.IsRightTiltX(x)) horizontal -= deg1Rad * 1.5f * x;
+	if (lpController.IsRightTiltY(y)) vertical -= deg1Rad * 1.5 * y;
+	
 
 	Move();
 
@@ -111,10 +113,17 @@ void Camera::Update()
 //------------------------------------------------------
 void Camera::Renderer()
 {
+	SetUseZBufferFlag(TRUE);		// zﾊﾞｯﾌｧを有効にするか
+	SetWriteZBufferFlag(TRUE);		// zﾊﾞｯﾌｧへの書き込みを有効にするか
+	SetUseLighting(FALSE);			// ﾗｲﾃｨﾝｸﾞ計算処理を使用するか
+
 	DrawFormatString(200, 16, 0xffffff, "%f,%f,%f", cameraPos.x, cameraPos.y, cameraPos.z);
 	DrawFormatString(200, 32, 0xffffff, "%f,%f,%f", targetLookAtPos.x, targetLookAtPos.y, targetLookAtPos.z);
-
 	DrawFormatString(200, 48, 0xffffff, "%f,%f", vertical, horizontal);
+
+	SetUseZBufferFlag(FALSE);		// zﾊﾞｯﾌｧを有効にするか
+	SetWriteZBufferFlag(FALSE);		// zﾊﾞｯﾌｧへの書き込みを有効にするか
+	SetUseLighting(TRUE);			// ﾗｲﾃｨﾝｸﾞ計算処理を使用するか
 }
 
 //------------------------------------------------------
@@ -149,25 +158,21 @@ void Camera::Move()
 	float shakeAngleSpeed = 0.5f;	// 揺らす速さ
 
 	// 水平方向の角度変更
-	auto HAngle = horizontal;
-	
-	if (HAngle < -DX_PI_F)
+	if (horizontal < -DX_PI_F)
 	{
 		horizontal += DX_TWO_PI_F;
 	}
-	if (HAngle > DX_PI_F)
+	if (horizontal > DX_PI_F)
 	{
 		horizontal -= DX_TWO_PI_F;
 	}
 
 	// 垂直方向の角度変更
-	auto VAngle = vertical;
-
-	if (VAngle < -DX_PI_F / 2.0f + 0.6f)
+	if (vertical < -DX_PI_F / 2.0f + 0.6f)
 	{
 		vertical = -DX_PI_F / 2.0f + 0.6f;
 	}
-	if (VAngle > DX_PI_F / 2.0f - 0.6f)
+	if (vertical > DX_PI_F / 2.0f - 0.6f)
 	{
 		vertical = DX_PI_F / 2.0f - 0.6f;
 	}
@@ -206,10 +211,10 @@ void Camera::Move()
 	// 目標座標の算出
 	Vector3 targetPosition;
 	targetPosition.x = 0.0f;
-	targetPosition.z = cos(VAngle) * camLength;
-	targetPosition.y = sin(VAngle) * camLength;
-	targetPosition.x = -sin(HAngle) * targetPosition.z;
-	targetPosition.z = cos(HAngle) * targetPosition.z;
+	targetPosition.z = cos(vertical) * camLength;
+	targetPosition.y = sin(vertical) * camLength;
+	targetPosition.x = -sin(horizontal) * targetPosition.z;
+	targetPosition.z = cos(horizontal) * targetPosition.z;
 
 	// 算出した位置に中心の位置を加算
 	targetPosition = targetPosition + targetLookAtPos;
@@ -240,6 +245,7 @@ void Camera::Move()
 
 	// カメラの正面方向のＹ成分を抜いたベクトルを算出
 	auto frontDirection = (Cross(Vector3(0.0f, -1.0f, 0.0f), rightDirection)).Normalized();
+	cameraDir = frontDirection;
 
 	/*
 	// カメラ座標から注視点座標の間にコリジョン用ポリゴンが存在するかチェック

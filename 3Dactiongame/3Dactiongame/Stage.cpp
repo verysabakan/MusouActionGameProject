@@ -47,7 +47,14 @@ void Stage::Initialize()
 //------------------------------------------------------
 void Stage::Finalize()
 {
+	// ﾓﾃﾞﾙの削除
+	MV1DeleteModel(modelHandle);
+	MV1DeleteModel(collisionModelHandle);
+	MV1DeleteModel(skyModelHandle);
 
+	modelHandle = NULL;
+	collisionModelHandle = NULL;
+	skyModelHandle = NULL;
 }
 
 //------------------------------------------------------
@@ -68,9 +75,17 @@ void Stage::Render()
 
 	if (collisionModelHandle)
 	{
+		SetUseZBufferFlag(TRUE);		// zﾊﾞｯﾌｧを有効にするか
+		SetWriteZBufferFlag(TRUE);		// zﾊﾞｯﾌｧへの書き込みを有効にするか
+		SetUseLighting(FALSE);			// ﾗｲﾃｨﾝｸﾞ計算処理を使用するか
+
 		// ﾃﾞﾊﾞｯｸﾞ用
 		MV1DrawModelDebug(collisionModelHandle, GetColor(0, 255, 0),
 			FALSE, 1.0f, TRUE, FALSE);
+
+		SetUseZBufferFlag(FALSE);		// zﾊﾞｯﾌｧを有効にするか
+		SetWriteZBufferFlag(FALSE);		// zﾊﾞｯﾌｧへの書き込みを有効にするか
+		SetUseLighting(TRUE);			// ﾗｲﾃｨﾝｸﾞ計算処理を使用するか
 	}
 }
 

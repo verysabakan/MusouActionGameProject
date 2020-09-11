@@ -11,13 +11,6 @@
 //------------------------------------------------------
 // @brief	ºİ½Ä×¸À
 //------------------------------------------------------
-//StageSelScene::StageSelScene(ISceneSwitcher* switcher, 
-//	SceneDateManager* dateManager)
-//	: BaseScene(switcher)
-//{
-//	// ˆ—‚È‚µ
-//}
-
 StageSelScene::StageSelScene(SceneManager* sManager)
 	: BaseScene((ISceneSwitcher*)sManager)
 {

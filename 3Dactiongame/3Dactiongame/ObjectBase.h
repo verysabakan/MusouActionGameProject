@@ -14,28 +14,6 @@
 class ObjectBase
 {
 protected:
-	//// Œ»Ý‚Ì±ÆÒ°¼®Ý‚Ìó‘ÔAM:ˆÚ“®
-	//enum ANIM_STATE
-	//{
-	//	ANIM_DEAD,
-	//	ANIM_DOWN,
-	//	ANIM_DAMAGE,
-	//	ANIM_STUN,
-	//	ANIM_JUMP,
-	//	ANIM_SKILL1,
-	//	ANIM_SKILL2,
-	//	ANIM_SKILL3,
-	//	ANIM_ATTACK1,
-	//	ANIM_ATTACK2,
-	//	ANIM_BROCK,
-	//	ANIM_WALK,
-	//	ANIM_RUN,
-	//	ANIM_STANCE
-	//};
-
-	//ANIM_STATE animState;		// Œ»Ý‚ÌÌßÚ²Ô°‚Ìó‘Ô
-	//ANIM_STATE oldAnimState;	// ‘O‚ÌÌßÚ²Ô°‚Ìó‘Ô
-
 	ACTION_STATE actionState;		// Œ»Ý‚ÌÌßÚ²Ô°‚Ìó‘Ô
 	ACTION_STATE oldActionState;	// ‘O‚ÌÌßÚ²Ô°‚Ìó‘Ô
 

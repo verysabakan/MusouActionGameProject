@@ -28,7 +28,7 @@ GameTask::~GameTask()
 {
 	// 処理なし
 }
-
+int ff = FALSE;
 //------------------------------------------------------
 // @brief	初期化
 //------------------------------------------------------
@@ -44,9 +44,12 @@ int GameTask::Initialize()
 	ChangeWindowMode(TRUE);				// TRUE:ｳｨﾝﾄﾞｳ、FALSE:ﾌﾙｽｸﾘｰﾝ
 	SetDrawScreen(DX_SCREEN_BACK);		// 背面に描画
 	SetBackgroundColor(BACKGROUND_COLOR, BACKGROUND_COLOR, BACKGROUND_COLOR);	// 背景色
-	SetUseZBuffer3D(TRUE);				// zﾊﾞｯﾌｧを有効にする
-	SetWriteZBuffer3D(TRUE);			// zﾊﾞｯﾌｧへの書き込みを有効にする
-	
+	//SetUseZBuffer3D(FALSE);			// zﾊﾞｯﾌｧを有効にするか(3Dのみ)
+	//SetWriteZBuffer3D(FALSE);			// zﾊﾞｯﾌｧへの書き込みを有効にするか(3Dのみ)
+	SetUseZBufferFlag(FALSE);			// zﾊﾞｯﾌｧを有効にするか
+	SetWriteZBufferFlag(FALSE);			// zﾊﾞｯﾌｧへの書き込みを有効にするか
+	SetUseLighting(TRUE);				// ﾗｲﾃｨﾝｸﾞ計算処理を使用するか
+
 	// 初期化処理
 	sceneManager->Initialize();
 

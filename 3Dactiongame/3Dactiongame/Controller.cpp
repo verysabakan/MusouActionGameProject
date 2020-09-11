@@ -6,10 +6,6 @@
 #include <DxLib.h>
 #include "Controller.h"
 
-// Áª¯¸—p
-bool up = false;
-bool trg = false;
-
 //------------------------------------------------------
 // @brief	ºİ½Ä×¸À
 //------------------------------------------------------
@@ -17,11 +13,13 @@ Controller::Controller()
 {
 	// Êß¯ÄŞ‘Î‰ÎŞÀİ‚Ì‰Šú‰»
 	SetPadInput(PAD_INPUT_UP, PAD_INPUT_DOWN, PAD_INPUT_LEFT, PAD_INPUT_RIGHT,
-		PAD_INPUT_B, PAD_INPUT_A, PAD_INPUT_C, PAD_INPUT_X);
+		PAD_INPUT_B, PAD_INPUT_A, PAD_INPUT_C, PAD_INPUT_X, defDeadZone);
 
 	// •Ï”‰Šú‰»
 	input = 0;
 	inputOld = 0;
+	leftLever = {};
+	rightLever = {};
 }
 
 //------------------------------------------------------
@@ -39,8 +37,10 @@ void Controller::Update()
 {
 	inputOld = input;								// ‘O‰ñ“ü—Í
 	input = GetJoypadInputState(DX_INPUT_PAD1);		// ¡‰ñ‚Ì“ü—Í
+	GetJoypadAnalogInput(&leftLever.x, &leftLever.y, DX_INPUT_PAD1);	// ¡‰ñ‚Ì¶ÚÊŞ°“ü—Í
+	GetJoypadAnalogInputRight(&rightLever.x, &rightLever.y, DX_INPUT_PAD1);	// ¡‰ñ‰EÚÊŞ°“ü—Í
 
-	// ·°ÎŞ°ÄŞ‚ÌŠ„‚è“–‚Ä
+	// ·°ÎŞ°ÄŞ‚ÌŠ„‚è“–‚Ä(Áª¯¸—p)
 	char keyInput[keyBuffer];
 	GetHitKeyStateAll(keyInput);
 	if (keyInput[KEY_INPUT_UP]) input |= padInput[PAD_UP];
@@ -51,6 +51,11 @@ void Controller::Update()
 	if (keyInput[KEY_INPUT_X]) input |= padInput[PAD_2];
 	if (keyInput[KEY_INPUT_C]) input |= padInput[PAD_3];
 	if (keyInput[KEY_INPUT_V]) input |= padInput[PAD_4];
+
+	if (keyInput[KEY_INPUT_W]) rightLever.y = -1000;
+	if (keyInput[KEY_INPUT_A]) rightLever.x = -1000;
+	if (keyInput[KEY_INPUT_S]) rightLever.y = 1000;
+	if (keyInput[KEY_INPUT_D]) rightLever.x = 1000;
 }
 
 //------------------------------------------------------
@@ -58,44 +63,20 @@ void Controller::Update()
 //------------------------------------------------------
 void Controller::Render()
 {
-	// ’·‰Ÿ‚µ
-	if (IsPushUP(INPUT_HOLD))
-	{
-		DrawString(0, 16, "Î°ÙÄŞ‚Å‚·", 0xffffff);
-		DrawFormatString(0, 32, 0xffffff, "%d", padInput[PAD_UP]);
-	}
-
-	// ‰Ÿ‚µ‚½uŠÔ
-	if (IsPushUP(INPUT_TRG))
-	{
-		trg = !trg;
-	}
-	if (trg) 
-	{
-		DrawString(0, 48, "ÄØ¶Ş°‚Å‚·", 0xffffff);
-		DrawFormatString(0, 64, 0xffffff, "%d", padInput[PAD_UP]);
-	}
-
-	// —£‚µ‚½uŠÔ
-	if (IsPushUP(INPUT_UP))
-	{
-		up = !up;
-	}
-	if (up)
-	{
-		DrawString(0, 80, "±¯Ìß‚Å‚·", 0xffffff);
-		DrawFormatString(0, 96, 0xffffff, "%d", padInput[PAD_UP]);
-	}
-
 	// ‚Ç‚ê‚ğ‰Ÿ‚µ‚Ä‚¢‚é‚©
 	for (auto i = 0; i < PAD_BUTTON_NUM; i++)
 	{
 		if (input & padInput[i])
 		{
-			DrawFormatString(0, 112 + 16 * i, 0xffffff, "%d:Î°ÙÄŞ‚Å‚·", i);
+			DrawFormatString(0, 16 + 16 * i, 0xffffff, "%d:Î°ÙÄŞ‚Å‚·", i);
 		}
 	}
-	
+
+	// ¶‰EÚÊŞ°
+	DrawFormatString(0, 144, 0xffffff, "%f", leftLever.x / tiltMax);
+	DrawFormatString(0, 160, 0xffffff, "%f", leftLever.y / tiltMax);
+	DrawFormatString(0, 176, 0xffffff, "%f", rightLever.x / tiltMax);
+	DrawFormatString(0, 192, 0xffffff, "%f", rightLever.y / tiltMax);
 }
 
 //------------------------------------------------------
@@ -103,7 +84,7 @@ void Controller::Render()
 // @param	‘Î‰‚·‚éÎŞÀİ‚Ì’l
 //------------------------------------------------------
 void Controller::SetPadInput(int up, int down, int left, int right, 
-								int a, int b, int c, int d)
+								int a, int b, int c, int d, double deadZone)
 {
 	// ‘Î‰‚·‚éÎŞÀİ‚ğŠ„‚èU‚è
 	padInput[PAD_UP] = up;
@@ -114,6 +95,9 @@ void Controller::SetPadInput(int up, int down, int left, int right,
 	padInput[PAD_2] = b;
 	padInput[PAD_3] = c;
 	padInput[PAD_4] = d;
+	deadZone;
+	// ÃŞ¯ÄŞ¿Ş°İ
+	SetJoypadDeadZone(DX_INPUT_PAD1, deadZone);
 }
 
 //------------------------------------------------------
@@ -213,7 +197,7 @@ const bool &Controller::IsPushRIGHT(const INPUT_STATE inputState) const
 }
 
 //------------------------------------------------------
-// @brief	1ÎŞÀİ‚Ìó‘Ô‚ğ•Ô‚·
+// @brief	1ÎŞÀİ‚Ìó‘Ô‚ğ•Ô‚·(xbox:B)
 // @param	inputState	Œ»İ‚Ì“ü—Í
 // @return	‰Ÿ‚³‚ê‚Ä‚¢‚ê‚Îtrue
 //------------------------------------------------------
@@ -237,7 +221,7 @@ const bool &Controller::IsPushA(const INPUT_STATE inputState) const
 }
 
 //------------------------------------------------------
-// @brief	2ÎŞÀİ‚Ìó‘Ô‚ğ•Ô‚·
+// @brief	2ÎŞÀİ‚Ìó‘Ô‚ğ•Ô‚·(xbox:A)
 // @param	inputState	Œ»İ‚Ì“ü—Í
 // @return	‰Ÿ‚³‚ê‚Ä‚¢‚ê‚Îtrue
 //------------------------------------------------------
@@ -261,7 +245,7 @@ const bool &Controller::IsPushB(const INPUT_STATE inputState) const
 }
 
 //------------------------------------------------------
-// @brief	3ÎŞÀİ‚Ìó‘Ô‚ğ•Ô‚·
+// @brief	3ÎŞÀİ‚Ìó‘Ô‚ğ•Ô‚·(xbox:X)
 // @param	inputState	Œ»İ‚Ì“ü—Í
 // @return	‰Ÿ‚³‚ê‚Ä‚¢‚ê‚Îtrue
 //------------------------------------------------------
@@ -285,7 +269,7 @@ const bool &Controller::IsPushC(const INPUT_STATE inputState) const
 }
 
 //------------------------------------------------------
-// @brief	4ÎŞÀİ‚Ìó‘Ô‚ğ•Ô‚·
+// @brief	4ÎŞÀİ‚Ìó‘Ô‚ğ•Ô‚·(xbox:Y)
 // @param	inputState	Œ»İ‚Ì“ü—Í
 // @return	‰Ÿ‚³‚ê‚Ä‚¢‚ê‚Îtrue
 //------------------------------------------------------
@@ -302,6 +286,74 @@ const bool &Controller::IsPushD(const INPUT_STATE inputState) const
 	}
 	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_4])
 	{
+		return true;
+	}
+
+	return false;
+}
+
+//------------------------------------------------------
+// @brief	ÚÊŞ°‚Ì‰¡•ûŒü‚ÌŒX‚«(xbox:¶ÚÊŞ°)
+// @param	t(Tilt)	Œ»İ‚ÌŒX‚«‚ğ“ü‚ê‚é‚½‚ß‚Ì“ü‚ê•¨
+// @return	‰Ÿ‚³‚ê‚Ä‚¢‚ê‚Îtrue
+//------------------------------------------------------
+const bool& Controller::IsLeftTiltX(float& t) const
+{
+	// “ü—Í‚ª‚ ‚ê‚Ît‚É’l‚ğ“ü‚ê‚Ätrue‚ğ•Ô‚·
+	if (leftLever.x != 0)
+	{
+		t = (float)leftLever.x / tiltMax;
+		return true;
+	}
+
+	return false;
+}
+
+//------------------------------------------------------
+// @brief	ÚÊŞ°‚Ìc•ûŒü‚ÌŒX‚«(xbox:¶ÚÊŞ°)
+// @param	t(Tilt)	Œ»İ‚ÌŒX‚«‚ğ“ü‚ê‚é‚½‚ß‚Ì“ü‚ê•¨
+// @return	‰Ÿ‚³‚ê‚Ä‚¢‚ê‚Îtrue
+//------------------------------------------------------
+const bool& Controller::IsLeftTiltY(float& t) const
+{
+	// “ü—Í‚ª‚ ‚ê‚Ît‚É’l‚ğ“ü‚ê‚Ätrue‚ğ•Ô‚·
+	if (leftLever.y != 0)
+	{
+		t = (float)leftLever.y / tiltMax;
+		return true;
+	}
+
+	return false;
+}
+
+//------------------------------------------------------
+// @brief	ÚÊŞ°‚Ì‰¡•ûŒü‚ÌŒX‚«(xbox:‰EÚÊŞ°)
+// @param	t(Tilt)	Œ»İ‚ÌŒX‚«‚ğ“ü‚ê‚é‚½‚ß‚Ì“ü‚ê•¨
+// @return	‰Ÿ‚³‚ê‚Ä‚¢‚ê‚Îtrue
+//------------------------------------------------------
+const bool& Controller::IsRightTiltX(float& t) const
+{
+	// “ü—Í‚ª‚ ‚ê‚Ît‚É’l‚ğ“ü‚ê‚Ätrue‚ğ•Ô‚·
+	if (rightLever.x != 0)
+	{
+		t = (float)rightLever.x / tiltMax;
+		return true;
+	}
+
+	return false;
+}
+
+//------------------------------------------------------
+// @brief	ÚÊŞ°‚Ìc•ûŒü‚ÌŒX‚«(xbox:‰EÚÊŞ°)
+// @param	t(Tilt)	Œ»İ‚ÌŒX‚«‚ğ“ü‚ê‚é‚½‚ß‚Ì“ü‚ê•¨
+// @return	‰Ÿ‚³‚ê‚Ä‚¢‚ê‚Îtrue
+//------------------------------------------------------
+const bool& Controller::IsRightTiltY(float& t) const
+{
+	// “ü—Í‚ª‚ ‚ê‚Ît‚É’l‚ğ“ü‚ê‚Ätrue‚ğ•Ô‚·
+	if (rightLever.y != 0)
+	{
+		t = (float)rightLever.y / tiltMax;
 		return true;
 	}
 

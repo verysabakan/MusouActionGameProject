@@ -43,13 +43,10 @@ void Player::Initialize()
 	SetAnimID(modelHandle, actionState);
 	oldActionState = actionState;	// ‘O‚Ì±ÆÒ°¼®İ
 	playTime = 0;
-	// À°¹Ş¯Ä‚ÌŒvZ
-	// target = ConvertVec3(VTransform(VGet(300.0f, pos.y, pos.z), MGetRotY(rol.y)));
 	//uŠg‘åk¬vu‰ñ“]vuˆÚ“®v‚Ìİ’è
 	scl = Vector3(0.5f, 0.5f, 0.5f);
 	MV1SetScale(modelHandle, scl.ConvertVec());//‡AŠg‘åk¬
 	MV1SetRotationXYZ(modelHandle, rol.ConvertVec());//‰ñ“]
-	// MV1SetRotationXYZ(model, rol);//‰ñ“]
 	MV1SetPosition(modelHandle, pos.ConvertVec());//ˆÚ“®
 
 	gravity = 0;	// d—Í
@@ -98,8 +95,8 @@ void Player::Behavior()
 	pos.y += moveSpeed.y;
 	if (lpController.IsPushC(INPUT_TRG) && moveSpeed.y == 0.0f)
 	{
-		moveSpeed.y += 100.0f;
-		jumpFlag = true;
+		//moveSpeed.y += 100.0f;
+		//jumpFlag = true;
 	}
 	// ---------------
 

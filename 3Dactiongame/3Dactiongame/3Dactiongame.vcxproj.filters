@@ -88,17 +88,17 @@
     <Filter Include="ヘッダー ファイル\Manager\Constant">
       <UniqueIdentifier>{1489df8b-9081-4d20-99be-5233a228cd6b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Object\HitCheck\ObjectBase">
-      <UniqueIdentifier>{0b3c1418-99a3-4a98-9e47-50def84ad6b8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Object\HitCheck\ObjectBase\Constant">
-      <UniqueIdentifier>{47b24094-b85c-46c3-a45b-2b6935d1298b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Object\HitCheck\ObjectBase">
+    <Filter Include="ヘッダー ファイル\Object\ObjectBase">
       <UniqueIdentifier>{6a199976-a201-4d4f-87c5-dca1298eb562}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Object\HitCheck\ObjectBase\Constant">
+    <Filter Include="ヘッダー ファイル\Object\ObjectBase\Constant">
       <UniqueIdentifier>{45d5963b-b996-4bb6-99bd-b08f94ab1133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\ObjectBase">
+      <UniqueIdentifier>{0b3c1418-99a3-4a98-9e47-50def84ad6b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\ObjectBase\Constant">
+      <UniqueIdentifier>{47b24094-b85c-46c3-a45b-2b6935d1298b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -175,7 +175,7 @@
       <Filter>ソース ファイル\Object\HitCheck</Filter>
     </ClCompile>
     <ClCompile Include="ObjectTypeConstant.cpp">
-      <Filter>ソース ファイル\Object\HitCheck\ObjectBase\Constant</Filter>
+      <Filter>ソース ファイル\Object\ObjectBase\Constant</Filter>
     </ClCompile>
     <ClCompile Include="toriaezu.cpp">
       <Filter>ソース ファイル\とりあえずなやつ</Filter>
@@ -199,13 +199,16 @@
       <Filter>ソース ファイル\Manager\Constant</Filter>
     </ClCompile>
     <ClCompile Include="ActionStateConstant.cpp">
-      <Filter>ソース ファイル\Object\HitCheck\ObjectBase\Constant</Filter>
+      <Filter>ソース ファイル\Object\ObjectBase\Constant</Filter>
     </ClCompile>
     <ClCompile Include="ObjectList.cpp">
       <Filter>ソース ファイル\Object\ObjectList</Filter>
     </ClCompile>
     <ClCompile Include="ObjectBase.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\Object\ObjectBase</Filter>
+    </ClCompile>
+    <ClCompile Include="EachActionPlayer.cpp">
+      <Filter>ソース ファイル\Object\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -297,7 +300,7 @@
       <Filter>ヘッダー ファイル\Object\HitCheck</Filter>
     </ClInclude>
     <ClInclude Include="ObjectTypeConstant.h">
-      <Filter>ヘッダー ファイル\Object\HitCheck\ObjectBase\Constant</Filter>
+      <Filter>ヘッダー ファイル\Object\ObjectBase\Constant</Filter>
     </ClInclude>
     <ClInclude Include="toriaezu.h">
       <Filter>ソース ファイル\とりあえずなやつ</Filter>
@@ -321,13 +324,16 @@
       <Filter>ヘッダー ファイル\Manager\Constant</Filter>
     </ClInclude>
     <ClInclude Include="ActionStateConstant.h">
-      <Filter>ヘッダー ファイル\Object\HitCheck\ObjectBase\Constant</Filter>
+      <Filter>ヘッダー ファイル\Object\ObjectBase\Constant</Filter>
     </ClInclude>
     <ClInclude Include="ObjectList.h">
       <Filter>ヘッダー ファイル\Object\ObjectList</Filter>
     </ClInclude>
     <ClInclude Include="ObjectBase.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
+      <Filter>ヘッダー ファイル\Object\ObjectBase</Filter>
+    </ClInclude>
+    <ClInclude Include="EachActionPlayer.h">
+      <Filter>ヘッダー ファイル\Object\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
