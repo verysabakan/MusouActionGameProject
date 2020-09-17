@@ -74,11 +74,14 @@ void FrameRate::Update()
 //------------------------------------------------------
 void FrameRate::Render()
 {
+	// ÃÞÊÞ¯¸Þ‚ÌŽž‚¾‚¯•`‰æ
+#ifdef _DEBUG
 	DebugDrawStart;
 	DFS(200, 0, 0xffffff, "FPS:%d", (int)fps);
 	DFS(200, 16, 0xffffff, "StepNum:%f", frameTime);
 	DFS(200, 32, 0xffffff, "StepNum:%d", stepNum);
 	DebugDrawEnd;
+#endif // _DEBUG
 }
 
 //------------------------------------------------------

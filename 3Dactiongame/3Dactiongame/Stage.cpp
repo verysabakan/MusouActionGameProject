@@ -8,6 +8,8 @@
 #include <DxLib.h>
 #include "Stage.h"
 
+#include "_Debug.h"
+
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
 //------------------------------------------------------
@@ -73,22 +75,17 @@ void Stage::Render()
 	// ステージ３Ｄモデルを描画
 	MV1DrawModel(modelHandle);
 
-#ifdef DEBUG
+	// ﾃﾞﾊﾞｯｸﾞの時だけ描画
+#ifdef _DEBUG
+	DebugDrawStart;
 	if (collisionModelHandle)
 	{
-		SetUseZBufferFlag(TRUE);		// zﾊﾞｯﾌｧを有効にするか
-		SetWriteZBufferFlag(TRUE);		// zﾊﾞｯﾌｧへの書き込みを有効にするか
-		SetUseLighting(FALSE);			// ﾗｲﾃｨﾝｸﾞ計算処理を使用するか
-
 		// ﾃﾞﾊﾞｯｸﾞ用
 		MV1DrawModelDebug(collisionModelHandle, GetColor(0, 255, 0),
 			FALSE, 1.0f, TRUE, FALSE);
-
-		SetUseZBufferFlag(FALSE);		// zﾊﾞｯﾌｧを有効にするか
-		SetWriteZBufferFlag(FALSE);		// zﾊﾞｯﾌｧへの書き込みを有効にするか
-		SetUseLighting(TRUE);			// ﾗｲﾃｨﾝｸﾞ計算処理を使用するか
 	}
-#endif // DEBUG
+	DebugDrawEnd;
+#endif // _DEBUG
 }
 
 //------------------------------------------------------

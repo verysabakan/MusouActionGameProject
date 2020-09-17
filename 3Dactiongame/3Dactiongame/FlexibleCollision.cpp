@@ -23,7 +23,15 @@ FlexibleCollision::FlexibleCollision()
 //------------------------------------------------------
 FlexibleCollision::~FlexibleCollision()
 {
-	// ˆ—‚È‚µ
+	// Še‰Šú‰»
+	for (auto i = begin(OBJECT_TYPE()); i < end(OBJECT_TYPE()); ++i)
+	{
+		for (auto j = begin(OBJECT_TYPE()); j < end(OBJECT_TYPE()); ++j)
+		{
+			// ˆÙíI—¹‚ÌÁª¯¸
+			assert(colTable[static_cast<int>(i)][static_cast<int>(j)] == NULL);
+		}
+	}
 }
 //------------------------------------------------------
 // @brief	‰Šú‰»

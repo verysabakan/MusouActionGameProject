@@ -115,11 +115,14 @@ void Camera::Update()
 //------------------------------------------------------
 void Camera::Renderer()
 {
+	// ÃÞÊÞ¯¸Þ‚ÌŽž‚¾‚¯•`‰æ
+#ifdef _DEBUG
 	DebugDrawStart;
 	DFS(200, 48, 0xffffff, "%f,%f,%f", cameraPos.x, cameraPos.y, cameraPos.z);
 	DFS(200, 64, 0xffffff, "%f,%f,%f", targetLookAtPos.x, targetLookAtPos.y, targetLookAtPos.z);
 	DFS(200, 80, 0xffffff, "%f,%f", vertical, horizontal);
 	DebugDrawEnd;
+#endif // _DEBUG
 }
 
 //------------------------------------------------------

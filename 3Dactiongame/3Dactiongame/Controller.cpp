@@ -65,6 +65,8 @@ void Controller::Update()
 //------------------------------------------------------
 void Controller::Render()
 {
+	// ÃÞÊÞ¯¸Þ‚ÌŽž‚¾‚¯•`‰æ
+#ifdef _DEBUG
 	DebugDrawStart;
 	// ‚Ç‚ê‚ð‰Ÿ‚µ‚Ä‚¢‚é‚©
 	for (auto i = begin(PAD_BUTTON()); i < end(PAD_BUTTON()); ++i)
@@ -80,6 +82,7 @@ void Controller::Render()
 	DFS(0, 176, 0xffffff, "%f", rightLever.x / tiltMax);
 	DFS(0, 192, 0xffffff, "%f", rightLever.y / tiltMax);
 	DebugDrawEnd;
+#endif // _DEBUG
 }
 
 //------------------------------------------------------

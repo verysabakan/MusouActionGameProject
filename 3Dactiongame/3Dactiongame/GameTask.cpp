@@ -33,15 +33,10 @@ GameTask::~GameTask()
 //------------------------------------------------------
 int GameTask::Initialize()
 {
-	// DxLibの初期化処理
-	if (DxLib_Init() == -1) 
-	{
-		return -1;	// ｴﾗｰが起きたら終了
-	}
-
 	// 画面ﾓｰﾄﾞのｾｯﾄ
-	SetGraphMode(SCREEN_SIZE_X, SCREEN_SIZE_Y, 32);		// ｽｸﾘｰﾝのｻｲｽﾞ
 	ChangeWindowMode(TRUE);				// TRUE:ｳｨﾝﾄﾞｳ、FALSE:ﾌﾙｽｸﾘｰﾝ
+	SetGraphMode(SCREEN_SIZE_X, SCREEN_SIZE_Y, COLLAR_BIT_NUM);		// ｽｸﾘｰﾝのｻｲｽﾞ、ﾋﾞｯﾄ数
+	if (DxLib_Init() == -1){return -1;}	// DxLibの初期化処理、ｴﾗｰが起きたら終了
 	SetDrawScreen(DX_SCREEN_BACK);		// 背面に描画
 	SetBackgroundColor(BACKGROUND_COLOR, BACKGROUND_COLOR, BACKGROUND_COLOR);	// 背景色
 	//SetUseZBuffer3D(FALSE);			// zﾊﾞｯﾌｧを有効にするか(3Dのみ)

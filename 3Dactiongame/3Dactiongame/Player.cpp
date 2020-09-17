@@ -83,10 +83,13 @@ void Player::Render()
 	// •`‰æ
 	MV1DrawModel(modelHandle);
 
+	// ÃŞÊŞ¯¸Ş‚Ì‚¾‚¯•`‰æ
+#ifdef _DEBUG
 	DebugDrawStart;
 	DFS(500, 0, 0xffffff, "%f,%f,%f", rol.x, rol.y, rol.z);
 	DFS(500, 16, 0xffffff, "%f,%f,%f", moveSpeed.x, moveSpeed.y, moveSpeed.z);
 	DebugDrawEnd;
+#endif // _DEBUG
 }
 //------------------------------------------------------
 // @brief	“®ì

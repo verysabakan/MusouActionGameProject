@@ -22,6 +22,7 @@ PlayerAndTerrain::~PlayerAndTerrain()
 {
 	// 処理なし
 }
+
 /*
 // 当たり判定の情報から、当たり判定に使用するカプセル形状を形成する２座標を取得する
 void CharaBase_GetHitCapsulePos(
