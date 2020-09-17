@@ -29,7 +29,7 @@ ModeSelScene::~ModeSelScene()
 //------------------------------------------------------
 void ModeSelScene::Initialize()
 {
-	modelHandle = MV1LoadModel("Model/Fukuoka_Prop.fbx");
+
 }
 
 //------------------------------------------------------
@@ -37,8 +37,7 @@ void ModeSelScene::Initialize()
 //------------------------------------------------------
 void ModeSelScene::Finalize()
 {
-	MV1DeleteModel(modelHandle);
-	modelHandle = NULL;
+
 }
 
 //------------------------------------------------------
@@ -46,12 +45,8 @@ void ModeSelScene::Finalize()
 //------------------------------------------------------
 void ModeSelScene::Update()
 {
-	// 画面に映る位置に３Ｄモデルを移動
-	MV1SetPosition(modelHandle, VGet(320.0f, -300.0f, 600.0f));
-	MV1DrawModel(modelHandle);
-
 	// ﾃﾞﾊﾞｯｸﾞ用ｼｰﾝ切り替えｷｰ:C
-	if (lpController.IsPushD(INPUT_TRG))
+	if (lpController->IsPushD(INPUT_STATE::INPUT_TRG))
 	{
 		sceneSwitcher->SwitchScene(eScene_CharSel);	// ｷｬﾗｸﾀｰ選択画面に切り替え
 	}
@@ -62,5 +57,5 @@ void ModeSelScene::Update()
 //------------------------------------------------------
 void ModeSelScene::Render()
 {
-	DrawString(0, 0, "ﾓｰﾄﾞ選択画面", 0xffffff);
+	DS(0, 0, "ﾓｰﾄﾞ選択画面", 0xffffff);
 }

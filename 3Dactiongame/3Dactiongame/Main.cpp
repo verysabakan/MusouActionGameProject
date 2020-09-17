@@ -5,9 +5,17 @@
 
 #include <DxLib.h>
 #include "GameTask.h"
+#include "FrameRate.h"
+
+#include "_Debug.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
+	// ÃŞÊŞ¯¸Ş³¨İÄŞ³²İ½Àİ½
+#ifdef _DEBUG
+	_Debug::Instance();
+#endif	// _DEBUG
+
 	// ¹Ş°ÑÀ½¸‚Ì¶¬
 	std::unique_ptr<GameTask> gameTask;
 	gameTask = std::make_unique<GameTask>();
@@ -22,8 +30,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	// ´½¹°Ìß·°‚ª‰Ÿ‚³‚ê‚é‚©³¨İÄŞ³‚ª•Â‚¶‚ç‚ê‚é‚Ü‚ÅÙ°Ìß
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
 	{
-		gameTask->Update();
-		gameTask->Render();
+		for (auto i = 0; i < lpFrameRate->GetStepNum(); i++)
+		{
+			gameTask->Update();
+			gameTask->Render();
+		}
 	}
 
 	gameTask->Finalize();	// I—¹ˆ—

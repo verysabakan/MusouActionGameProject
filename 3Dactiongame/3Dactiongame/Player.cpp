@@ -10,6 +10,9 @@
 #include "Player.h"
 #include "Controller.h"
 
+#include "FrameRate.h"
+#include "_Debug.h"
+
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
 //------------------------------------------------------
@@ -49,7 +52,6 @@ void Player::Initialize()
 	MV1SetRotationXYZ(modelHandle, rol.ConvertVec());//回転
 	MV1SetPosition(modelHandle, pos.ConvertVec());//移動
 
-	gravity = 0;	// 重力
 }
 
 //------------------------------------------------------
@@ -80,30 +82,73 @@ void Player::Render()
 {
 	// 描画
 	MV1DrawModel(modelHandle);
-}
 
+	DebugDrawStart;
+	DFS(500, 0, 0xffffff, "%f,%f,%f", rol.x, rol.y, rol.z);
+	DFS(500, 16, 0xffffff, "%f,%f,%f", moveSpeed.x, moveSpeed.y, moveSpeed.z);
+	DebugDrawEnd;
+}
 //------------------------------------------------------
 // @brief	動作
 //------------------------------------------------------
 void Player::Behavior()
 {
-	moveSpeed = {};
-
+	auto newSpeed = Vector3();
+	
 	// ---------------
 	// とりあえずのやつ
-	moveSpeed.y += gravity;
-	pos.y += moveSpeed.y;
-	if (lpController.IsPushC(INPUT_TRG) && moveSpeed.y == 0.0f)
+	if (lpController->IsPushC(INPUT_STATE::INPUT_TRG) && actionState != ACTION_STATE::ACTION_STATE_JUMP)
 	{
-		//moveSpeed.y += 100.0f;
-		//jumpFlag = true;
+		moveSpeed.y = 5.0f;
+		actionState = ACTION_STATE::ACTION_STATE_JUMP;
+	}
+	if (lpController->IsPushA(INPUT_STATE::INPUT_TRG))
+	{
+		actionState = ACTION_STATE::ACTION_STATE_ATTACK1;
 	}
 	// ---------------
 
-	// 入力無し:待機状態
-	actionState = ACTION_STATE::ACTION_STATE_STANCE;
+	// ｶﾒﾗ正面方向に移動
+	if (lpController->IsPushUP(INPUT_STATE::INPUT_HOLD))
+	{
+		// 移動速度
+		newSpeed = moveDir * 5.0f;
+		// 進む方向の速度に変換
+		moveSpeed = moveSpeed + newSpeed;
+		actionState = ACTION_STATE::ACTION_STATE_RUN;
+	}
 
-	moveFlag = false;
+	// ｶﾒﾗの方向に移動
+	if (lpController->IsPushDOWN(INPUT_STATE::INPUT_HOLD))
+	{
+		// 移動速度
+		newSpeed = moveDir * 5.0f * -1.0f;
+		// 進む方向の速度に変換
+		moveSpeed = moveSpeed + newSpeed;
+		actionState = ACTION_STATE::ACTION_STATE_RUN;
+	}
+
+	// 右移動
+	if (lpController->IsPushRIGHT(INPUT_STATE::INPUT_HOLD))
+	{
+		// 移動速度
+		newSpeed = moveDir * 5.0f;
+		moveSpeed = moveSpeed + newSpeed;
+		// 進む方向の速度に変換
+		moveSpeed = Vector3(moveSpeed.z, moveSpeed.y, -moveSpeed.x);
+		actionState = ACTION_STATE::ACTION_STATE_RUN;
+	}
+
+	// 左移動
+	if (lpController->IsPushLEFT(INPUT_STATE::INPUT_HOLD))
+	{
+		// 移動速度
+		newSpeed = moveDir * 5.0f;
+		moveSpeed = moveSpeed + newSpeed;
+		// 進む方向の速度に変換
+		moveSpeed = Vector3(-moveSpeed.z, moveSpeed.y, moveSpeed.x);
+		actionState = ACTION_STATE::ACTION_STATE_RUN;
+	}
 
 	// 行動別の処理(優先度準)
 	if (actionState == ACTION_STATE::ACTION_STATE_DEAD)
@@ -124,7 +169,8 @@ void Player::Behavior()
 	}
 	else if (actionState == ACTION_STATE::ACTION_STATE_JUMP)
 	{
-		
+		moveSpeed -= otamesi * lpFrameRate->GetStepTime();
+		moveSpeed.y += -9.8f * lpFrameRate->GetStepTime();
 	}
 	else if (actionState == ACTION_STATE::ACTION_STATE_SKILL1)
 	{
@@ -140,7 +186,10 @@ void Player::Behavior()
 	}
 	else if (actionState == ACTION_STATE::ACTION_STATE_ATTACK1)
 	{
-		
+		if (playTime >= totalTime)
+		{
+			actionState = ACTION_STATE::ACTION_STATE_STANCE;
+		}
 	}
 	else if (actionState == ACTION_STATE::ACTION_STATE_ATTACK2)
 	{
@@ -156,66 +205,12 @@ void Player::Behavior()
 	}
 	else if (actionState == ACTION_STATE::ACTION_STATE_RUN)
 	{
-
+		rol.y = atan2(-moveSpeed.x, -moveSpeed.z);
+		actionState = ACTION_STATE::ACTION_STATE_RUN;
 	}
 	else if (actionState == ACTION_STATE::ACTION_STATE_STANCE)
 	{
 
-	}
-
-	// 右移動
-	if (lpController.IsPushRIGHT(INPUT_HOLD))
-	{
-
-		// 移動速度
-		moveSpeed.x = moveDir.x * 5.0f;
-		moveSpeed.z = moveDir.z * 5.0f;
-		// 進む方向の速度に変換
-		moveSpeed = Vector3(moveSpeed.z, moveSpeed.y, -moveSpeed.x);
-		actionState = ACTION_STATE::ACTION_STATE_RUN;
-	}
-
-	// 左移動
-	if (lpController.IsPushLEFT(INPUT_HOLD))
-	{
-		// 移動速度
-		moveSpeed.x = moveDir.x * 5.0f;
-		moveSpeed.z = moveDir.z * 5.0f;
-		// 進む方向の速度に変換
-		moveSpeed = Vector3(-moveSpeed.z, moveSpeed.y, moveSpeed.x);
-		actionState = ACTION_STATE::ACTION_STATE_RUN;
-	}
-
-	// ｶﾒﾗ正面方向に移動
-	if (lpController.IsPushUP(INPUT_HOLD))
-	{
-		// 移動速度
-		moveSpeed.x = moveDir.x * 5.0f;
-		moveSpeed.z = moveDir.z * 5.0f;
-		// 進む方向の速度に変換
-		moveSpeed = Vector3(moveSpeed.x, moveSpeed.y, moveSpeed.z);
-		actionState = ACTION_STATE::ACTION_STATE_RUN;
-	}
-
-	// ｶﾒﾗの方向に移動
-	if (lpController.IsPushDOWN(INPUT_HOLD))
-	{
-		// 移動速度
-		moveSpeed.x = moveDir.x * 5.0f;
-		moveSpeed.z = moveDir.z * 5.0f;
-		// 進む方向の速度に変換
-		moveSpeed = Vector3(-moveSpeed.x, moveSpeed.y, -moveSpeed.z);
-		actionState = ACTION_STATE::ACTION_STATE_RUN;
-	}
-
-	// 移動しているときの更新
-	if (actionState == ACTION_STATE::ACTION_STATE_RUN)
-	{
-		rol.y = atan2(-moveSpeed.x, -moveSpeed.z);
-		//pos.x += moveSpeed.x;
-		//pos.z += moveSpeed.z;
-		actionState = ACTION_STATE::ACTION_STATE_RUN;
-		moveFlag = true;
 	}
 
 	// 移動、回転の設定
@@ -242,8 +237,13 @@ void Player::Animation()
 	if (playTime >= totalTime)
 	{
 		playTime = 0.0f;
+		if (actionState == ACTION_STATE::ACTION_STATE_ATTACK1)
+		{
+			actionState = ACTION_STATE::ACTION_STATE_STANCE;
+		}
 	}
 
+	otamesi = ConvertVec3(MV1GetAttachAnimFrameLocalPosition(modelHandle, attachiIndex, 0));
 	// modelにｱﾆﾒｰｼｮﾝをｾｯﾄ
 	MV1SetAttachAnimTime(modelHandle, attachiIndex, playTime);
 }

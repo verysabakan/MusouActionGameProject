@@ -9,6 +9,9 @@
 #include "Camera.h"
 #include "ObjectBase.h"
 #include "Controller.h"
+#include "FrameRate.h"
+
+#include "_Debug.h"
 
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
@@ -38,8 +41,7 @@ void Camera::Initialize()
 	targetLookAtPos = {};				// 注視点
 	cameraDir = {};						// 向き
 	cameraUpVec = { 0, 1.0f, 0.0f };	// ｶﾒﾗの上方向
-	SetCameraNearFar(clipNear, clipFar);	// ｶﾒﾗの描画範囲
-
+	SetCameraNearFar(CamCon::clipNear, CamCon::clipFar);	// ｶﾒﾗの描画範囲
 	horizontal = 0;
 	vertical = 0;
 }
@@ -63,10 +65,10 @@ void Camera::Update()
 	if (CheckHitKey(KEY_INPUT_F)) camLength += 5;
 	if (CheckHitKey(KEY_INPUT_G)) camLength -= 5;
 	// ｽﾃｨｯｸによるものに変える
-	float x = 0;
-	float y = 0;
-	if (lpController.IsRightTiltX(x)) horizontal -= deg1Rad * 1.5f * x;
-	if (lpController.IsRightTiltY(y)) vertical -= deg1Rad * 1.5 * y;
+	auto x = 0.0f;
+	auto y = 0.0f;
+	if (lpController->IsRightTiltX(x)) horizontal -= CamCon::deg1Rad * 1.5f * x;
+	if (lpController->IsRightTiltY(y)) vertical -= CamCon::deg1Rad * 1.5 * y;
 	
 
 	Move();
@@ -113,17 +115,11 @@ void Camera::Update()
 //------------------------------------------------------
 void Camera::Renderer()
 {
-	SetUseZBufferFlag(TRUE);		// zﾊﾞｯﾌｧを有効にするか
-	SetWriteZBufferFlag(TRUE);		// zﾊﾞｯﾌｧへの書き込みを有効にするか
-	SetUseLighting(FALSE);			// ﾗｲﾃｨﾝｸﾞ計算処理を使用するか
-
-	DrawFormatString(200, 16, 0xffffff, "%f,%f,%f", cameraPos.x, cameraPos.y, cameraPos.z);
-	DrawFormatString(200, 32, 0xffffff, "%f,%f,%f", targetLookAtPos.x, targetLookAtPos.y, targetLookAtPos.z);
-	DrawFormatString(200, 48, 0xffffff, "%f,%f", vertical, horizontal);
-
-	SetUseZBufferFlag(FALSE);		// zﾊﾞｯﾌｧを有効にするか
-	SetWriteZBufferFlag(FALSE);		// zﾊﾞｯﾌｧへの書き込みを有効にするか
-	SetUseLighting(TRUE);			// ﾗｲﾃｨﾝｸﾞ計算処理を使用するか
+	DebugDrawStart;
+	DFS(200, 48, 0xffffff, "%f,%f,%f", cameraPos.x, cameraPos.y, cameraPos.z);
+	DFS(200, 64, 0xffffff, "%f,%f,%f", targetLookAtPos.x, targetLookAtPos.y, targetLookAtPos.z);
+	DFS(200, 80, 0xffffff, "%f,%f", vertical, horizontal);
+	DebugDrawEnd;
 }
 
 //------------------------------------------------------
@@ -146,7 +142,7 @@ void Camera::Move()
 		return;
 	}
 
-	auto StepTime = 0.08f;	// 推移時間
+	auto StepTime = lpFrameRate->GetStepTime();	// 推移時間
 	Vector3 origPosition = cameraPos;	// 揺らしを無視した位置
 	Vector3 origLookAtPosition = targetLookAtPos;	// 揺らしを無視したﾀｰｹﾞｯﾄ位置
 	Vector3 shakePosition = { 0.0f, 0.0f, 0.0f };	// 揺らしたときの位置
@@ -156,6 +152,7 @@ void Camera::Move()
 	float shakeTime = 1.0f;	// 揺らす時間
 	float shakeWidth = 5.0f;	// 揺らす幅
 	float shakeAngleSpeed = 0.5f;	// 揺らす速さ
+	Vector3 TestPosition = {};
 
 	// 水平方向の角度変更
 	if (horizontal < -DX_PI_F)

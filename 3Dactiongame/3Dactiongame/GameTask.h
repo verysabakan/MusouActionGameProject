@@ -6,14 +6,15 @@
 #pragma once
 
 #include <memory>
-//#include <mutex>
 
 // ﾌﾟﾛﾄﾀｲﾌﾟ宣言
 class SceneManager;
-class FrameRate;
 
 class GameTask
 {
+private:
+	std::unique_ptr<SceneManager> sceneManager;
+
 public:
 	GameTask();			// ｺﾝｽﾄﾗｸﾀ
 	~GameTask();		// ﾃﾞｽﾄﾗｸﾀ
@@ -23,8 +24,5 @@ public:
 	void Update();		// 更新
 	void Render();		// 更新
 
-private:
-	std::unique_ptr<SceneManager> sceneManager;
-	std::unique_ptr<FrameRate> frameRate;
 };
 

@@ -82,7 +82,7 @@ void SceneManager::Update()
 		}
 		else if (nextScene == eScene_Game)
 		{
-			scene = std::make_shared<GameScene>(this, GetStageType());
+			scene = std::make_shared<GameScene>(this, lpSceneDateManager->GetStageType());
 		}
 
 		// Ÿ‚Ì¼°İ‚És‚©‚È‚¢

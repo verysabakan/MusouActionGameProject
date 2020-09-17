@@ -23,4 +23,6 @@ public:
 private:
 	void Behavior();		// ìÆçÏ
 	void Animation();		// ±∆“∞ºÆ›
+
+	Vector3 otamesi;
 };

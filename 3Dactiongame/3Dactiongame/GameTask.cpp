@@ -18,7 +18,6 @@ GameTask::GameTask()
 {
 	// ｵﾌﾞｼﾞｪｸﾄ生成
 	sceneManager = std::make_unique<SceneManager>();
-	frameRate = std::make_unique<FrameRate>();
 }
 
 //------------------------------------------------------
@@ -28,14 +27,15 @@ GameTask::~GameTask()
 {
 	// 処理なし
 }
-int ff = FALSE;
+
 //------------------------------------------------------
 // @brief	初期化
 //------------------------------------------------------
 int GameTask::Initialize()
 {
 	// DxLibの初期化処理
-	if (DxLib_Init() == -1) {
+	if (DxLib_Init() == -1) 
+	{
 		return -1;	// ｴﾗｰが起きたら終了
 	}
 
@@ -66,7 +66,6 @@ void GameTask::Finalize()
 
 	// ﾘｿｰｽの開放
 	sceneManager.reset();
-	frameRate.reset();
 
 	// DxLibの後始末
 	DxLib_End();	
@@ -77,9 +76,9 @@ void GameTask::Finalize()
 //------------------------------------------------------
 void GameTask::Update()
 {
-	frameRate->Update();	// ﾌﾚｰﾑ計測固定
-	lpController.Update();	// ｺﾝﾄﾛｰﾗｰの更新
+	lpController->Update();	// ｺﾝﾄﾛｰﾗｰの更新
 	sceneManager->Update();	// ｼｰﾝ別の更新
+	lpFrameRate->Update();	// ﾌﾚｰﾑ計測固定
 }
 
 //------------------------------------------------------
@@ -88,8 +87,10 @@ void GameTask::Update()
 void GameTask::Render()
 {
 	ClearDrawScreen();		// 画面を初期化
+
 	sceneManager->Render();	// ｼｰﾝ別の描画
-	lpController.Render();	// ｺﾝﾄﾛｰﾗｰの描画:入力ﾁｪｯｸ
-	frameRate->Render();	// 現在のﾌﾚｰﾑﾚｰﾄの描画
+	lpController->Render();	// ｺﾝﾄﾛｰﾗｰの描画:入力ﾁｪｯｸ
+	lpFrameRate->Render();	// 現在のﾌﾚｰﾑﾚｰﾄの描画
+
 	ScreenFlip();			// 裏画面の内容を表面に反映させる
 }

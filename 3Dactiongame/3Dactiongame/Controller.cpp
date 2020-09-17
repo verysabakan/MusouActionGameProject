@@ -6,6 +6,8 @@
 #include <DxLib.h>
 #include "Controller.h"
 
+#include "_Debug.h"
+
 //------------------------------------------------------
 // @brief	ｺﾝｽﾄﾗｸﾀ
 //------------------------------------------------------
@@ -43,14 +45,14 @@ void Controller::Update()
 	// ｷｰﾎﾞｰﾄﾞの割り当て(ﾁｪｯｸ用)
 	char keyInput[keyBuffer];
 	GetHitKeyStateAll(keyInput);
-	if (keyInput[KEY_INPUT_UP]) input |= padInput[PAD_UP];
-	if (keyInput[KEY_INPUT_DOWN]) input |= padInput[PAD_DOWN];
-	if (keyInput[KEY_INPUT_LEFT]) input |= padInput[PAD_LEFT];
-	if (keyInput[KEY_INPUT_RIGHT]) input |= padInput[PAD_RIGHT];
-	if (keyInput[KEY_INPUT_Z]) input |= padInput[PAD_1];
-	if (keyInput[KEY_INPUT_X]) input |= padInput[PAD_2];
-	if (keyInput[KEY_INPUT_C]) input |= padInput[PAD_3];
-	if (keyInput[KEY_INPUT_V]) input |= padInput[PAD_4];
+	if (keyInput[KEY_INPUT_UP]) input |= padInput[ConvertNum(PAD_BUTTON::PAD_UP)];
+	if (keyInput[KEY_INPUT_DOWN]) input |= padInput[ConvertNum(PAD_BUTTON::PAD_DOWN)];
+	if (keyInput[KEY_INPUT_LEFT]) input |= padInput[ConvertNum(PAD_BUTTON::PAD_LEFT)];
+	if (keyInput[KEY_INPUT_RIGHT]) input |= padInput[ConvertNum(PAD_BUTTON::PAD_RIGHT)];
+	if (keyInput[KEY_INPUT_Z]) input |= padInput[ConvertNum(PAD_BUTTON::PAD_1)];
+	if (keyInput[KEY_INPUT_X]) input |= padInput[ConvertNum(PAD_BUTTON::PAD_2)];
+	if (keyInput[KEY_INPUT_C]) input |= padInput[ConvertNum(PAD_BUTTON::PAD_3)];
+	if (keyInput[KEY_INPUT_V]) input |= padInput[ConvertNum(PAD_BUTTON::PAD_4)];
 
 	if (keyInput[KEY_INPUT_W]) rightLever.y = -1000;
 	if (keyInput[KEY_INPUT_A]) rightLever.x = -1000;
@@ -63,20 +65,21 @@ void Controller::Update()
 //------------------------------------------------------
 void Controller::Render()
 {
+	DebugDrawStart;
 	// どれを押しているか
-	for (auto i = 0; i < PAD_BUTTON_NUM; i++)
+	for (auto i = begin(PAD_BUTTON()); i < end(PAD_BUTTON()); ++i)
 	{
-		if (input & padInput[i])
+		if (input & padInput[ConvertNum(i)])
 		{
-			DrawFormatString(0, 16 + 16 * i, 0xffffff, "%d:ﾎｰﾙﾄﾞです", i);
+			DFS(0, 16 + 16 * ConvertNum(i), 0xffffff, "%d:ﾎｰﾙﾄﾞです", ConvertNum(i));
 		}
 	}
-
 	// 左右ﾚﾊﾞｰ
-	DrawFormatString(0, 144, 0xffffff, "%f", leftLever.x / tiltMax);
-	DrawFormatString(0, 160, 0xffffff, "%f", leftLever.y / tiltMax);
-	DrawFormatString(0, 176, 0xffffff, "%f", rightLever.x / tiltMax);
-	DrawFormatString(0, 192, 0xffffff, "%f", rightLever.y / tiltMax);
+	DFS(0, 144, 0xffffff, "%f", leftLever.x / tiltMax);
+	DFS(0, 160, 0xffffff, "%f", leftLever.y / tiltMax);
+	DFS(0, 176, 0xffffff, "%f", rightLever.x / tiltMax);
+	DFS(0, 192, 0xffffff, "%f", rightLever.y / tiltMax);
+	DebugDrawEnd;
 }
 
 //------------------------------------------------------
@@ -87,14 +90,14 @@ void Controller::SetPadInput(int up, int down, int left, int right,
 								int a, int b, int c, int d, double deadZone)
 {
 	// 対応するﾎﾞﾀﾝを割り振り
-	padInput[PAD_UP] = up;
-	padInput[PAD_DOWN] = down;
-	padInput[PAD_LEFT] = left;
-	padInput[PAD_RIGHT] = right;
-	padInput[PAD_1] = a;
-	padInput[PAD_2] = b;
-	padInput[PAD_3] = c;
-	padInput[PAD_4] = d;
+	padInput[ConvertNum(PAD_BUTTON::PAD_UP)] = up;
+	padInput[ConvertNum(PAD_BUTTON::PAD_DOWN)] = down;
+	padInput[ConvertNum(PAD_BUTTON::PAD_LEFT)] = left;
+	padInput[ConvertNum(PAD_BUTTON::PAD_RIGHT)] = right;
+	padInput[ConvertNum(PAD_BUTTON::PAD_1)] = a;
+	padInput[ConvertNum(PAD_BUTTON::PAD_2)] = b;
+	padInput[ConvertNum(PAD_BUTTON::PAD_3)] = c;
+	padInput[ConvertNum(PAD_BUTTON::PAD_4)] = d;
 	deadZone;
 	// ﾃﾞｯﾄﾞｿﾞｰﾝ
 	SetJoypadDeadZone(DX_INPUT_PAD1, deadZone);
@@ -105,18 +108,21 @@ void Controller::SetPadInput(int up, int down, int left, int right,
 // @param	inputState	現在の入力
 // @return	押されていればtrue
 //------------------------------------------------------
-const bool &Controller::IsPushUP(const INPUT_STATE inputState) const
+const bool &Controller::IsPushUP(const INPUT_STATE& inputState) const
 {
 	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
-	if (inputState == INPUT_HOLD && input & padInput[PAD_UP])
+	if (inputState == INPUT_STATE::INPUT_HOLD 
+		&& input & padInput[ConvertNum(PAD_BUTTON::PAD_UP)])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_UP])
+	else if (inputState == INPUT_STATE::INPUT_TRG 
+		&& input & ~inputOld & padInput[ConvertNum(PAD_BUTTON::PAD_UP)])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_UP])
+	else if (inputState == INPUT_STATE::INPUT_UP 
+		&& ~input & inputOld & padInput[ConvertNum(PAD_BUTTON::PAD_UP)])
 	{
 		return true;
 	}
@@ -129,18 +135,21 @@ const bool &Controller::IsPushUP(const INPUT_STATE inputState) const
 // @param	inputState	現在の入力
 // @return	押されていればtrue
 //------------------------------------------------------
-const bool &Controller::IsPushDOWN(const INPUT_STATE inputState) const
+const bool &Controller::IsPushDOWN(const INPUT_STATE& inputState) const
 {
 	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
-	if (inputState == INPUT_HOLD && input & padInput[PAD_DOWN])
+	if (inputState == INPUT_STATE::INPUT_HOLD
+		&& input & padInput[ConvertNum(PAD_BUTTON::PAD_DOWN)])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_DOWN])
+	else if (inputState == INPUT_STATE::INPUT_TRG
+		&& input & ~inputOld & padInput[ConvertNum(PAD_BUTTON::PAD_DOWN)])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_DOWN])
+	else if (inputState == INPUT_STATE::INPUT_UP
+		&& ~input & inputOld & padInput[ConvertNum(PAD_BUTTON::PAD_DOWN)])
 	{
 		return true;
 	}
@@ -153,18 +162,21 @@ const bool &Controller::IsPushDOWN(const INPUT_STATE inputState) const
 // @param	inputState	現在の入力
 // @return	押されていればtrue
 //------------------------------------------------------
-const bool &Controller::IsPushLEFT(const INPUT_STATE inputState) const
+const bool &Controller::IsPushLEFT(const INPUT_STATE& inputState) const
 {
 	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
-	if (inputState == INPUT_HOLD && input & padInput[PAD_LEFT])
+	if (inputState == INPUT_STATE::INPUT_HOLD
+		&& input & padInput[ConvertNum(PAD_BUTTON::PAD_LEFT)])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_LEFT])
+	else if (inputState == INPUT_STATE::INPUT_TRG
+		&& input & ~inputOld & padInput[ConvertNum(PAD_BUTTON::PAD_LEFT)])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_LEFT])
+	else if (inputState == INPUT_STATE::INPUT_UP
+		&& ~input & inputOld & padInput[ConvertNum(PAD_BUTTON::PAD_LEFT)])
 	{
 		return true;
 	}
@@ -177,18 +189,21 @@ const bool &Controller::IsPushLEFT(const INPUT_STATE inputState) const
 // @param	inputState	現在の入力
 // @return	押されていればtrue
 //------------------------------------------------------
-const bool &Controller::IsPushRIGHT(const INPUT_STATE inputState) const
+const bool &Controller::IsPushRIGHT(const INPUT_STATE& inputState) const
 {
 	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
-	if (inputState == INPUT_HOLD && input & padInput[PAD_RIGHT])
+	if (inputState == INPUT_STATE::INPUT_HOLD
+		&& input & padInput[ConvertNum(PAD_BUTTON::PAD_RIGHT)])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_RIGHT])
+	else if (inputState == INPUT_STATE::INPUT_TRG
+		&& input & ~inputOld & padInput[ConvertNum(PAD_BUTTON::PAD_RIGHT)])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_RIGHT])
+	else if (inputState == INPUT_STATE::INPUT_UP
+		&& ~input & inputOld & padInput[ConvertNum(PAD_BUTTON::PAD_RIGHT)])
 	{
 		return true;
 	}
@@ -201,18 +216,21 @@ const bool &Controller::IsPushRIGHT(const INPUT_STATE inputState) const
 // @param	inputState	現在の入力
 // @return	押されていればtrue
 //------------------------------------------------------
-const bool &Controller::IsPushA(const INPUT_STATE inputState) const
+const bool &Controller::IsPushA(const INPUT_STATE& inputState) const
 {
 	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
-	if (inputState == INPUT_HOLD && input & padInput[PAD_1])
+	if (inputState == INPUT_STATE::INPUT_HOLD
+		&& input & padInput[ConvertNum(PAD_BUTTON::PAD_1)])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_1])
+	else if (inputState == INPUT_STATE::INPUT_TRG
+		&& input & ~inputOld & padInput[ConvertNum(PAD_BUTTON::PAD_1)])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_1])
+	else if (inputState == INPUT_STATE::INPUT_UP
+		&& ~input & inputOld & padInput[ConvertNum(PAD_BUTTON::PAD_1)])
 	{
 		return true;
 	}
@@ -225,18 +243,21 @@ const bool &Controller::IsPushA(const INPUT_STATE inputState) const
 // @param	inputState	現在の入力
 // @return	押されていればtrue
 //------------------------------------------------------
-const bool &Controller::IsPushB(const INPUT_STATE inputState) const
+const bool &Controller::IsPushB(const INPUT_STATE& inputState) const
 {
 	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
-	if (inputState == INPUT_HOLD && input & padInput[PAD_2])
+	if (inputState == INPUT_STATE::INPUT_HOLD
+		&& input & padInput[ConvertNum(PAD_BUTTON::PAD_2)])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_2])
+	else if (inputState == INPUT_STATE::INPUT_TRG
+		&& input & ~inputOld & padInput[ConvertNum(PAD_BUTTON::PAD_2)])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_2])
+	else if (inputState == INPUT_STATE::INPUT_UP
+		&& ~input & inputOld & padInput[ConvertNum(PAD_BUTTON::PAD_2)])
 	{
 		return true;
 	}
@@ -249,18 +270,21 @@ const bool &Controller::IsPushB(const INPUT_STATE inputState) const
 // @param	inputState	現在の入力
 // @return	押されていればtrue
 //------------------------------------------------------
-const bool &Controller::IsPushC(const INPUT_STATE inputState) const
+const bool &Controller::IsPushC(const INPUT_STATE& inputState) const
 {
 	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
-	if (inputState == INPUT_HOLD && input & padInput[PAD_3])
+	if (inputState == INPUT_STATE::INPUT_HOLD
+		&& input & padInput[ConvertNum(PAD_BUTTON::PAD_3)])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_3])
+	else if (inputState == INPUT_STATE::INPUT_TRG
+		&& input & ~inputOld & padInput[ConvertNum(PAD_BUTTON::PAD_3)])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_3])
+	else if (inputState == INPUT_STATE::INPUT_UP
+		&& ~input & inputOld & padInput[ConvertNum(PAD_BUTTON::PAD_3)])
 	{
 		return true;
 	}
@@ -273,18 +297,21 @@ const bool &Controller::IsPushC(const INPUT_STATE inputState) const
 // @param	inputState	現在の入力
 // @return	押されていればtrue
 //------------------------------------------------------
-const bool &Controller::IsPushD(const INPUT_STATE inputState) const
+const bool &Controller::IsPushD(const INPUT_STATE& inputState) const
 {
 	// ﾎｰﾙﾄﾞ、ﾄﾘｶﾞｰ、ｱｯﾌﾟの状態を返す
-	if (inputState == INPUT_HOLD && input & padInput[PAD_4])
+	if (inputState == INPUT_STATE::INPUT_HOLD
+		&& input & padInput[ConvertNum(PAD_BUTTON::PAD_4)])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_TRG && input & ~inputOld & padInput[PAD_4])
+	else if (inputState == INPUT_STATE::INPUT_TRG
+		&& input & ~inputOld & padInput[ConvertNum(PAD_BUTTON::PAD_4)])
 	{
 		return true;
 	}
-	else if (inputState == INPUT_UP && ~input & inputOld & padInput[PAD_4])
+	else if (inputState == INPUT_STATE::INPUT_UP
+		&& ~input & inputOld & padInput[ConvertNum(PAD_BUTTON::PAD_4)])
 	{
 		return true;
 	}

@@ -38,8 +38,6 @@ protected:
 	// ‚Æ‚è‚ ‚¦‚¸‚Ì‚â‚Â«
 	//------------------------------------------
 	bool moveFlag = false;
-	bool jumpFlag = false;
-	float gravity;
 
 public:
 	ObjectBase();			// ºİ½Ä×¸À
@@ -67,18 +65,14 @@ public:
 	//------------------------------------------
 	//virtual OBJECT_TYPE GetType() override {}				// µÌŞ¼Şª¸Ä‚Ìí—Ş‚ğæ“¾
 
-	bool JumpState()		// ¼Ş¬İÌß’†
+	ACTION_STATE GetNowAction()		// ¼Ş¬İÌß’†
 	{
-		if (actionState == ACTION_STATE::ACTION_STATE_JUMP)
-		{
-			true;
-		}
-		return false;
+		return actionState;
 	}
 
-	float RiseY()
+	void SetActionState(const ACTION_STATE& aS)		// ¼Ş¬İÌß’†‚É‚·‚é
 	{
-		return moveSpeed.y;
+		actionState = aS;
 	}
 
 	bool MoveFlag()
@@ -96,14 +90,9 @@ public:
 		moveSpeed.y = y;
 	}
 
-	void SetGravity(const float& g)
+	void SetMoveSpeed(const Vector3& mS)
 	{
-		gravity = g;
-	}
-
-	bool JumpFlag()
-	{
-		return jumpFlag;
+		moveSpeed = mS;
 	}
 
 	Vector3 GetMoveSpeed()

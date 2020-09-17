@@ -17,7 +17,7 @@ enum class MANAGER_TYPE
 	TERRAIN_MANAGER,	// 地形
 
 	NONE,				// 何もない
-	MANAGER_TYPE_NUM	// 当たり判定を取るｵﾌﾞｼﾞｪｸﾄの種類数(最大値)
+	MANAGER_TYPE_NUM	// ﾏﾈｰｼﾞｬｰの種類数(最大値)
 };
 
 MANAGER_TYPE begin(MANAGER_TYPE);					// MANAGER_TYPEの先頭の要素を返す

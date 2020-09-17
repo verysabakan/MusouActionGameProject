@@ -70,10 +70,17 @@ void TitleScene::Finalize()
 void TitleScene::Update()
 {
 	// ÃÞÊÞ¯¸Þ—p¼°ÝØ‚è‘Ö‚¦·°:Q
-	if (lpController.IsPushD(INPUT_TRG))
+	if (lpController->IsPushD(INPUT_STATE::INPUT_TRG))
 	{
+		//------------------------------------------------------
+		// ‚Æ‚è‚ ‚¦‚¸‚Ì‚â‚Â
+		// ‘I‚ñ‚¾½Ã°¼Þ‚ð•Û‘¶
+		lpSceneDateManager->SetStageType(STAGE_SAMPLE);
+		sceneSwitcher->SwitchScene(eScene_Game);
+		//------------------------------------------------------
+
 		// Ó°ÄÞ‘I‘ð‰æ–Ê‚ÉØ‚è‘Ö‚¦
-		sceneSwitcher->SwitchScene(eScene_ModeSel);
+		//sceneSwitcher->SwitchScene(eScene_ModeSel);
 	}
 }
 
@@ -84,11 +91,11 @@ void TitleScene::Render()
 {
 	// ‰æ‘œ‚Ì•`‰æ
 	DrawGraph(0, 0, bgImage, true);
-	DrawGraph(MARK_POS_X, MARK_POS_Y, titleImage[TITLE_PARTS_MARK], true);
-	DrawGraph(EW_POS_X, EW_POS_Y, titleImage[TITLE_PARTS_EW], true);
-	DrawGraph(EXTREME_POS_X, EXTREME_POS_Y, titleImage[TITLE_PARTS_EXTREME], true);
-	DrawGraph(WARRIORS_POS_X, WARRIORS_POS_Y, titleImage[TITLE_PARTS_WARRIORS], true);
-	DrawGraph(START_POS_X, START_POS_Y, pabImage, true);
+	DrawGraph(TitleCon::MARK_POS_X, TitleCon::MARK_POS_Y, titleImage[TITLE_PARTS_MARK], true);
+	DrawGraph(TitleCon::EW_POS_X, TitleCon::EW_POS_Y, titleImage[TITLE_PARTS_EW], true);
+	DrawGraph(TitleCon::EXTREME_POS_X, TitleCon::EXTREME_POS_Y, titleImage[TITLE_PARTS_EXTREME], true);
+	DrawGraph(TitleCon::WARRIORS_POS_X, TitleCon::WARRIORS_POS_Y, titleImage[TITLE_PARTS_WARRIORS], true);
+	DrawGraph(TitleCon::START_POS_X, TitleCon::START_POS_Y, pabImage, true);
 
-	DrawString(0, 0, "À²ÄÙ‰æ–Ê", 0xffffff);
+	DS(0, 0, "À²ÄÙ‰æ–Ê", 0xffffff);
 }

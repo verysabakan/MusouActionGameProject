@@ -115,6 +115,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>%DXLIB_DIR%;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -130,6 +131,7 @@
     <ClCompile Include="CharSelScene.cpp" />
     <ClCompile Include="CollisionBase.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="_Debug.cpp" />
     <ClCompile Include="EachActionPlayer.cpp" />
     <ClCompile Include="FlexibleCollision.cpp" />
     <ClCompile Include="FrameRate.cpp" />
@@ -137,6 +139,7 @@
     <ClCompile Include="GameTask.cpp" />
     <ClCompile Include="GeneralManager.cpp" />
     <ClCompile Include="GMList.cpp" />
+    <ClCompile Include="InputStateConstant.cpp" />
     <ClCompile Include="ISceneSwitcher.cpp" />
     <ClCompile Include="ManagerBase.cpp" />
     <ClCompile Include="ManagerTypeConstant.cpp" />
@@ -146,6 +149,7 @@
     <ClCompile Include="ObjectBase.cpp" />
     <ClCompile Include="ModeSelScene.cpp" />
     <ClCompile Include="ObjectTypeConstant.cpp" />
+    <ClCompile Include="PadButtonConstant.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerAndTerrain.cpp" />
@@ -158,7 +162,6 @@
     <ClCompile Include="StageManager.cpp" />
     <ClCompile Include="StageSelScene.cpp" />
     <ClCompile Include="TitleScene.cpp" />
-    <ClCompile Include="toriaezu.cpp" />
     <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +170,11 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CharSelScene.h" />
     <ClInclude Include="CollisionBase.h" />
+    <ClInclude Include="_Debug.h" />
     <ClInclude Include="EachActionPlayer.h" />
     <ClInclude Include="GeneralManager.h" />
     <ClInclude Include="GMList.h" />
+    <ClInclude Include="InputStateConstant.h" />
     <ClInclude Include="ManagerBase.h" />
     <ClInclude Include="ManagerTypeConstant.h" />
     <ClInclude Include="ObjectList.h" />
@@ -183,6 +188,7 @@
     <ClInclude Include="ObjectBase.h" />
     <ClInclude Include="LoadModel.h" />
     <ClInclude Include="ModeSelScene.h" />
+    <ClInclude Include="PadButtonConstant.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAndTerrain.h" />
@@ -194,6 +200,7 @@
     <ClInclude Include="SceneDateManager.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SceneProcess.h" />
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="StageManager.h" />
@@ -201,7 +208,6 @@
     <ClInclude Include="StageType.h" />
     <ClInclude Include="TitleConstant.h" />
     <ClInclude Include="TitleScene.h" />
-    <ClInclude Include="toriaezu.h" />
     <ClInclude Include="Vector3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

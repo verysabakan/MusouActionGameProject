@@ -73,9 +73,6 @@
     <Filter Include="ヘッダー ファイル\Object\ObjectList">
       <UniqueIdentifier>{61750521-717e-452f-aa5f-636c0410c48e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\とりあえずなやつ">
-      <UniqueIdentifier>{65bdab5a-cd4d-42a9-a5aa-03dd9bf9328c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Manager">
       <UniqueIdentifier>{e3f7959e-ae8d-4ed9-ade9-c4fdfd002252}</UniqueIdentifier>
     </Filter>
@@ -99,6 +96,21 @@
     </Filter>
     <Filter Include="ソース ファイル\Object\ObjectBase\Constant">
       <UniqueIdentifier>{47b24094-b85c-46c3-a45b-2b6935d1298b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Singleton">
+      <UniqueIdentifier>{4c35885c-b452-4565-be55-d24cce62a9e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Constant">
+      <UniqueIdentifier>{9a60a2cb-4cfb-429f-8506-5f222d7d2a1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Main\Constant">
+      <UniqueIdentifier>{8474ab88-3d9d-4b59-bf50-95bdebbbd2a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Debug">
+      <UniqueIdentifier>{3342a123-fc76-413d-af8d-226c201c9893}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Debug">
+      <UniqueIdentifier>{36ec3d4f-c05d-43ba-a421-da1011657218}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -177,9 +189,6 @@
     <ClCompile Include="ObjectTypeConstant.cpp">
       <Filter>ソース ファイル\Object\ObjectBase\Constant</Filter>
     </ClCompile>
-    <ClCompile Include="toriaezu.cpp">
-      <Filter>ソース ファイル\とりあえずなやつ</Filter>
-    </ClCompile>
     <ClCompile Include="GeneralManager.cpp">
       <Filter>ソース ファイル\Manager</Filter>
     </ClCompile>
@@ -209,6 +218,15 @@
     </ClCompile>
     <ClCompile Include="EachActionPlayer.cpp">
       <Filter>ソース ファイル\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="InputStateConstant.cpp">
+      <Filter>ソース ファイル\Main\Constant</Filter>
+    </ClCompile>
+    <ClCompile Include="PadButtonConstant.cpp">
+      <Filter>ソース ファイル\Main\Constant</Filter>
+    </ClCompile>
+    <ClCompile Include="_Debug.cpp">
+      <Filter>ソース ファイル\Debug</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -302,9 +320,6 @@
     <ClInclude Include="ObjectTypeConstant.h">
       <Filter>ヘッダー ファイル\Object\ObjectBase\Constant</Filter>
     </ClInclude>
-    <ClInclude Include="toriaezu.h">
-      <Filter>ソース ファイル\とりあえずなやつ</Filter>
-    </ClInclude>
     <ClInclude Include="GeneralManager.h">
       <Filter>ヘッダー ファイル\Manager</Filter>
     </ClInclude>
@@ -334,6 +349,18 @@
     </ClInclude>
     <ClInclude Include="EachActionPlayer.h">
       <Filter>ヘッダー ファイル\Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>ヘッダー ファイル\Singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="PadButtonConstant.h">
+      <Filter>ヘッダー ファイル\Main\Constant</Filter>
+    </ClInclude>
+    <ClInclude Include="InputStateConstant.h">
+      <Filter>ヘッダー ファイル\Main\Constant</Filter>
+    </ClInclude>
+    <ClInclude Include="_Debug.h">
+      <Filter>ヘッダー ファイル\Debug</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

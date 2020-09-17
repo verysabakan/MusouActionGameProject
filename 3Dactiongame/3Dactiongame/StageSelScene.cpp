@@ -12,9 +12,9 @@
 // @brief	ｺﾝｽﾄﾗｸﾀ
 //------------------------------------------------------
 StageSelScene::StageSelScene(SceneManager* sManager)
-	: BaseScene((ISceneSwitcher*)sManager)
+	: BaseScene(sManager)
 {
-	sceneDateManager = (SceneDateManager*)sManager;
+	// 処理なし
 }
 
 //------------------------------------------------------
@@ -32,9 +32,9 @@ void StageSelScene::Update()
 {
 	
 	// ﾃﾞﾊﾞｯｸﾞ用ｼｰﾝ切り替えｷｰ:Q
-	if (lpController.IsPushD(INPUT_TRG))
+	if (lpController->IsPushD(INPUT_STATE::INPUT_TRG))
 	{
-		sceneDateManager->SetStageType(STAGE_SAMPLE);	// 選んだｽﾃｰｼﾞを保存
+		lpSceneDateManager->SetStageType(STAGE_SAMPLE);	// 選んだｽﾃｰｼﾞを保存
 		sceneSwitcher->SwitchScene(eScene_Game);		// ｹﾞｰﾑ画面に切り替え
 	}
 }
@@ -44,5 +44,5 @@ void StageSelScene::Update()
 //------------------------------------------------------
 void StageSelScene::Render()
 {
-	DrawString(0,0,"ｽﾃｰｼﾞ選択画面",0xffffff);
+	DS(0,0,"ｽﾃｰｼﾞ選択画面",0xffffff);
 }

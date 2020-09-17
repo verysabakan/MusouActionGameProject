@@ -57,7 +57,7 @@ void GameScene::Update()
 	generalManager->Update();
 	
 	// ÃÞÊÞ¯¸Þ—p¼°ÝØ‚è‘Ö‚¦·°:Q
-	if (lpController.IsPushD(INPUT_TRG))
+	if (lpController->IsPushD(INPUT_STATE::INPUT_TRG))
 	{
 		sceneSwitcher->SwitchScene(eScene_Title);	// À²ÄÙ‰æ–Ê‚ÉØ‚è‘Ö‚¦
 	}
@@ -70,4 +70,6 @@ void GameScene::Render()
 {
 	// Še•`‰æˆ—
 	generalManager->Render();
+
+	DS(0, 0, "¹Þ°Ñ‰æ–Ê", 0xffffff);
 }

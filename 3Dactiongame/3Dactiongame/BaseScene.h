@@ -10,12 +10,13 @@
 #include "ISceneSwitcher.h"
 #include "SceneDateManager.h"
 
+#include "_Debug.h"
+
 class BaseScene
 	: public SceneProcess
 {
 protected:
 	ISceneSwitcher* sceneSwitcher;			// ¼°İ‚ÌØ‚è‘Ö‚¦‚ğ“`‚¦‚é
-	SceneDateManager* sceneDateManager;		// ¼°İŠÔ‚ÌÃŞ°À‚Ìó‚¯“n‚µ
 
 public:
 	BaseScene(ISceneSwitcher* switcher);	// ºİ½Ä×¸À

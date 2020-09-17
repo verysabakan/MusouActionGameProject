@@ -12,13 +12,7 @@
 //------------------------------------------------------
 FlexibleCollision::FlexibleCollision()
 {
-	/*
-	colTable[SHAPE_CIRCLE][SHAPE_CIRCLE] = new CircleAndCircle();
-	colTable[SHAPE_CIRCLE][SHAPE_RECT] = new CircleAndRect();
-	colTable[SHAPE_RECT][SHAPE_CIRCLE] = new CircleAndRect();
-	colTable[SHAPE_RECT][SHAPE_RECT] = new RectAndRect();
-	*/
-	
+	// 判定の生成
 	colTable[static_cast<int>(OBJECT_TYPE::OBJECT_TYPE_PLAYER)]
 				[static_cast<int>(OBJECT_TYPE::OBJECT_TYPE_TERRAIN)]
 		= std::make_unique<PlayerAndTerrain>();	// ﾌﾟﾚｲﾔｰと地形の当たり判定
@@ -37,9 +31,9 @@ FlexibleCollision::~FlexibleCollision()
 void FlexibleCollision::Initialize()
 {
 	// 各初期化
-	for (OBJECT_TYPE i = begin(OBJECT_TYPE::OBJECT_TYPE_ENEMY); i < end(i); ++i)
+	for (auto i = begin(OBJECT_TYPE()); i < end(OBJECT_TYPE()); ++i)
 	{
-		for (OBJECT_TYPE j = begin(OBJECT_TYPE::OBJECT_TYPE_ENEMY); j < end(j); ++j)
+		for (auto j = begin(OBJECT_TYPE()); j < end(OBJECT_TYPE()); ++j)
 		{
 			if (colTable[static_cast<int>(i)][static_cast<int>(j)] != nullptr)
 			{
@@ -56,9 +50,9 @@ void FlexibleCollision::Initialize()
 void FlexibleCollision::Finalize()
 {
 	// 各終了処理
-	for (OBJECT_TYPE i = begin(OBJECT_TYPE::OBJECT_TYPE_ENEMY); i < end(i); ++i)
+	for (auto i = begin(OBJECT_TYPE()); i < end(OBJECT_TYPE()); ++i)
 	{
-		for (OBJECT_TYPE j = begin(OBJECT_TYPE::OBJECT_TYPE_ENEMY); j < end(j); ++j)
+		for (auto j = begin(OBJECT_TYPE()); j < end(OBJECT_TYPE()); ++j)
 		{
 			// ﾘｿｰｽの開放
 			colTable[static_cast<int>(i)][static_cast<int>(j)].reset();
@@ -76,19 +70,22 @@ void FlexibleCollision::Finalize()
 bool FlexibleCollision::HitCheck(const std::shared_ptr<ObjectBase>& o1, const std::shared_ptr<ObjectBase>& o2)
 {
 	// 要素が入っているかﾁｪｯｸ
-	for (auto i = 0; i < useTypeList1.size(); ++i)
+	for (auto i = 0; i < useTypeList1.size(); i++)
 	{
-		for (auto j = 0; j < useTypeList2.size(); ++j)
+		for (auto j = 0; j < useTypeList2.size(); j++)
 		{
+			// listに入って無ければｽｷｯﾌﾟ
 			if (!(useTypeList1[i] == o1->GetType() 
-				&& useTypeList2[j] == o1->GetType()))
+				&& useTypeList2[j] == o2->GetType()))
 			{
 				continue;
 			}
+
+			// ﾘｽﾄに入っていれば判定を取る
 			return colTable[static_cast<int>(o1->GetType())]
 				[static_cast<int>(o2->GetType())]->HitCheck(o1, o2);
 		}
 	}
-	return false;	// 何もなかった
+	return false;	// 何もなかった(異常終了)
 }
 

@@ -30,7 +30,7 @@ CharSelScene::~CharSelScene()
 void CharSelScene::Update()
 {
 	// ﾃﾞﾊﾞｯｸﾞ用ｼｰﾝ切り替えｷｰ:Q
-	if (lpController.IsPushD(INPUT_TRG))
+	if (lpController->IsPushD(INPUT_STATE::INPUT_TRG))
 	{
 		sceneSwitcher->SwitchScene(eScene_StageSel);	// ｽﾃｰｼﾞ選択画面に切り替え
 	}
@@ -41,5 +41,5 @@ void CharSelScene::Update()
 //------------------------------------------------------
 void CharSelScene::Render()
 {
-	DrawString(0, 0, "ｷｬﾗｸﾀｰ選択画面", 0xffffff);
+	DS(0, 0, "ｷｬﾗｸﾀｰ選択画面", 0xffffff);
 }

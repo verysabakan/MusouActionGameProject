@@ -6,17 +6,24 @@
 #pragma once
 
 #include "StageType.h"
+#include "Singleton.h"
+
+// ’è‹`
+#define lpSceneDateManager SceneDateManager::Instance()
 
 class SceneDateManager
+	:public Singleton<SceneDateManager>
 {
 private:
 	STAGE_TYPE stageType;	// ‚Ç‚Ì½Ã°¼Þ‚©
 
 public:
-	SceneDateManager();				// ºÝ½Ä×¸À
-	virtual ~SceneDateManager();	// ÃÞ½Ä×¸À
-
 	void SetStageType(const STAGE_TYPE& type);	// ‘I‚ñ‚¾½Ã°¼Þ‚ð¾¯Ä
 	const STAGE_TYPE GetStageType() const;	// Ši”[‚µ‚½½Ã°¼ÞÀ²Ìß‚ðŽæ“¾
+
+private:
+	SceneDateManager();				// ºÝ½Ä×¸À
+	friend Singleton<SceneDateManager>;	// ÌÚÝÄÞ¸×½
+	~SceneDateManager();	// ÃÞ½Ä×¸À
 
 };

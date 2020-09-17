@@ -8,7 +8,7 @@
 #include "BaseScene.h"
 
 class SceneManager 
-	: public ISceneSwitcher, SceneDateManager
+	: public ISceneSwitcher
 	, private SceneProcess
 {
 private:

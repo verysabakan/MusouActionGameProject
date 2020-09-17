@@ -13,8 +13,7 @@ class SceneManager;
 class StageSelScene
 	: public BaseScene
 {
-public:
-	//StageSelScene(ISceneSwitcher* switcher,SceneDateManager* dateManager);	// ºÝ½Ä×¸À
+public:	// ºÝ½Ä×¸À
 	StageSelScene(SceneManager* sManager);
 	~StageSelScene();					// ÃÞ½Ä×¸À
 

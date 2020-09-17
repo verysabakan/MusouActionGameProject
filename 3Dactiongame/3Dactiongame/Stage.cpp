@@ -73,6 +73,7 @@ void Stage::Render()
 	// ステージ３Ｄモデルを描画
 	MV1DrawModel(modelHandle);
 
+#ifdef DEBUG
 	if (collisionModelHandle)
 	{
 		SetUseZBufferFlag(TRUE);		// zﾊﾞｯﾌｧを有効にするか
@@ -87,6 +88,7 @@ void Stage::Render()
 		SetWriteZBufferFlag(FALSE);		// zﾊﾞｯﾌｧへの書き込みを有効にするか
 		SetUseLighting(TRUE);			// ﾗｲﾃｨﾝｸﾞ計算処理を使用するか
 	}
+#endif // DEBUG
 }
 
 //------------------------------------------------------

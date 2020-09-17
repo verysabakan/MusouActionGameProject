@@ -11,7 +11,7 @@ class ModeSelScene
 	: public BaseScene
 {
 private:
-	int modelHandle;
+
 
 public:
 	ModeSelScene(ISceneSwitcher* switcher);	// ºÝ½Ä×¸À

@@ -18,6 +18,5 @@ public:
 	virtual ~CollisionBase();	// ƒˆ‰¼‘zÃŞ½Ä×¸À
 
 	virtual bool HitCheck(const std::shared_ptr<ObjectBase>& o1, const std::shared_ptr<ObjectBase>& o2) = 0;	// Še“–‚½‚è”»’èˆ—:•K‚¸À‘•
-
 };
 

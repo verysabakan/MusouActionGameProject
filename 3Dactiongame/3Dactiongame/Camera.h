@@ -11,7 +11,9 @@
 class ObjectBase;
 class Player;
 
-namespace {
+// CameraConstant
+namespace CamCon
+{
 	const float standardEye = 100.0f;	// Œ©‚Ä‚¢‚éˆÊ’u‚ğã‚°‚é
 	const float clipNear = 0.1f;		// è‘O¸Ø¯Ìß
 	const float clipFar = 5000.0f;		// ‰œ¸Ø¯Ìß

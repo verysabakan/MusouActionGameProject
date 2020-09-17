@@ -5,7 +5,8 @@
 
 #pragma once
 
-namespace 
+// TitleConstant
+namespace TitleCon
 {
 	// MARK‰æ‘œ‚Ì»²½Þ
 	const int MARK_POS_X = 375;
